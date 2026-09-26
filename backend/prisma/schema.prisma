@@ -32,6 +32,7 @@ model Project {
   user        User     @relation(fields: [userId], references: [id])
 
   etapas ProjectStep[]
+  midias ProjectMedia[]
 }
 
 model ProjectStep {
@@ -39,6 +40,17 @@ model ProjectStep {
   titulo    String
   conteudo  String
   ordem     Int
+  createdAt DateTime @default(now())
+
+  projectId Int
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model ProjectMedia {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  tipo      String
+  url       String
   createdAt DateTime @default(now())
 
   projectId Int

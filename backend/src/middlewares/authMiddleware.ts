@@ -1,15 +1,15 @@
 import type { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
-type TokenPayload = {
-  userId: number;
-};
+
 
 export function authMiddleware(
   req: Request,
   res: Response,
   next: NextFunction,
 ) {
+
+  
   const authorization = req.headers.authorization;
 
   if (!authorization) {
