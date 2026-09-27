@@ -1,0 +1,35 @@
+
+:root {
+  --color-background: #0B0B0F;
+  --color-surface: #18181F;
+  --color-surface-secondary: #121217;
+
+  --color-border: #292932;
+
+  --color-title: #F5F5F7;
+  --color-text: #C7C7D1;
+  --color-text-secondary: #92929F;
+
+  --color-primary: #7C3AED;
+  --color-primary-hover: #8B5CF6;
+  --color-primary-dark: #5B21B6;
+
+  --color-white: #FFFFFF;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
