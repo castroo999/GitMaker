@@ -73,7 +73,7 @@ export default function Login() {
         localStorage.setItem("token", data.token);
         localStorage.setItem("usuario", JSON.stringify(data.usuario));
 
-        window.location.href = "/";
+        window.location.href = "/home";
       } else {
         const response = await fetch("http://localhost:3000/auth/cadastro", {
           method: "POST",

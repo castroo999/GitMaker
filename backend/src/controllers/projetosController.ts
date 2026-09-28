@@ -41,6 +41,14 @@ export async function listarProjetos(req: Request, res: Response) {
           nome: true,
         },
       },
+      midias: {
+        select: {
+          id: true,
+          nome: true,
+          tipo: true,
+          url: true,
+        },
+      },
     },
     orderBy: {
       createdAt: "desc",

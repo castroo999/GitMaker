@@ -1,0 +1,113 @@
+.sidebar-topo {
+  width: 260px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+  background: #121217;
+  border-right: 1px solid #292932;
+  box-sizing: border-box;
+  transition: width 0.3s ease, padding 0.3s ease;
+  overflow: hidden;
+}
+
+.sidebar-topo.minimizada {
+  width: 72px;
+  padding: 24px 10px;
+}
+
+.perfil {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  margin-bottom: 28px;
+  color: #f5f5f7;
+  min-width: 0;
+}
+
+.perfil h2 {
+  flex: 1;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.botao-toggle {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #92929f;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.3s ease;
+}
+
+.botao-toggle:hover {
+  background: #18181f;
+  color: #8b5cf6;
+}
+
+.botao-toggle svg {
+  width: 19px;
+  height: 19px;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-topo.minimizada .botao-toggle svg {
+  transform: rotate(180deg);
+}
+
+.itens-sidebar button,
+.sidebar-footer button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 12px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: #92929f;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.itens-sidebar button svg,
+.sidebar-footer button svg {
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+}
+
+.itens-sidebar button:hover,
+.sidebar-footer button:hover {
+  background: #18181f;
+  color: #f5f5f7;
+  border-color: #292932;
+}
+
+.itens-sidebar button:hover svg,
+.sidebar-footer button:hover svg {
+  color: #8b5cf6;
+}
+
+.sidebar-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid #292932;
+}

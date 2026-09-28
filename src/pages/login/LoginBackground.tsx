@@ -1,8 +1,7 @@
+import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-export function iniciarLoginBackground(
-  canvas: HTMLCanvasElement
-) {
+export function iniciarLoginBackground(canvas: HTMLCanvasElement) {
   const renderer = new THREE.WebGLRenderer({
     canvas,
     alpha: true,
@@ -10,12 +9,12 @@ export function iniciarLoginBackground(
   });
 
   renderer.setPixelRatio(
-    Math.min(window.devicePixelRatio, 2)
+    Math.min(window.devicePixelRatio, 2),
   );
 
   renderer.setSize(
     window.innerWidth,
-    window.innerHeight
+    window.innerHeight,
   );
 
   const scene = new THREE.Scene();
@@ -26,23 +25,19 @@ export function iniciarLoginBackground(
     1,
     -1,
     0,
-    1
+    1,
   );
 
   const uniforms = {
     u_time: {
       value: 0,
     },
-
     u_resolution: {
       value: new THREE.Vector2(
-        window.innerWidth *
-          window.devicePixelRatio,
-        window.innerHeight *
-          window.devicePixelRatio
+        window.innerWidth * window.devicePixelRatio,
+        window.innerHeight * window.devicePixelRatio,
       ),
     },
-
     u_opacities: {
       value: [
         0.15,
@@ -57,7 +52,6 @@ export function iniciarLoginBackground(
         0.9,
       ],
     },
-
     u_colors: {
       value: [
         new THREE.Vector3(0.48, 0.23, 0.92),
@@ -68,15 +62,12 @@ export function iniciarLoginBackground(
         new THREE.Vector3(0.42, 0.2, 0.85),
       ],
     },
-
     u_total_size: {
       value: 24,
     },
-
     u_dot_size: {
       value: 7,
     },
-
     u_reverse: {
       value: 0,
     },
@@ -130,7 +121,6 @@ export function iniciarLoginBackground(
       }
 
       void main() {
-
         vec2 st = fragCoord.xy;
 
         st.x -= abs(
@@ -203,9 +193,9 @@ export function iniciarLoginBackground(
         float animationSpeed = 3.0;
 
         vec2 centerGrid =
-          u_resolution /
-          2.0 /
-          u_total_size;
+          u_resolution
+          / 2.0
+          / u_total_size;
 
         float distanceFromCenter =
           distance(centerGrid, grid);
@@ -242,22 +232,17 @@ export function iniciarLoginBackground(
     `,
 
     glslVersion: THREE.GLSL3,
-
     blending: THREE.CustomBlending,
-
     blendSrc: THREE.SrcAlphaFactor,
-
     blendDst: THREE.OneFactor,
-
     transparent: true,
   });
 
-  const geometry =
-    new THREE.PlaneGeometry(2, 2);
+  const geometry = new THREE.PlaneGeometry(2, 2);
 
   const mesh = new THREE.Mesh(
     geometry,
-    material
+    material,
   );
 
   scene.add(mesh);
@@ -271,8 +256,7 @@ export function iniciarLoginBackground(
       requestAnimationFrame(animate);
 
     uniforms.u_time.value =
-      (performance.now() - startTime) /
-      1000;
+      (performance.now() - startTime) / 1000;
 
     renderer.render(scene, camera);
   };
@@ -282,21 +266,18 @@ export function iniciarLoginBackground(
   const handleResize = () => {
     renderer.setSize(
       window.innerWidth,
-      window.innerHeight
+      window.innerHeight,
     );
 
     uniforms.u_resolution.value.set(
-      window.innerWidth *
-        window.devicePixelRatio,
-
-      window.innerHeight *
-        window.devicePixelRatio
+      window.innerWidth * window.devicePixelRatio,
+      window.innerHeight * window.devicePixelRatio,
     );
   };
 
   window.addEventListener(
     "resize",
-    handleResize
+    handleResize,
   );
 
   return () => {
@@ -304,11 +285,36 @@ export function iniciarLoginBackground(
 
     window.removeEventListener(
       "resize",
-      handleResize
+      handleResize,
     );
 
     geometry.dispose();
     material.dispose();
     renderer.dispose();
   };
+}
+
+export default function LoginBackground() {
+  const canvasRef =
+    useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    if (!canvasRef.current) {
+      return;
+    }
+
+    const cleanup =
+      iniciarLoginBackground(
+        canvasRef.current,
+      );
+
+    return cleanup;
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="login-background"
+    />
+  );
 }
