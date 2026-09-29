@@ -233,6 +233,7 @@ export type ProjectStepWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"ProjectStep"> | Date | string
   projectId?: Prisma.IntFilter<"ProjectStep"> | number
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
+  midias?: Prisma.ProjectMediaListRelationFilter
 }
 
 export type ProjectStepOrderByWithRelationInput = {
@@ -243,6 +244,7 @@ export type ProjectStepOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
   project?: Prisma.ProjectOrderByWithRelationInput
+  midias?: Prisma.ProjectMediaOrderByRelationAggregateInput
 }
 
 export type ProjectStepWhereUniqueInput = Prisma.AtLeast<{
@@ -256,6 +258,7 @@ export type ProjectStepWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"ProjectStep"> | Date | string
   projectId?: Prisma.IntFilter<"ProjectStep"> | number
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
+  midias?: Prisma.ProjectMediaListRelationFilter
 }, "id">
 
 export type ProjectStepOrderByWithAggregationInput = {
@@ -290,6 +293,7 @@ export type ProjectStepCreateInput = {
   ordem: number
   createdAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutEtapasInput
+  midias?: Prisma.ProjectMediaCreateNestedManyWithoutStepInput
 }
 
 export type ProjectStepUncheckedCreateInput = {
@@ -299,6 +303,7 @@ export type ProjectStepUncheckedCreateInput = {
   ordem: number
   createdAt?: Date | string
   projectId: number
+  midias?: Prisma.ProjectMediaUncheckedCreateNestedManyWithoutStepInput
 }
 
 export type ProjectStepUpdateInput = {
@@ -307,6 +312,7 @@ export type ProjectStepUpdateInput = {
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutEtapasNestedInput
+  midias?: Prisma.ProjectMediaUpdateManyWithoutStepNestedInput
 }
 
 export type ProjectStepUncheckedUpdateInput = {
@@ -316,6 +322,7 @@ export type ProjectStepUncheckedUpdateInput = {
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projectId?: Prisma.IntFieldUpdateOperationsInput | number
+  midias?: Prisma.ProjectMediaUncheckedUpdateManyWithoutStepNestedInput
 }
 
 export type ProjectStepCreateManyInput = {
@@ -392,6 +399,11 @@ export type ProjectStepSumOrderByAggregateInput = {
   projectId?: Prisma.SortOrder
 }
 
+export type ProjectStepNullableScalarRelationFilter = {
+  is?: Prisma.ProjectStepWhereInput | null
+  isNot?: Prisma.ProjectStepWhereInput | null
+}
+
 export type ProjectStepCreateNestedManyWithoutProjectInput = {
   create?: Prisma.XOR<Prisma.ProjectStepCreateWithoutProjectInput, Prisma.ProjectStepUncheckedCreateWithoutProjectInput> | Prisma.ProjectStepCreateWithoutProjectInput[] | Prisma.ProjectStepUncheckedCreateWithoutProjectInput[]
   connectOrCreate?: Prisma.ProjectStepCreateOrConnectWithoutProjectInput | Prisma.ProjectStepCreateOrConnectWithoutProjectInput[]
@@ -434,11 +446,28 @@ export type ProjectStepUncheckedUpdateManyWithoutProjectNestedInput = {
   deleteMany?: Prisma.ProjectStepScalarWhereInput | Prisma.ProjectStepScalarWhereInput[]
 }
 
+export type ProjectStepCreateNestedOneWithoutMidiasInput = {
+  create?: Prisma.XOR<Prisma.ProjectStepCreateWithoutMidiasInput, Prisma.ProjectStepUncheckedCreateWithoutMidiasInput>
+  connectOrCreate?: Prisma.ProjectStepCreateOrConnectWithoutMidiasInput
+  connect?: Prisma.ProjectStepWhereUniqueInput
+}
+
+export type ProjectStepUpdateOneWithoutMidiasNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectStepCreateWithoutMidiasInput, Prisma.ProjectStepUncheckedCreateWithoutMidiasInput>
+  connectOrCreate?: Prisma.ProjectStepCreateOrConnectWithoutMidiasInput
+  upsert?: Prisma.ProjectStepUpsertWithoutMidiasInput
+  disconnect?: Prisma.ProjectStepWhereInput | boolean
+  delete?: Prisma.ProjectStepWhereInput | boolean
+  connect?: Prisma.ProjectStepWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectStepUpdateToOneWithWhereWithoutMidiasInput, Prisma.ProjectStepUpdateWithoutMidiasInput>, Prisma.ProjectStepUncheckedUpdateWithoutMidiasInput>
+}
+
 export type ProjectStepCreateWithoutProjectInput = {
   titulo: string
   conteudo: string
   ordem: number
   createdAt?: Date | string
+  midias?: Prisma.ProjectMediaCreateNestedManyWithoutStepInput
 }
 
 export type ProjectStepUncheckedCreateWithoutProjectInput = {
@@ -447,6 +476,7 @@ export type ProjectStepUncheckedCreateWithoutProjectInput = {
   conteudo: string
   ordem: number
   createdAt?: Date | string
+  midias?: Prisma.ProjectMediaUncheckedCreateNestedManyWithoutStepInput
 }
 
 export type ProjectStepCreateOrConnectWithoutProjectInput = {
@@ -487,6 +517,56 @@ export type ProjectStepScalarWhereInput = {
   projectId?: Prisma.IntFilter<"ProjectStep"> | number
 }
 
+export type ProjectStepCreateWithoutMidiasInput = {
+  titulo: string
+  conteudo: string
+  ordem: number
+  createdAt?: Date | string
+  project: Prisma.ProjectCreateNestedOneWithoutEtapasInput
+}
+
+export type ProjectStepUncheckedCreateWithoutMidiasInput = {
+  id?: number
+  titulo: string
+  conteudo: string
+  ordem: number
+  createdAt?: Date | string
+  projectId: number
+}
+
+export type ProjectStepCreateOrConnectWithoutMidiasInput = {
+  where: Prisma.ProjectStepWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectStepCreateWithoutMidiasInput, Prisma.ProjectStepUncheckedCreateWithoutMidiasInput>
+}
+
+export type ProjectStepUpsertWithoutMidiasInput = {
+  update: Prisma.XOR<Prisma.ProjectStepUpdateWithoutMidiasInput, Prisma.ProjectStepUncheckedUpdateWithoutMidiasInput>
+  create: Prisma.XOR<Prisma.ProjectStepCreateWithoutMidiasInput, Prisma.ProjectStepUncheckedCreateWithoutMidiasInput>
+  where?: Prisma.ProjectStepWhereInput
+}
+
+export type ProjectStepUpdateToOneWithWhereWithoutMidiasInput = {
+  where?: Prisma.ProjectStepWhereInput
+  data: Prisma.XOR<Prisma.ProjectStepUpdateWithoutMidiasInput, Prisma.ProjectStepUncheckedUpdateWithoutMidiasInput>
+}
+
+export type ProjectStepUpdateWithoutMidiasInput = {
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  conteudo?: Prisma.StringFieldUpdateOperationsInput | string
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  project?: Prisma.ProjectUpdateOneRequiredWithoutEtapasNestedInput
+}
+
+export type ProjectStepUncheckedUpdateWithoutMidiasInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  conteudo?: Prisma.StringFieldUpdateOperationsInput | string
+  ordem?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  projectId?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
 export type ProjectStepCreateManyProjectInput = {
   id?: number
   titulo: string
@@ -500,6 +580,7 @@ export type ProjectStepUpdateWithoutProjectInput = {
   conteudo?: Prisma.StringFieldUpdateOperationsInput | string
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  midias?: Prisma.ProjectMediaUpdateManyWithoutStepNestedInput
 }
 
 export type ProjectStepUncheckedUpdateWithoutProjectInput = {
@@ -508,6 +589,7 @@ export type ProjectStepUncheckedUpdateWithoutProjectInput = {
   conteudo?: Prisma.StringFieldUpdateOperationsInput | string
   ordem?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  midias?: Prisma.ProjectMediaUncheckedUpdateManyWithoutStepNestedInput
 }
 
 export type ProjectStepUncheckedUpdateManyWithoutProjectInput = {
@@ -519,6 +601,35 @@ export type ProjectStepUncheckedUpdateManyWithoutProjectInput = {
 }
 
 
+/**
+ * Count Type ProjectStepCountOutputType
+ */
+
+export type ProjectStepCountOutputType = {
+  midias: number
+}
+
+export type ProjectStepCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  midias?: boolean | ProjectStepCountOutputTypeCountMidiasArgs
+}
+
+/**
+ * ProjectStepCountOutputType without action
+ */
+export type ProjectStepCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProjectStepCountOutputType
+   */
+  select?: Prisma.ProjectStepCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ProjectStepCountOutputType without action
+ */
+export type ProjectStepCountOutputTypeCountMidiasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProjectMediaWhereInput
+}
+
 
 export type ProjectStepSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -528,6 +639,8 @@ export type ProjectStepSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   createdAt?: boolean
   projectId?: boolean
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  midias?: boolean | Prisma.ProjectStep$midiasArgs<ExtArgs>
+  _count?: boolean | Prisma.ProjectStepCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["projectStep"]>
 
 export type ProjectStepSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -562,6 +675,8 @@ export type ProjectStepSelectScalar = {
 export type ProjectStepOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "titulo" | "conteudo" | "ordem" | "createdAt" | "projectId", ExtArgs["result"]["projectStep"]>
 export type ProjectStepInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  midias?: boolean | Prisma.ProjectStep$midiasArgs<ExtArgs>
+  _count?: boolean | Prisma.ProjectStepCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProjectStepIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
@@ -574,6 +689,7 @@ export type $ProjectStepPayload<ExtArgs extends runtime.Types.Extensions.Interna
   name: "ProjectStep"
   objects: {
     project: Prisma.$ProjectPayload<ExtArgs>
+    midias: Prisma.$ProjectMediaPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -977,6 +1093,7 @@ readonly fields: ProjectStepFieldRefs;
 export interface Prisma__ProjectStepClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   project<T extends Prisma.ProjectDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectClient<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  midias<T extends Prisma.ProjectStep$midiasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectStep$midiasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectMediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1410,6 +1527,30 @@ export type ProjectStepDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Limit how many ProjectSteps to delete.
    */
   limit?: number
+}
+
+/**
+ * ProjectStep.midias
+ */
+export type ProjectStep$midiasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProjectMedia
+   */
+  select?: Prisma.ProjectMediaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProjectMedia
+   */
+  omit?: Prisma.ProjectMediaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectMediaInclude<ExtArgs> | null
+  where?: Prisma.ProjectMediaWhereInput
+  orderBy?: Prisma.ProjectMediaOrderByWithRelationInput | Prisma.ProjectMediaOrderByWithRelationInput[]
+  cursor?: Prisma.ProjectMediaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProjectMediaScalarFieldEnum | Prisma.ProjectMediaScalarFieldEnum[]
 }
 
 /**

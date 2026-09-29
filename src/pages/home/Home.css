@@ -84,20 +84,17 @@
   color: #c7c7d1;
 }
 
-@media (max-width: 768px) {
-  .conteudo {
-    padding: 24px 18px;
-  }
 
-  .conteudo h1 {
-    font-size: 24px;
-  }
+.cards-projetos > div {
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
 
-  .cards-projetos {
-    grid-template-columns: 1fr;
-  }
-
-  .cards-projetos img {
-    height: 200px;
-  }
+.cards-projetos > div:hover {
+  transform: translateY(-3px);
+  border-color: #7c3aed;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }

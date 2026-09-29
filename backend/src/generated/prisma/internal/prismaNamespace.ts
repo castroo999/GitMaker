@@ -795,7 +795,8 @@ export const ProjectMediaScalarFieldEnum = {
   tipo: 'tipo',
   url: 'url',
   createdAt: 'createdAt',
-  projectId: 'projectId'
+  projectId: 'projectId',
+  stepId: 'stepId'
 } as const
 
 export type ProjectMediaScalarFieldEnum = (typeof ProjectMediaScalarFieldEnum)[keyof typeof ProjectMediaScalarFieldEnum]
@@ -815,6 +816,14 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
 

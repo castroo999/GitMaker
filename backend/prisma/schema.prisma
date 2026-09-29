@@ -36,23 +36,28 @@ model Project {
 }
 
 model ProjectStep {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   titulo    String
   conteudo  String
   ordem     Int
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
 
   projectId Int
-  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  project   Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  midias    ProjectMedia[]
 }
 
 model ProjectMedia {
-  id        Int      @id @default(autoincrement())
+  id        Int          @id @default(autoincrement())
   nome      String
   tipo      String
   url       String
-  createdAt DateTime @default(now())
+  createdAt DateTime     @default(now())
 
   projectId Int
-  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  project   Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  stepId    Int?
+  step     ProjectStep? @relation(fields: [stepId], references: [id], onDelete: Cascade)
 }

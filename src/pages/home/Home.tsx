@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "@/components/sidebar/Sidebar";
+import ProjetoModal from "@/components/projeto/ProjetoModal";
 
 type Projeto = {
   id: number;
@@ -25,6 +26,13 @@ export default function Home() {
   const [projetos, setProjetos] = useState<Projeto[]>([]);
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(true);
+
+  const [projetoSelecionado, setProjetoSelecionado] = useState<Projeto | null>(
+    null,
+  );
+
+  const [modalAberto, setModalAberto] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,7 +46,7 @@ export default function Home() {
 
       try {
         const resposta = await fetch(
-          `http://localhost:3000/projetos/listar-projetos`,
+          "http://localhost:3000/projetos/listar-projetos",
           {
             method: "GET",
             headers: {
@@ -70,8 +78,19 @@ export default function Home() {
         setCarregando(false);
       }
     }
+
     carregarHome();
-  }, []);
+  }, [navigate]);
+
+  function abrirProjeto(projeto: Projeto) {
+    setProjetoSelecionado(projeto);
+    setModalAberto(true);
+  }
+
+  function fecharModal() {
+    setModalAberto(false);
+    setProjetoSelecionado(null);
+  }
 
   return (
     <div className="layout">
@@ -92,7 +111,7 @@ export default function Home() {
               );
 
               return (
-                <div key={projeto.id}>
+                <div key={projeto.id} onClick={() => abrirProjeto(projeto)}>
                   {imagem && (
                     <img
                       src={`http://localhost:3000${imagem.url}`}
@@ -101,13 +120,21 @@ export default function Home() {
                   )}
 
                   <h2>{projeto.titulo}</h2>
+
                   <p>{projeto.descricao}</p>
+
                   <span>Criado por {projeto.user.nome}</span>
                 </div>
               );
             })}
           </div>
         )}
+
+        <ProjetoModal
+          projeto={projetoSelecionado}
+          aberto={modalAberto}
+          onFechar={fecharModal}
+        />
       </main>
     </div>
   );

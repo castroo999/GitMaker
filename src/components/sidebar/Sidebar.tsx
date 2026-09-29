@@ -9,6 +9,7 @@ import {
   Info,
   Plus,
   LogOut,
+  Folders,
 } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -33,12 +34,17 @@ export default function SideBar() {
       </div>
 
       <div className="itens-sidebar">
-        <button onClick={() => navigate('/home') }>
+        <button onClick={() => navigate("/home")}>
           <Folder />
           {!minimizada && <span>Projetos</span>}
         </button>
 
-        <button onClick={() => navigate('/criar')}>
+        <button>
+          <Folders />
+          {!minimizada && <span>Seus projetos</span>}
+        </button>
+
+        <button onClick={() => navigate("/criar")}>
           <Plus />
           {!minimizada && <span>Criar Projetos</span>}
         </button>

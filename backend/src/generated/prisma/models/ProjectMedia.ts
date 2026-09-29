@@ -29,11 +29,13 @@ export type AggregateProjectMedia = {
 export type ProjectMediaAvgAggregateOutputType = {
   id: number | null
   projectId: number | null
+  stepId: number | null
 }
 
 export type ProjectMediaSumAggregateOutputType = {
   id: number | null
   projectId: number | null
+  stepId: number | null
 }
 
 export type ProjectMediaMinAggregateOutputType = {
@@ -43,6 +45,7 @@ export type ProjectMediaMinAggregateOutputType = {
   url: string | null
   createdAt: Date | null
   projectId: number | null
+  stepId: number | null
 }
 
 export type ProjectMediaMaxAggregateOutputType = {
@@ -52,6 +55,7 @@ export type ProjectMediaMaxAggregateOutputType = {
   url: string | null
   createdAt: Date | null
   projectId: number | null
+  stepId: number | null
 }
 
 export type ProjectMediaCountAggregateOutputType = {
@@ -61,6 +65,7 @@ export type ProjectMediaCountAggregateOutputType = {
   url: number
   createdAt: number
   projectId: number
+  stepId: number
   _all: number
 }
 
@@ -68,11 +73,13 @@ export type ProjectMediaCountAggregateOutputType = {
 export type ProjectMediaAvgAggregateInputType = {
   id?: true
   projectId?: true
+  stepId?: true
 }
 
 export type ProjectMediaSumAggregateInputType = {
   id?: true
   projectId?: true
+  stepId?: true
 }
 
 export type ProjectMediaMinAggregateInputType = {
@@ -82,6 +89,7 @@ export type ProjectMediaMinAggregateInputType = {
   url?: true
   createdAt?: true
   projectId?: true
+  stepId?: true
 }
 
 export type ProjectMediaMaxAggregateInputType = {
@@ -91,6 +99,7 @@ export type ProjectMediaMaxAggregateInputType = {
   url?: true
   createdAt?: true
   projectId?: true
+  stepId?: true
 }
 
 export type ProjectMediaCountAggregateInputType = {
@@ -100,6 +109,7 @@ export type ProjectMediaCountAggregateInputType = {
   url?: true
   createdAt?: true
   projectId?: true
+  stepId?: true
   _all?: true
 }
 
@@ -196,6 +206,7 @@ export type ProjectMediaGroupByOutputType = {
   url: string
   createdAt: Date
   projectId: number
+  stepId: number | null
   _count: ProjectMediaCountAggregateOutputType | null
   _avg: ProjectMediaAvgAggregateOutputType | null
   _sum: ProjectMediaSumAggregateOutputType | null
@@ -228,7 +239,9 @@ export type ProjectMediaWhereInput = {
   url?: Prisma.StringFilter<"ProjectMedia"> | string
   createdAt?: Prisma.DateTimeFilter<"ProjectMedia"> | Date | string
   projectId?: Prisma.IntFilter<"ProjectMedia"> | number
+  stepId?: Prisma.IntNullableFilter<"ProjectMedia"> | number | null
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
+  step?: Prisma.XOR<Prisma.ProjectStepNullableScalarRelationFilter, Prisma.ProjectStepWhereInput> | null
 }
 
 export type ProjectMediaOrderByWithRelationInput = {
@@ -238,7 +251,9 @@ export type ProjectMediaOrderByWithRelationInput = {
   url?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
+  stepId?: Prisma.SortOrderInput | Prisma.SortOrder
   project?: Prisma.ProjectOrderByWithRelationInput
+  step?: Prisma.ProjectStepOrderByWithRelationInput
 }
 
 export type ProjectMediaWhereUniqueInput = Prisma.AtLeast<{
@@ -251,7 +266,9 @@ export type ProjectMediaWhereUniqueInput = Prisma.AtLeast<{
   url?: Prisma.StringFilter<"ProjectMedia"> | string
   createdAt?: Prisma.DateTimeFilter<"ProjectMedia"> | Date | string
   projectId?: Prisma.IntFilter<"ProjectMedia"> | number
+  stepId?: Prisma.IntNullableFilter<"ProjectMedia"> | number | null
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
+  step?: Prisma.XOR<Prisma.ProjectStepNullableScalarRelationFilter, Prisma.ProjectStepWhereInput> | null
 }, "id">
 
 export type ProjectMediaOrderByWithAggregationInput = {
@@ -261,6 +278,7 @@ export type ProjectMediaOrderByWithAggregationInput = {
   url?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
+  stepId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ProjectMediaCountOrderByAggregateInput
   _avg?: Prisma.ProjectMediaAvgOrderByAggregateInput
   _max?: Prisma.ProjectMediaMaxOrderByAggregateInput
@@ -278,6 +296,7 @@ export type ProjectMediaScalarWhereWithAggregatesInput = {
   url?: Prisma.StringWithAggregatesFilter<"ProjectMedia"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ProjectMedia"> | Date | string
   projectId?: Prisma.IntWithAggregatesFilter<"ProjectMedia"> | number
+  stepId?: Prisma.IntNullableWithAggregatesFilter<"ProjectMedia"> | number | null
 }
 
 export type ProjectMediaCreateInput = {
@@ -286,6 +305,7 @@ export type ProjectMediaCreateInput = {
   url: string
   createdAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutMidiasInput
+  step?: Prisma.ProjectStepCreateNestedOneWithoutMidiasInput
 }
 
 export type ProjectMediaUncheckedCreateInput = {
@@ -295,6 +315,7 @@ export type ProjectMediaUncheckedCreateInput = {
   url: string
   createdAt?: Date | string
   projectId: number
+  stepId?: number | null
 }
 
 export type ProjectMediaUpdateInput = {
@@ -303,6 +324,7 @@ export type ProjectMediaUpdateInput = {
   url?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutMidiasNestedInput
+  step?: Prisma.ProjectStepUpdateOneWithoutMidiasNestedInput
 }
 
 export type ProjectMediaUncheckedUpdateInput = {
@@ -312,6 +334,7 @@ export type ProjectMediaUncheckedUpdateInput = {
   url?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projectId?: Prisma.IntFieldUpdateOperationsInput | number
+  stepId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ProjectMediaCreateManyInput = {
@@ -321,6 +344,7 @@ export type ProjectMediaCreateManyInput = {
   url: string
   createdAt?: Date | string
   projectId: number
+  stepId?: number | null
 }
 
 export type ProjectMediaUpdateManyMutationInput = {
@@ -337,6 +361,7 @@ export type ProjectMediaUncheckedUpdateManyInput = {
   url?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projectId?: Prisma.IntFieldUpdateOperationsInput | number
+  stepId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ProjectMediaListRelationFilter = {
@@ -356,11 +381,13 @@ export type ProjectMediaCountOrderByAggregateInput = {
   url?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
+  stepId?: Prisma.SortOrder
 }
 
 export type ProjectMediaAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
+  stepId?: Prisma.SortOrder
 }
 
 export type ProjectMediaMaxOrderByAggregateInput = {
@@ -370,6 +397,7 @@ export type ProjectMediaMaxOrderByAggregateInput = {
   url?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
+  stepId?: Prisma.SortOrder
 }
 
 export type ProjectMediaMinOrderByAggregateInput = {
@@ -379,11 +407,13 @@ export type ProjectMediaMinOrderByAggregateInput = {
   url?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
+  stepId?: Prisma.SortOrder
 }
 
 export type ProjectMediaSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
+  stepId?: Prisma.SortOrder
 }
 
 export type ProjectMediaCreateNestedManyWithoutProjectInput = {
@@ -428,11 +458,62 @@ export type ProjectMediaUncheckedUpdateManyWithoutProjectNestedInput = {
   deleteMany?: Prisma.ProjectMediaScalarWhereInput | Prisma.ProjectMediaScalarWhereInput[]
 }
 
+export type ProjectMediaCreateNestedManyWithoutStepInput = {
+  create?: Prisma.XOR<Prisma.ProjectMediaCreateWithoutStepInput, Prisma.ProjectMediaUncheckedCreateWithoutStepInput> | Prisma.ProjectMediaCreateWithoutStepInput[] | Prisma.ProjectMediaUncheckedCreateWithoutStepInput[]
+  connectOrCreate?: Prisma.ProjectMediaCreateOrConnectWithoutStepInput | Prisma.ProjectMediaCreateOrConnectWithoutStepInput[]
+  createMany?: Prisma.ProjectMediaCreateManyStepInputEnvelope
+  connect?: Prisma.ProjectMediaWhereUniqueInput | Prisma.ProjectMediaWhereUniqueInput[]
+}
+
+export type ProjectMediaUncheckedCreateNestedManyWithoutStepInput = {
+  create?: Prisma.XOR<Prisma.ProjectMediaCreateWithoutStepInput, Prisma.ProjectMediaUncheckedCreateWithoutStepInput> | Prisma.ProjectMediaCreateWithoutStepInput[] | Prisma.ProjectMediaUncheckedCreateWithoutStepInput[]
+  connectOrCreate?: Prisma.ProjectMediaCreateOrConnectWithoutStepInput | Prisma.ProjectMediaCreateOrConnectWithoutStepInput[]
+  createMany?: Prisma.ProjectMediaCreateManyStepInputEnvelope
+  connect?: Prisma.ProjectMediaWhereUniqueInput | Prisma.ProjectMediaWhereUniqueInput[]
+}
+
+export type ProjectMediaUpdateManyWithoutStepNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectMediaCreateWithoutStepInput, Prisma.ProjectMediaUncheckedCreateWithoutStepInput> | Prisma.ProjectMediaCreateWithoutStepInput[] | Prisma.ProjectMediaUncheckedCreateWithoutStepInput[]
+  connectOrCreate?: Prisma.ProjectMediaCreateOrConnectWithoutStepInput | Prisma.ProjectMediaCreateOrConnectWithoutStepInput[]
+  upsert?: Prisma.ProjectMediaUpsertWithWhereUniqueWithoutStepInput | Prisma.ProjectMediaUpsertWithWhereUniqueWithoutStepInput[]
+  createMany?: Prisma.ProjectMediaCreateManyStepInputEnvelope
+  set?: Prisma.ProjectMediaWhereUniqueInput | Prisma.ProjectMediaWhereUniqueInput[]
+  disconnect?: Prisma.ProjectMediaWhereUniqueInput | Prisma.ProjectMediaWhereUniqueInput[]
+  delete?: Prisma.ProjectMediaWhereUniqueInput | Prisma.ProjectMediaWhereUniqueInput[]
+  connect?: Prisma.ProjectMediaWhereUniqueInput | Prisma.ProjectMediaWhereUniqueInput[]
+  update?: Prisma.ProjectMediaUpdateWithWhereUniqueWithoutStepInput | Prisma.ProjectMediaUpdateWithWhereUniqueWithoutStepInput[]
+  updateMany?: Prisma.ProjectMediaUpdateManyWithWhereWithoutStepInput | Prisma.ProjectMediaUpdateManyWithWhereWithoutStepInput[]
+  deleteMany?: Prisma.ProjectMediaScalarWhereInput | Prisma.ProjectMediaScalarWhereInput[]
+}
+
+export type ProjectMediaUncheckedUpdateManyWithoutStepNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectMediaCreateWithoutStepInput, Prisma.ProjectMediaUncheckedCreateWithoutStepInput> | Prisma.ProjectMediaCreateWithoutStepInput[] | Prisma.ProjectMediaUncheckedCreateWithoutStepInput[]
+  connectOrCreate?: Prisma.ProjectMediaCreateOrConnectWithoutStepInput | Prisma.ProjectMediaCreateOrConnectWithoutStepInput[]
+  upsert?: Prisma.ProjectMediaUpsertWithWhereUniqueWithoutStepInput | Prisma.ProjectMediaUpsertWithWhereUniqueWithoutStepInput[]
+  createMany?: Prisma.ProjectMediaCreateManyStepInputEnvelope
+  set?: Prisma.ProjectMediaWhereUniqueInput | Prisma.ProjectMediaWhereUniqueInput[]
+  disconnect?: Prisma.ProjectMediaWhereUniqueInput | Prisma.ProjectMediaWhereUniqueInput[]
+  delete?: Prisma.ProjectMediaWhereUniqueInput | Prisma.ProjectMediaWhereUniqueInput[]
+  connect?: Prisma.ProjectMediaWhereUniqueInput | Prisma.ProjectMediaWhereUniqueInput[]
+  update?: Prisma.ProjectMediaUpdateWithWhereUniqueWithoutStepInput | Prisma.ProjectMediaUpdateWithWhereUniqueWithoutStepInput[]
+  updateMany?: Prisma.ProjectMediaUpdateManyWithWhereWithoutStepInput | Prisma.ProjectMediaUpdateManyWithWhereWithoutStepInput[]
+  deleteMany?: Prisma.ProjectMediaScalarWhereInput | Prisma.ProjectMediaScalarWhereInput[]
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type ProjectMediaCreateWithoutProjectInput = {
   nome: string
   tipo: string
   url: string
   createdAt?: Date | string
+  step?: Prisma.ProjectStepCreateNestedOneWithoutMidiasInput
 }
 
 export type ProjectMediaUncheckedCreateWithoutProjectInput = {
@@ -441,6 +522,7 @@ export type ProjectMediaUncheckedCreateWithoutProjectInput = {
   tipo: string
   url: string
   createdAt?: Date | string
+  stepId?: number | null
 }
 
 export type ProjectMediaCreateOrConnectWithoutProjectInput = {
@@ -479,6 +561,50 @@ export type ProjectMediaScalarWhereInput = {
   url?: Prisma.StringFilter<"ProjectMedia"> | string
   createdAt?: Prisma.DateTimeFilter<"ProjectMedia"> | Date | string
   projectId?: Prisma.IntFilter<"ProjectMedia"> | number
+  stepId?: Prisma.IntNullableFilter<"ProjectMedia"> | number | null
+}
+
+export type ProjectMediaCreateWithoutStepInput = {
+  nome: string
+  tipo: string
+  url: string
+  createdAt?: Date | string
+  project: Prisma.ProjectCreateNestedOneWithoutMidiasInput
+}
+
+export type ProjectMediaUncheckedCreateWithoutStepInput = {
+  id?: number
+  nome: string
+  tipo: string
+  url: string
+  createdAt?: Date | string
+  projectId: number
+}
+
+export type ProjectMediaCreateOrConnectWithoutStepInput = {
+  where: Prisma.ProjectMediaWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectMediaCreateWithoutStepInput, Prisma.ProjectMediaUncheckedCreateWithoutStepInput>
+}
+
+export type ProjectMediaCreateManyStepInputEnvelope = {
+  data: Prisma.ProjectMediaCreateManyStepInput | Prisma.ProjectMediaCreateManyStepInput[]
+  skipDuplicates?: boolean
+}
+
+export type ProjectMediaUpsertWithWhereUniqueWithoutStepInput = {
+  where: Prisma.ProjectMediaWhereUniqueInput
+  update: Prisma.XOR<Prisma.ProjectMediaUpdateWithoutStepInput, Prisma.ProjectMediaUncheckedUpdateWithoutStepInput>
+  create: Prisma.XOR<Prisma.ProjectMediaCreateWithoutStepInput, Prisma.ProjectMediaUncheckedCreateWithoutStepInput>
+}
+
+export type ProjectMediaUpdateWithWhereUniqueWithoutStepInput = {
+  where: Prisma.ProjectMediaWhereUniqueInput
+  data: Prisma.XOR<Prisma.ProjectMediaUpdateWithoutStepInput, Prisma.ProjectMediaUncheckedUpdateWithoutStepInput>
+}
+
+export type ProjectMediaUpdateManyWithWhereWithoutStepInput = {
+  where: Prisma.ProjectMediaScalarWhereInput
+  data: Prisma.XOR<Prisma.ProjectMediaUpdateManyMutationInput, Prisma.ProjectMediaUncheckedUpdateManyWithoutStepInput>
 }
 
 export type ProjectMediaCreateManyProjectInput = {
@@ -487,6 +613,7 @@ export type ProjectMediaCreateManyProjectInput = {
   tipo: string
   url: string
   createdAt?: Date | string
+  stepId?: number | null
 }
 
 export type ProjectMediaUpdateWithoutProjectInput = {
@@ -494,6 +621,7 @@ export type ProjectMediaUpdateWithoutProjectInput = {
   tipo?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  step?: Prisma.ProjectStepUpdateOneWithoutMidiasNestedInput
 }
 
 export type ProjectMediaUncheckedUpdateWithoutProjectInput = {
@@ -502,6 +630,7 @@ export type ProjectMediaUncheckedUpdateWithoutProjectInput = {
   tipo?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stepId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ProjectMediaUncheckedUpdateManyWithoutProjectInput = {
@@ -510,6 +639,42 @@ export type ProjectMediaUncheckedUpdateManyWithoutProjectInput = {
   tipo?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stepId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type ProjectMediaCreateManyStepInput = {
+  id?: number
+  nome: string
+  tipo: string
+  url: string
+  createdAt?: Date | string
+  projectId: number
+}
+
+export type ProjectMediaUpdateWithoutStepInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  project?: Prisma.ProjectUpdateOneRequiredWithoutMidiasNestedInput
+}
+
+export type ProjectMediaUncheckedUpdateWithoutStepInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  projectId?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type ProjectMediaUncheckedUpdateManyWithoutStepInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  tipo?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  projectId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -521,7 +686,9 @@ export type ProjectMediaSelect<ExtArgs extends runtime.Types.Extensions.Internal
   url?: boolean
   createdAt?: boolean
   projectId?: boolean
+  stepId?: boolean
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  step?: boolean | Prisma.ProjectMedia$stepArgs<ExtArgs>
 }, ExtArgs["result"]["projectMedia"]>
 
 export type ProjectMediaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -531,7 +698,9 @@ export type ProjectMediaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   url?: boolean
   createdAt?: boolean
   projectId?: boolean
+  stepId?: boolean
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  step?: boolean | Prisma.ProjectMedia$stepArgs<ExtArgs>
 }, ExtArgs["result"]["projectMedia"]>
 
 export type ProjectMediaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -541,7 +710,9 @@ export type ProjectMediaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   url?: boolean
   createdAt?: boolean
   projectId?: boolean
+  stepId?: boolean
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  step?: boolean | Prisma.ProjectMedia$stepArgs<ExtArgs>
 }, ExtArgs["result"]["projectMedia"]>
 
 export type ProjectMediaSelectScalar = {
@@ -551,23 +722,28 @@ export type ProjectMediaSelectScalar = {
   url?: boolean
   createdAt?: boolean
   projectId?: boolean
+  stepId?: boolean
 }
 
-export type ProjectMediaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "tipo" | "url" | "createdAt" | "projectId", ExtArgs["result"]["projectMedia"]>
+export type ProjectMediaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "tipo" | "url" | "createdAt" | "projectId" | "stepId", ExtArgs["result"]["projectMedia"]>
 export type ProjectMediaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  step?: boolean | Prisma.ProjectMedia$stepArgs<ExtArgs>
 }
 export type ProjectMediaIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  step?: boolean | Prisma.ProjectMedia$stepArgs<ExtArgs>
 }
 export type ProjectMediaIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  step?: boolean | Prisma.ProjectMedia$stepArgs<ExtArgs>
 }
 
 export type $ProjectMediaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ProjectMedia"
   objects: {
     project: Prisma.$ProjectPayload<ExtArgs>
+    step: Prisma.$ProjectStepPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -576,6 +752,7 @@ export type $ProjectMediaPayload<ExtArgs extends runtime.Types.Extensions.Intern
     url: string
     createdAt: Date
     projectId: number
+    stepId: number | null
   }, ExtArgs["result"]["projectMedia"]>
   composites: {}
 }
@@ -971,6 +1148,7 @@ readonly fields: ProjectMediaFieldRefs;
 export interface Prisma__ProjectMediaClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   project<T extends Prisma.ProjectDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectClient<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  step<T extends Prisma.ProjectMedia$stepArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMedia$stepArgs<ExtArgs>>): Prisma.Prisma__ProjectStepClient<runtime.Types.Result.GetResult<Prisma.$ProjectStepPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1006,6 +1184,7 @@ export interface ProjectMediaFieldRefs {
   readonly url: Prisma.FieldRef<"ProjectMedia", 'String'>
   readonly createdAt: Prisma.FieldRef<"ProjectMedia", 'DateTime'>
   readonly projectId: Prisma.FieldRef<"ProjectMedia", 'Int'>
+  readonly stepId: Prisma.FieldRef<"ProjectMedia", 'Int'>
 }
     
 
@@ -1404,6 +1583,25 @@ export type ProjectMediaDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Limit how many ProjectMedias to delete.
    */
   limit?: number
+}
+
+/**
+ * ProjectMedia.step
+ */
+export type ProjectMedia$stepArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProjectStep
+   */
+  select?: Prisma.ProjectStepSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProjectStep
+   */
+  omit?: Prisma.ProjectStepOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectStepInclude<ExtArgs> | null
+  where?: Prisma.ProjectStepWhereInput
 }
 
 /**
