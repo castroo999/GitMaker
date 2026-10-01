@@ -116,8 +116,8 @@ export default function Login() {
     setIsLogin((valor) => !valor);
   };
 
-  const handleGithub = () => {
-    setErro("Login com GitHub ainda não está disponível.");
+  const handleGoogle = () => {
+    setErro("Login com Google ainda não está disponível.");
   };
 
   return (
@@ -140,7 +140,7 @@ export default function Login() {
           onSenhaChange={setSenha}
           onSubmit={handleSubmit}
           onTrocarModo={trocarModo}
-          onGithub={handleGithub}
+          onGithub={handleGoogle}
         />
       </section>
     </main>

@@ -1,4 +1,4 @@
-import { TextHoverEffect } from "@/components/ui/text-hover-effect";
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Hero.css";
@@ -61,7 +61,7 @@ export default function Hero() {
 
       <div className="hero-conteudo">
         <div className="hero-logo">
-          <TextHoverEffect text="GIT MAKER" duration={0.5} />
+          <h1>GIT-<span>MAKER</span></h1>
         </div>
 
         <h1 className="hero-titulo">

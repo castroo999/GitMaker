@@ -1,4 +1,7 @@
 .sidebar-topo {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 260px;
   height: 100vh;
   display: flex;
@@ -7,8 +10,9 @@
   background: #121217;
   border-right: 1px solid #292932;
   box-sizing: border-box;
-  transition: width 0.3s ease, padding 0.3s ease;
+  transition: width .3s ease, padding .3s ease;
   overflow: hidden;
+  z-index: 1000;
 }
 
 .sidebar-topo.minimizada {
@@ -47,7 +51,7 @@
   background: transparent;
   color: #92929f;
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease, transform 0.3s ease;
+  transition: background-color .2s ease, color .2s ease, transform .3s ease;
 }
 
 .botao-toggle:hover {
@@ -58,7 +62,7 @@
 .botao-toggle svg {
   width: 19px;
   height: 19px;
-  transition: transform 0.3s ease;
+  transition: transform .3s ease;
 }
 
 .sidebar-topo.minimizada .botao-toggle svg {
@@ -81,7 +85,7 @@
   font-weight: 500;
   text-align: left;
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
 }
 
 .itens-sidebar button svg,

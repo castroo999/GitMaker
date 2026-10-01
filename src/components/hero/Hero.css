@@ -32,24 +32,23 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  margin-left: 234px;
+  width: calc(100% - 234px);
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
-
-.hero-logo {
-  width: min(900px, 95vw);
-  height: 180px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
+.hero-logo h1 {
+  font-size: 6rem;
+  font-weight: 700;
+  letter-spacing: -3px;
+  color: #F5F5F7;
+  margin: 0;
 }
 
-
-
-.hero-logo svg {
-  filter: drop-shadow(0 0 8px rgba(124, 58, 237, 0.25));
+.hero-logo span {
+  color: #7c3aed;
 }
-
 
 .hero-titulo {
   min-height: 80px;
@@ -71,6 +70,7 @@
 }
 
 @keyframes piscar-cursor {
+
   0%,
   45% {
     opacity: 1;

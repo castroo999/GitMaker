@@ -26,18 +26,14 @@ type LoginFormProps = {
 
 export default function LoginForm({
   isLogin,
-
   nome,
   email,
   senha,
-
   erro,
   carregando,
-
   onNomeChange,
   onEmailChange,
   onSenhaChange,
-
   onSubmit,
   onTrocarModo,
   onGithub,

@@ -1,4 +1,3 @@
-import "./Sidebar.css";
 import {
   UserRound,
   Folder,
@@ -11,30 +10,34 @@ import {
   LogOut,
   Folders,
 } from "lucide-react";
-import { useState } from "react";
+import "./Sidebar.css";
 import { useNavigate } from "react-router-dom";
 
-export default function SideBar() {
-  const [minimizada, setMinimizada] = useState(false);
+type SidebarProps = {
+  minimizada: boolean;
+  setMinimizada: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export default function Sidebar({ minimizada, setMinimizada }: SidebarProps) {
   const navigate = useNavigate();
 
   return (
     <section className={`sidebar-topo ${minimizada ? "minimizada" : ""}`}>
       <div className="perfil">
         <UserRound />
-
-        {!minimizada && <h2>gustavo castro</h2>}
+        {!minimizada && <h2>Gustavo Castro</h2>}
 
         <button
           className="botao-toggle"
           onClick={() => setMinimizada(!minimizada)}
+          aria-label={minimizada ? "Expandir sidebar" : "Minimizar sidebar"}
         >
           <ArrowRight />
         </button>
       </div>
 
       <div className="itens-sidebar">
-        <button onClick={() => navigate("/home")}>
+        <button>
           <Folder />
           {!minimizada && <span>Projetos</span>}
         </button>
