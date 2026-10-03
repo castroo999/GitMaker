@@ -1,5 +1,6 @@
 .hero {
   position: relative;
+  width: 100%;
   min-height: 100vh;
   overflow: hidden;
   background: #0b0b0f;
@@ -22,9 +23,9 @@
 .hero-conteudo {
   position: relative;
   z-index: 1;
-  min-height: 100vh;
   width: 100%;
   max-width: 1100px;
+  min-height: 100vh;
   margin: 0 auto;
   padding: 40px 20px;
   display: flex;
@@ -32,9 +33,6 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-left: 234px;
-  width: calc(100% - 234px);
-  min-height: 100vh;
   box-sizing: border-box;
 }
 
@@ -42,7 +40,7 @@
   font-size: 6rem;
   font-weight: 700;
   letter-spacing: -3px;
-  color: #F5F5F7;
+  color: #f5f5f7;
   margin: 0;
 }
 
@@ -70,18 +68,15 @@
 }
 
 @keyframes piscar-cursor {
-
   0%,
   45% {
     opacity: 1;
   }
-
   46%,
   100% {
     opacity: 0;
   }
 }
-
 
 .hero-descricao {
   max-width: 750px;
@@ -90,7 +85,6 @@
   font-size: 19px;
   line-height: 1.6;
 }
-
 
 .hero-botoes {
   display: flex;
@@ -112,11 +106,10 @@
     box-shadow 0.2s;
 }
 
-
 .botao-principal {
   border: 1px solid #7c3aed;
   background-color: #7c3aed;
-  color: #ffffff;
+  color: #fff;
 }
 
 .botao-principal:hover {

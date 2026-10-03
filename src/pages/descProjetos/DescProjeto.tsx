@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Sidebar from "@/components/sidebar/Sidebar";
 import "./DescProjeto.css";
 
 type Projeto = {
@@ -159,7 +158,7 @@ export default function DescProjeto() {
   if (carregando) {
     return (
       <div className="layout">
-        <Sidebar />
+        
 
         <main className="pagina-projeto">
           <p>Carregando projeto...</p>
@@ -171,7 +170,7 @@ export default function DescProjeto() {
   if (erro || !projeto) {
     return (
       <div className="layout">
-        <Sidebar />
+       
 
         <main className="pagina-projeto">
           <p>{erro || "Projeto não encontrado"}</p>
@@ -182,7 +181,7 @@ export default function DescProjeto() {
 
   return (
     <div className="layout">
-      <Sidebar />
+      
 
       <main className="pagina-projeto">
         <button className="botao-voltar" onClick={() => navigate("/home")}>

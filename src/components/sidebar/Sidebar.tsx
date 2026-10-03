@@ -21,6 +21,13 @@ type SidebarProps = {
 export default function Sidebar({ minimizada, setMinimizada }: SidebarProps) {
   const navigate = useNavigate();
 
+
+  function sair() {
+    localStorage.clear();
+    navigate("/login");
+    alert("Voce saiu com susesso da sua conta!");
+  }
+
   return (
     <section className={`sidebar-topo ${minimizada ? "minimizada" : ""}`}>
       <div className="perfil">
@@ -37,12 +44,12 @@ export default function Sidebar({ minimizada, setMinimizada }: SidebarProps) {
       </div>
 
       <div className="itens-sidebar">
-        <button>
+        <button onClick={() => navigate("/home")}>
           <Folder />
           {!minimizada && <span>Projetos</span>}
         </button>
 
-        <button>
+        <button onClick={() => navigate("/meus-projetos")}>
           <Folders />
           {!minimizada && <span>Seus projetos</span>}
         </button>
@@ -74,7 +81,7 @@ export default function Sidebar({ minimizada, setMinimizada }: SidebarProps) {
           {!minimizada && <span>Sobre</span>}
         </button>
 
-        <button>
+        <button onClick={sair}>
           <LogOut />
           {!minimizada && <span>Sair</span>}
         </button>

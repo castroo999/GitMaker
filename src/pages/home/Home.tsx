@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "@/components/sidebar/Sidebar";
 import ProjetoModal from "@/components/projeto/ProjetoModal";
 
 type Projeto = {
@@ -94,7 +93,7 @@ export default function Home() {
 
   return (
     <div className="layout">
-      <Sidebar />
+      
 
       <main className="conteudo">
         <h1>Projetos</h1>

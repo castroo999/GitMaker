@@ -133,3 +133,33 @@ export async function deletarProjeto(req: Request, res: Response) {
     projeto,
   });
 }
+
+export async function listarMeusProjetos(req: Request, res: Response) {
+  const userId = req.userId
+
+  if (!userId) {
+    res.status(401).json({
+      mensagem: "ERRO usuario não autenticado"
+    })
+    return;
+  }
+
+  const projetos = await prisma.project.findMany({
+    where: {
+      userId: req.userId,
+    },
+    include: {
+      user: {
+        select: {
+          id: true,
+          nome: true,
+        },
+      },
+      midias: true,
+    },
+  });
+
+  res.status(200).json({
+    projetos
+  })
+}

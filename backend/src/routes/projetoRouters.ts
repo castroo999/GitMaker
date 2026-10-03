@@ -5,6 +5,7 @@ import {
   atualizarProjeto,
   buscarProjetos,
   deletarProjeto,
+  listarMeusProjetos
 } from "../controllers/projetosController";
 import { authMiddleware } from "../middlewares/authMiddleware";
 
@@ -19,5 +20,7 @@ router.get("/buscar-projeto/:id", buscarProjetos);
 router.put("/atualizar-projeto/:id", authMiddleware, atualizarProjeto);
 
 router.delete("/deletar-projeto/:id", authMiddleware, deletarProjeto);
+
+router.get("/meus-projetos", authMiddleware, listarMeusProjetos);
 
 export default router

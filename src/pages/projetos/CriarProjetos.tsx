@@ -1,7 +1,6 @@
 import "./CriarProjetos.css";
 import { useState, type ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "@/components/sidebar/Sidebar";
 import CriarEtapa from "@/components/etapas/CriarEtapa";
 import HeroBackground from "../../components/hero/HeroBackgound";
 
@@ -96,7 +95,7 @@ export default function CriarProjetos() {
 
   return (
     <div className="pagina-criar-projeto">
-      <Sidebar />
+      
 
       <main className="criar-projeto">
         <HeroBackground />
