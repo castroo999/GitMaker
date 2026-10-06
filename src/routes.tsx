@@ -5,6 +5,7 @@ import Home from "./pages/home/Home";
 import CriarProjetos from "./pages/projetos/CriarProjetos";
 import DescProjeto from "./pages/descProjetos/DescProjeto";
 import SeusProjetos from './pages/seusProjetos/SeusProjetos'
+import Comunidades from "./pages/comunidades/Comunidades";
 import Layout from "./components/layout/layout";
 
 export default function AppRoutes() {
@@ -19,6 +20,7 @@ export default function AppRoutes() {
           <Route path="/criar" element={<CriarProjetos />} />
           <Route path="/meus-projetos" element={<SeusProjetos />} />
           <Route path="/projetos/:id" element={<DescProjeto />} />
+          <Route path='comunidades' element={<Comunidades />} />
         </Route>
       </Routes>
     </BrowserRouter>

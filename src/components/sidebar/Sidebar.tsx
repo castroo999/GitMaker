@@ -13,12 +13,15 @@ import {
 import "./Sidebar.css";
 import { useNavigate } from "react-router-dom";
 
+
 type SidebarProps = {
   minimizada: boolean;
   setMinimizada: React.Dispatch<React.SetStateAction<boolean>>;
+  onAbrirSobre: () => void
+  onAbrirConfiguracoes: () => void;
 };
 
-export default function Sidebar({ minimizada, setMinimizada }: SidebarProps) {
+export default function Sidebar({ minimizada, setMinimizada, onAbrirSobre, onAbrirConfiguracoes, }: SidebarProps) {
   const navigate = useNavigate();
 
 
@@ -59,7 +62,7 @@ export default function Sidebar({ minimizada, setMinimizada }: SidebarProps) {
           {!minimizada && <span>Criar Projetos</span>}
         </button>
 
-        <button>
+        <button onClick={() => navigate('/comunidades')}>
           <Globe />
           {!minimizada && <span>Comunidades</span>}
         </button>
@@ -71,12 +74,12 @@ export default function Sidebar({ minimizada, setMinimizada }: SidebarProps) {
       </div>
 
       <div className="sidebar-footer">
-        <button>
+        <button onClick={onAbrirConfiguracoes}>
           <Settings />
           {!minimizada && <span>Configurações</span>}
         </button>
 
-        <button>
+        <button onClick={onAbrirSobre}>
           <Info />
           {!minimizada && <span>Sobre</span>}
         </button>
