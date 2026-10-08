@@ -158,8 +158,6 @@ export default function DescProjeto() {
   if (carregando) {
     return (
       <div className="layout">
-        
-
         <main className="pagina-projeto">
           <p>Carregando projeto...</p>
         </main>
@@ -170,8 +168,6 @@ export default function DescProjeto() {
   if (erro || !projeto) {
     return (
       <div className="layout">
-       
-
         <main className="pagina-projeto">
           <p>{erro || "Projeto não encontrado"}</p>
         </main>
@@ -181,8 +177,6 @@ export default function DescProjeto() {
 
   return (
     <div className="layout">
-      
-
       <main className="pagina-projeto">
         <button className="botao-voltar" onClick={() => navigate("/home")}>
           ← Voltar
@@ -208,14 +202,11 @@ export default function DescProjeto() {
               {midias.map((midia) => (
                 <div className="midia" key={midia.id}>
                   {midia.tipo.startsWith("image/") && (
-                    <img
-                      src={`http://localhost:3000${midia.url}`}
-                      alt={midia.nome}
-                    />
+                    <img src={midia.url} alt={midia.nome} />
                   )}
 
                   {midia.tipo.startsWith("video/") && (
-                    <video src={`http://localhost:3000${midia.url}`} controls />
+                    <video src={midia.url} controls />
                   )}
                 </div>
               ))}
@@ -245,17 +236,11 @@ export default function DescProjeto() {
                       {midiasDaEtapa.map((midia) => (
                         <div className="etapa-midia" key={midia.id}>
                           {midia.tipo.startsWith("image/") && (
-                            <img
-                              src={`http://localhost:3000${midia.url}`}
-                              alt={midia.nome}
-                            />
+                            <img src={midia.url} alt={midia.nome} />
                           )}
 
                           {midia.tipo.startsWith("video/") && (
-                            <video
-                              src={`http://localhost:3000${midia.url}`}
-                              controls
-                            />
+                            <video src={midia.url} controls />
                           )}
                         </div>
                       ))}

@@ -93,8 +93,6 @@ export default function Home() {
 
   return (
     <div className="layout">
-      
-
       <main className="conteudo">
         <h1>Projetos</h1>
 
@@ -111,12 +109,7 @@ export default function Home() {
 
               return (
                 <div key={projeto.id} onClick={() => abrirProjeto(projeto)}>
-                  {imagem && (
-                    <img
-                      src={`http://localhost:3000${imagem.url}`}
-                      alt={projeto.titulo}
-                    />
-                  )}
+                  {imagem && <img src={imagem.url} alt={projeto.titulo} />}
 
                   <h2>{projeto.titulo}</h2>
 

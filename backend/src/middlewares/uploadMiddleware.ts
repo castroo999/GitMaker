@@ -1,20 +1,9 @@
-import multer from 'multer';
-import path from 'path';
+import multer from "multer";
 
-const storage = multer.diskStorage({
-    destination: (_req, _file, cb) => {
-        cb(null, "uploads/projetos")
-    },
-
-    filename: (_req, file, cb) => {
-        const extensao = path.extname(file.originalname)
-        const nomeArquivo = `${Date.now()}-${Math.round(Math.random() * 1e9)}${extensao}`;
-        cb(null, nomeArquivo);
-    }
-})
+const storage = multer.memoryStorage();
 
 const upload = multer({
-    storage,
+  storage,
 });
 
 export default upload;

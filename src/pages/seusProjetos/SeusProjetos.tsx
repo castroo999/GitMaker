@@ -100,10 +100,7 @@ export default function SeusProjetos() {
                 onClick={() => navigate(`/projetos/${projeto.id}`)}
               >
                 {projeto.midias.length > 0 ? (
-                  <img
-                    src={`http://localhost:3000${projeto.midias[0].url}`}
-                    alt={projeto.titulo}
-                  />
+                  <img src={projeto.midias[0].url} alt={projeto.titulo} />
                 ) : (
                   <div className="seu-projeto-sem-imagem">Sem imagem</div>
                 )}
