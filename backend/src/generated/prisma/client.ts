@@ -59,3 +59,18 @@ export type ProjectStep = Prisma.ProjectStepModel
  * 
  */
 export type ProjectMedia = Prisma.ProjectMediaModel
+/**
+ * Model Community
+ * 
+ */
+export type Community = Prisma.CommunityModel
+/**
+ * Model CommunityMember
+ * 
+ */
+export type CommunityMember = Prisma.CommunityMemberModel
+/**
+ * Model CommunityPost
+ * 
+ */
+export type CommunityPost = Prisma.CommunityPostModel

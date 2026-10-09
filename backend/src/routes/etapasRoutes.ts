@@ -1,12 +1,10 @@
 import { Router } from "express";
-
 import {
   criarEtapa,
   listarEtapas,
   atualizarEtapas,
   deletarEtapa,
 } from "../controllers/etapasController";
-
 import { authMiddleware } from "../middlewares/authMiddleware";
 
 const router = Router();

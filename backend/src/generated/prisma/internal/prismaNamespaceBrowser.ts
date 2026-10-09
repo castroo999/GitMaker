@@ -54,7 +54,10 @@ export const ModelName = {
   User: 'User',
   Project: 'Project',
   ProjectStep: 'ProjectStep',
-  ProjectMedia: 'ProjectMedia'
+  ProjectMedia: 'ProjectMedia',
+  Community: 'Community',
+  CommunityMember: 'CommunityMember',
+  CommunityPost: 'CommunityPost'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -118,6 +121,42 @@ export const ProjectMediaScalarFieldEnum = {
 } as const
 
 export type ProjectMediaScalarFieldEnum = (typeof ProjectMediaScalarFieldEnum)[keyof typeof ProjectMediaScalarFieldEnum]
+
+
+export const CommunityScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome',
+  descricao: 'descricao',
+  tipoEntrada: 'tipoEntrada',
+  createdAt: 'createdAt',
+  creatorId: 'creatorId'
+} as const
+
+export type CommunityScalarFieldEnum = (typeof CommunityScalarFieldEnum)[keyof typeof CommunityScalarFieldEnum]
+
+
+export const CommunityMemberScalarFieldEnum = {
+  id: 'id',
+  status: 'status',
+  createdAt: 'createdAt',
+  userId: 'userId',
+  communityId: 'communityId'
+} as const
+
+export type CommunityMemberScalarFieldEnum = (typeof CommunityMemberScalarFieldEnum)[keyof typeof CommunityMemberScalarFieldEnum]
+
+
+export const CommunityPostScalarFieldEnum = {
+  id: 'id',
+  titulo: 'titulo',
+  conteudo: 'conteudo',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  authorId: 'authorId',
+  communityId: 'communityId'
+} as const
+
+export type CommunityPostScalarFieldEnum = (typeof CommunityPostScalarFieldEnum)[keyof typeof CommunityPostScalarFieldEnum]
 
 
 export const SortOrder = {
