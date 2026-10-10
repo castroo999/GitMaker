@@ -1,0 +1,2 @@
+ALTER TABLE "CommunityMember"
+ADD COLUMN "statusContribuicao" TEXT NOT NULL DEFAULT 'NAO_SOLICITADO';

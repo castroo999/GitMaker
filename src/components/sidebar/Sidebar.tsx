@@ -21,8 +21,33 @@ type SidebarProps = {
   onAbrirConfiguracoes: () => void;
 };
 
+function obterNomeUsuario(): string {
+  const usuario = localStorage.getItem("usuario");
+
+  if (!usuario) return "Usuário";
+
+  try {
+    const dados: unknown = JSON.parse(usuario);
+
+    if (
+      typeof dados === "object" &&
+      dados !== null &&
+      "nome" in dados &&
+      typeof dados.nome === "string" &&
+      dados.nome.trim()
+    ) {
+      return dados.nome;
+    }
+  } catch (error: unknown) {
+    if (!(error instanceof SyntaxError)) throw error;
+  }
+
+  return "Usuário";
+}
+
 export default function Sidebar({ minimizada, setMinimizada, onAbrirSobre, onAbrirConfiguracoes, }: SidebarProps) {
   const navigate = useNavigate();
+  const nomeUsuario = obterNomeUsuario();
 
 
   function sair() {
@@ -35,7 +60,7 @@ export default function Sidebar({ minimizada, setMinimizada, onAbrirSobre, onAbr
     <section className={`sidebar-topo ${minimizada ? "minimizada" : ""}`}>
       <div className="perfil">
         <UserRound />
-        {!minimizada && <h2>Gustavo Castro</h2>}
+        {!minimizada && <h2>{nomeUsuario}</h2>}
 
         <button
           className="botao-toggle"

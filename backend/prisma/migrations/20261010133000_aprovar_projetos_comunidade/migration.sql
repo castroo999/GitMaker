@@ -1,0 +1,2 @@
+ALTER TABLE "Project"
+ADD COLUMN "statusAprovacao" TEXT NOT NULL DEFAULT 'APROVADO';

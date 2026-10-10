@@ -1,0 +1,153 @@
+.gs-container {
+  margin-top: 24px;
+  padding: 20px;
+  border: 1px solid #30303a;
+  border-radius: 14px;
+  background: #18181f;
+  color: #f4f4f5;
+}
+.gs-cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.gs-cabecalho h3 {
+  margin: 0 0 5px;
+  font-size: 17px;
+}
+.gs-cabecalho p {
+  margin: 0;
+  color: #a1a1aa;
+  font-size: 13px;
+}
+.gs-atualizar {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid #3f3f46;
+  border-radius: 9px;
+  background: #27272f;
+  color: #e4e4e7;
+  cursor: pointer;
+}
+.gs-atualizar:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.gs-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.gs-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px;
+  border: 1px solid #30303a;
+  border-radius: 10px;
+  background: #202027;
+}
+.gs-usuario {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.gs-avatar {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #303047;
+  color: #c4b5fd;
+}
+.gs-dados {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.gs-dados strong {
+  overflow-wrap: anywhere;
+  font-size: 14px;
+}
+.gs-dados span,
+.gs-dados small {
+  overflow-wrap: anywhere;
+  color: #a1a1aa;
+  font-size: 12px;
+}
+.gs-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.gs-acoes button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 12px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.gs-acoes button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.gs-aprovar {
+  background: #14532d;
+  color: #bbf7d0;
+}
+.gs-ver-projeto {
+  background: #302344;
+  border-color: #51416f !important;
+  color: #ddd6fe;
+}
+.gs-status-permissao {
+  color: #c4b5fd !important;
+}
+.gs-projeto-pendente .gs-dados span {
+  color: #d4d4d8;
+  line-height: 1.5;
+}
+.gs-recusar {
+  background: #451a1a;
+  color: #fecaca;
+}
+.gs-vazio {
+  margin: 16px 0 4px;
+  color: #a1a1aa;
+  font-size: 14px;
+}
+.gs-erro {
+  color: #fca5a5;
+  font-size: 13px;
+}
+.gs-sucesso {
+  color: #86efac;
+  font-size: 13px;
+}
+@media (max-width: 600px) {
+  .gs-container {
+    padding: 14px;
+  }
+  .gs-item {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .gs-acoes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}

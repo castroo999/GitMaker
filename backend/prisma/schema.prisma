@@ -29,13 +29,19 @@ model Project {
   id          Int      @id @default(autoincrement())
   titulo      String
   descricao   String
+  statusAprovacao String @default("APROVADO")
   createdAt   DateTime @default(now())
 
   userId      Int
   user        User     @relation(fields: [userId], references: [id])
 
+  communityId Int?
+  community   Community? @relation(fields: [communityId], references: [id], onDelete: Restrict)
+
   etapas ProjectStep[]
   midias ProjectMedia[]
+
+  @@index([communityId])
 }
 
 model ProjectStep {
@@ -77,12 +83,14 @@ model Community {
 
   membros     CommunityMember[]
   posts       CommunityPost[]
+  projetos    Project[]
 }
 
 model CommunityMember {
-  id          Int      @id @default(autoincrement())
-  status      String   @default("APROVADO")
-  createdAt   DateTime @default(now())
+  id                     Int      @id @default(autoincrement())
+  status                 String   @default("APROVADO")
+  statusContribuicao     String   @default("NAO_SOLICITADO")
+  createdAt              DateTime @default(now())
 
   userId      Int
   user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -105,4 +113,19 @@ model CommunityPost {
 
   communityId Int
   community   Community @relation(fields: [communityId], references: [id], onDelete: Cascade)
+
+  midias CommunityPostMedia[]
+}
+
+model CommunityPostMedia {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  tipo      String
+  url       String
+  createdAt DateTime @default(now())
+
+  postId Int
+  post   CommunityPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@index([postId])
 }

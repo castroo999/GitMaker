@@ -6,12 +6,17 @@ type Projeto = {
   id: number;
   titulo: string;
   descricao: string;
+  statusAprovacao: string;
   createdAt: string;
   userId: number;
   user: {
     id: number;
     nome: string;
   };
+  community?: {
+    id: number;
+    nome: string;
+  } | null;
 };
 
 type Etapa = {
@@ -178,7 +183,16 @@ export default function DescProjeto() {
   return (
     <div className="layout">
       <main className="pagina-projeto">
-        <button className="botao-voltar" onClick={() => navigate("/home")}>
+        <button
+          className="botao-voltar"
+          onClick={() =>
+            navigate(
+              projeto.community
+                ? `/comunidades/${projeto.community.id}`
+                : "/home",
+            )
+          }
+        >
           ← Voltar
         </button>
 
@@ -187,6 +201,20 @@ export default function DescProjeto() {
 
           <p className="projeto-autor">Criado por {projeto.user.nome}</p>
         </section>
+
+        {projeto.community && projeto.statusAprovacao === "PENDENTE" && (
+          <div className="projeto-aviso-aprovacao">
+            <strong>Projeto em fase de verificação</strong>
+            <p>O criador da comunidade ainda precisa aprovar este projeto.</p>
+          </div>
+        )}
+
+        {projeto.community && projeto.statusAprovacao === "RECUSADO" && (
+          <div className="projeto-aviso-aprovacao projeto-aviso-recusado">
+            <strong>Projeto não aprovado</strong>
+            <p>O criador da comunidade recusou este projeto.</p>
+          </div>
+        )}
 
         <section className="projeto-descricao">
           <h2>Sobre o projeto</h2>

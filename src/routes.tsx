@@ -7,7 +7,7 @@ import DescProjeto from "./pages/descProjetos/DescProjeto";
 import SeusProjetos from './pages/seusProjetos/SeusProjetos'
 import Comunidades from "./pages/comunidades/Comunidades";
 import Layout from "./components/layout/layout";
-import VerComunidade from "./pages/comunidades/verComunidade";
+import VerComunidade from "./pages/comunidades/VerComunidade";
 
 export default function AppRoutes() {
   return (

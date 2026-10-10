@@ -1,16 +1,20 @@
 import "./CriarProjetos.css";
 import { useState, type ChangeEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import CriarEtapa from "@/components/etapas/CriarEtapa";
 import HeroBackground from "../../components/hero/HeroBackgound";
 
 export default function CriarProjetos() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const comunidadeIdParam = searchParams.get("comunidadeId");
+  const projetoDaComunidade = comunidadeIdParam !== null;
 
   const [erro, setErro] = useState("");
   const [titulo, setTitulo] = useState("");
   const [descricao, setDescricao] = useState("");
   const [projetoId, setProjetoId] = useState<number | null>(null);
+  const [statusAprovacao, setStatusAprovacao] = useState("");
   const [imagens, setImagens] = useState<File[]>([]);
 
   function selecionarImagens(evento: ChangeEvent<HTMLInputElement>) {
@@ -32,6 +36,19 @@ export default function CriarProjetos() {
       return;
     }
 
+    const comunidadeId =
+      comunidadeIdParam === null ? null : Number(comunidadeIdParam);
+
+    if (
+      comunidadeIdParam !== null &&
+      (comunidadeId === null ||
+        !Number.isSafeInteger(comunidadeId) ||
+        comunidadeId <= 0)
+    ) {
+      setErro("A comunidade informada é inválida.");
+      return;
+    }
+
     try {
       const resposta = await fetch(
         "http://localhost:3000/projetos/criar-projeto",
@@ -44,6 +61,7 @@ export default function CriarProjetos() {
           body: JSON.stringify({
             titulo,
             descricao,
+            ...(comunidadeId !== null ? { comunidadeId } : {}),
           }),
         },
       );
@@ -65,6 +83,7 @@ export default function CriarProjetos() {
       const novoProjetoId = dados.projeto.id;
 
       setProjetoId(novoProjetoId);
+      setStatusAprovacao(dados.projeto.statusAprovacao || "APROVADO");
       setErro("");
 
       for (const imagem of imagens) {
@@ -101,7 +120,17 @@ export default function CriarProjetos() {
         <HeroBackground />
 
         <div className="criar-projeto-conteudo">
-          <h1>Criar projeto</h1>
+          <h1>
+            {projetoDaComunidade
+              ? "Criar projeto da comunidade"
+              : "Criar projeto"}
+          </h1>
+          {projetoDaComunidade && (
+            <p className="criar-projeto-aviso-comunidade">
+              O projeto será enviado para análise do criador e, depois de
+              aprovado, ficará disponível para os membros da comunidade.
+            </p>
+          )}
 
           <input
             type="text"
@@ -143,7 +172,22 @@ export default function CriarProjetos() {
 
           {erro && <p>{erro}</p>}
 
-          <button onClick={criarProjeto}>Criar projeto</button>
+          <button onClick={criarProjeto} disabled={projetoId !== null}>
+            {projetoId ? "Projeto enviado" : "Criar projeto"}
+          </button>
+
+          {projetoId && projetoDaComunidade && statusAprovacao === "PENDENTE" && (
+            <section className="criar-projeto-em-analise" role="status">
+              <h2>Projeto em fase de verificação</h2>
+              <p>
+                Seu projeto foi enviado ao criador da comunidade. Ele ficará
+                visível para os outros membros depois da aprovação.
+              </p>
+              <button type="button" onClick={() => navigate(`/projetos/${projetoId}`)}>
+                Acompanhar projeto
+              </button>
+            </section>
+          )}
 
           {projetoId && (
             <CriarEtapa projetoId={projetoId} projetoTitulo={titulo} />

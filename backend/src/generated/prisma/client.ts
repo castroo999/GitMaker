@@ -74,3 +74,8 @@ export type CommunityMember = Prisma.CommunityMemberModel
  * 
  */
 export type CommunityPost = Prisma.CommunityPostModel
+/**
+ * Model CommunityPostMedia
+ * 
+ */
+export type CommunityPostMedia = Prisma.CommunityPostMediaModel

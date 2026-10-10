@@ -6,12 +6,23 @@ import {
   deletarEtapa,
 } from "../controllers/etapasController";
 import { authMiddleware } from "../middlewares/authMiddleware";
+import { verificarAcessoProjeto } from "../middlewares/verificarAcessoProjeto";
 
 const router = Router();
 
-router.post("/projetos/:projetoId/etapas", authMiddleware, criarEtapa);
+router.post(
+  "/projetos/:projetoId/etapas",
+  authMiddleware,
+  verificarAcessoProjeto,
+  criarEtapa,
+);
 
-router.get("/projetos/:projetoId/etapas", listarEtapas);
+router.get(
+  "/projetos/:projetoId/etapas",
+  authMiddleware,
+  verificarAcessoProjeto,
+  listarEtapas,
+);
 
 router.put("/etapas/:etapaId", authMiddleware, atualizarEtapas);
 

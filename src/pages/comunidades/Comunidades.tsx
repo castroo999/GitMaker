@@ -38,6 +38,30 @@ interface RespostaApi {
   status?: string;
 }
 
+function obterIdUsuarioLogado(): number | null {
+  const usuario = localStorage.getItem("usuario");
+
+  if (!usuario) return null;
+
+  try {
+    const dados: unknown = JSON.parse(usuario);
+
+    if (
+      typeof dados === "object" &&
+      dados !== null &&
+      "id" in dados &&
+      typeof dados.id === "number" &&
+      Number.isSafeInteger(dados.id)
+    ) {
+      return dados.id;
+    }
+  } catch {
+    return null;
+  }
+
+  return null;
+}
+
 export default function Comunidades() {
   const [comunidades, setComunidades] = useState<Comunidade[]>([]);
   const [busca, setBusca] = useState("");
@@ -57,6 +81,7 @@ export default function Comunidades() {
   >({});
   const [solicitando, setSolicitando] = useState<number | null>(null);
   const navigate = useNavigate();
+  const usuarioId = obterIdUsuarioLogado();
 
   const carregarComunidades = useCallback(async () => {
     try {
@@ -71,6 +96,41 @@ export default function Comunidades() {
 
       const dados: RespostaComunidades = await resposta.json();
       setComunidades(dados.comunidades);
+
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setStatusParticipacao({});
+        return;
+      }
+
+      const participacoes = await Promise.all(
+        dados.comunidades.map(async (comunidade) => {
+          try {
+            const respostaParticipacao = await fetch(
+              `http://localhost:3000/comunidades/${comunidade.id}/minha-participacao`,
+              { headers: { Authorization: `Bearer ${token}` } },
+            );
+
+            if (!respostaParticipacao.ok) return null;
+
+            const participacao: RespostaApi = await respostaParticipacao.json();
+            return participacao.status
+              ? ([comunidade.id, participacao.status] as const)
+              : null;
+          } catch {
+            return null;
+          }
+        }),
+      );
+
+      setStatusParticipacao(
+        Object.fromEntries(
+          participacoes.filter(
+            (participacao): participacao is readonly [number, string] =>
+              participacao !== null,
+          ),
+        ),
+      );
     } catch (error: unknown) {
       setErro(
         error instanceof Error ? error.message : "Ocorreu um erro inesperado.",
@@ -356,6 +416,7 @@ export default function Comunidades() {
             <div className="comuni-grid">
               {comunidadesFiltradas.map((comunidade) => {
                 const status = statusParticipacao[comunidade.id];
+                const ehDono = usuarioId === comunidade.creator.id;
                 const entradaPorAprovacao =
                   comunidade.tipoEntrada === "APROVACAO";
                 const aguardandoAprovacao = status === "PENDENTE";
@@ -416,7 +477,7 @@ export default function Comunidades() {
                       </p>
                     )}
 
-                    {entradaPorAprovacao && !jaAprovado ? (
+                    {entradaPorAprovacao && !jaAprovado && !ehDono ? (
                       <button
                         className="entrar"
                         type="button"
@@ -441,7 +502,7 @@ export default function Comunidades() {
                         type="button"
                         onClick={() => navigate(`/comunidades/${comunidade.id}`)}
                       >
-                        Ver comunidade
+                        {ehDono ? "Ver sua comunidade" : "Ver comunidade"}
                         <ArrowRight size={16} />
                       </button>
                     )}

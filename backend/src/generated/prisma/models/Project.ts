@@ -29,35 +29,43 @@ export type AggregateProject = {
 export type ProjectAvgAggregateOutputType = {
   id: number | null
   userId: number | null
+  communityId: number | null
 }
 
 export type ProjectSumAggregateOutputType = {
   id: number | null
   userId: number | null
+  communityId: number | null
 }
 
 export type ProjectMinAggregateOutputType = {
   id: number | null
   titulo: string | null
   descricao: string | null
+  statusAprovacao: string | null
   createdAt: Date | null
   userId: number | null
+  communityId: number | null
 }
 
 export type ProjectMaxAggregateOutputType = {
   id: number | null
   titulo: string | null
   descricao: string | null
+  statusAprovacao: string | null
   createdAt: Date | null
   userId: number | null
+  communityId: number | null
 }
 
 export type ProjectCountAggregateOutputType = {
   id: number
   titulo: number
   descricao: number
+  statusAprovacao: number
   createdAt: number
   userId: number
+  communityId: number
   _all: number
 }
 
@@ -65,35 +73,43 @@ export type ProjectCountAggregateOutputType = {
 export type ProjectAvgAggregateInputType = {
   id?: true
   userId?: true
+  communityId?: true
 }
 
 export type ProjectSumAggregateInputType = {
   id?: true
   userId?: true
+  communityId?: true
 }
 
 export type ProjectMinAggregateInputType = {
   id?: true
   titulo?: true
   descricao?: true
+  statusAprovacao?: true
   createdAt?: true
   userId?: true
+  communityId?: true
 }
 
 export type ProjectMaxAggregateInputType = {
   id?: true
   titulo?: true
   descricao?: true
+  statusAprovacao?: true
   createdAt?: true
   userId?: true
+  communityId?: true
 }
 
 export type ProjectCountAggregateInputType = {
   id?: true
   titulo?: true
   descricao?: true
+  statusAprovacao?: true
   createdAt?: true
   userId?: true
+  communityId?: true
   _all?: true
 }
 
@@ -187,8 +203,10 @@ export type ProjectGroupByOutputType = {
   id: number
   titulo: string
   descricao: string
+  statusAprovacao: string
   createdAt: Date
   userId: number
+  communityId: number | null
   _count: ProjectCountAggregateOutputType | null
   _avg: ProjectAvgAggregateOutputType | null
   _sum: ProjectSumAggregateOutputType | null
@@ -218,9 +236,12 @@ export type ProjectWhereInput = {
   id?: Prisma.IntFilter<"Project"> | number
   titulo?: Prisma.StringFilter<"Project"> | string
   descricao?: Prisma.StringFilter<"Project"> | string
+  statusAprovacao?: Prisma.StringFilter<"Project"> | string
   createdAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   userId?: Prisma.IntFilter<"Project"> | number
+  communityId?: Prisma.IntNullableFilter<"Project"> | number | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  community?: Prisma.XOR<Prisma.CommunityNullableScalarRelationFilter, Prisma.CommunityWhereInput> | null
   etapas?: Prisma.ProjectStepListRelationFilter
   midias?: Prisma.ProjectMediaListRelationFilter
 }
@@ -229,9 +250,12 @@ export type ProjectOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
+  statusAprovacao?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  communityId?: Prisma.SortOrderInput | Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
+  community?: Prisma.CommunityOrderByWithRelationInput
   etapas?: Prisma.ProjectStepOrderByRelationAggregateInput
   midias?: Prisma.ProjectMediaOrderByRelationAggregateInput
 }
@@ -243,9 +267,12 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ProjectWhereInput | Prisma.ProjectWhereInput[]
   titulo?: Prisma.StringFilter<"Project"> | string
   descricao?: Prisma.StringFilter<"Project"> | string
+  statusAprovacao?: Prisma.StringFilter<"Project"> | string
   createdAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   userId?: Prisma.IntFilter<"Project"> | number
+  communityId?: Prisma.IntNullableFilter<"Project"> | number | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  community?: Prisma.XOR<Prisma.CommunityNullableScalarRelationFilter, Prisma.CommunityWhereInput> | null
   etapas?: Prisma.ProjectStepListRelationFilter
   midias?: Prisma.ProjectMediaListRelationFilter
 }, "id">
@@ -254,8 +281,10 @@ export type ProjectOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
+  statusAprovacao?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  communityId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ProjectCountOrderByAggregateInput
   _avg?: Prisma.ProjectAvgOrderByAggregateInput
   _max?: Prisma.ProjectMaxOrderByAggregateInput
@@ -270,15 +299,19 @@ export type ProjectScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Project"> | number
   titulo?: Prisma.StringWithAggregatesFilter<"Project"> | string
   descricao?: Prisma.StringWithAggregatesFilter<"Project"> | string
+  statusAprovacao?: Prisma.StringWithAggregatesFilter<"Project"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Project"> | Date | string
   userId?: Prisma.IntWithAggregatesFilter<"Project"> | number
+  communityId?: Prisma.IntNullableWithAggregatesFilter<"Project"> | number | null
 }
 
 export type ProjectCreateInput = {
   titulo: string
   descricao: string
+  statusAprovacao?: string
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutProjetosInput
+  community?: Prisma.CommunityCreateNestedOneWithoutProjetosInput
   etapas?: Prisma.ProjectStepCreateNestedManyWithoutProjectInput
   midias?: Prisma.ProjectMediaCreateNestedManyWithoutProjectInput
 }
@@ -287,8 +320,10 @@ export type ProjectUncheckedCreateInput = {
   id?: number
   titulo: string
   descricao: string
+  statusAprovacao?: string
   createdAt?: Date | string
   userId: number
+  communityId?: number | null
   etapas?: Prisma.ProjectStepUncheckedCreateNestedManyWithoutProjectInput
   midias?: Prisma.ProjectMediaUncheckedCreateNestedManyWithoutProjectInput
 }
@@ -296,8 +331,10 @@ export type ProjectUncheckedCreateInput = {
 export type ProjectUpdateInput = {
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  statusAprovacao?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutProjetosNestedInput
+  community?: Prisma.CommunityUpdateOneWithoutProjetosNestedInput
   etapas?: Prisma.ProjectStepUpdateManyWithoutProjectNestedInput
   midias?: Prisma.ProjectMediaUpdateManyWithoutProjectNestedInput
 }
@@ -306,8 +343,10 @@ export type ProjectUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  statusAprovacao?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  communityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   etapas?: Prisma.ProjectStepUncheckedUpdateManyWithoutProjectNestedInput
   midias?: Prisma.ProjectMediaUncheckedUpdateManyWithoutProjectNestedInput
 }
@@ -316,13 +355,16 @@ export type ProjectCreateManyInput = {
   id?: number
   titulo: string
   descricao: string
+  statusAprovacao?: string
   createdAt?: Date | string
   userId: number
+  communityId?: number | null
 }
 
 export type ProjectUpdateManyMutationInput = {
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  statusAprovacao?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -330,8 +372,10 @@ export type ProjectUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  statusAprovacao?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  communityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type ProjectListRelationFilter = {
@@ -348,34 +392,42 @@ export type ProjectCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
+  statusAprovacao?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  communityId?: Prisma.SortOrder
 }
 
 export type ProjectAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  communityId?: Prisma.SortOrder
 }
 
 export type ProjectMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
+  statusAprovacao?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  communityId?: Prisma.SortOrder
 }
 
 export type ProjectMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
+  statusAprovacao?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  communityId?: Prisma.SortOrder
 }
 
 export type ProjectSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  communityId?: Prisma.SortOrder
 }
 
 export type ProjectScalarRelationFilter = {
@@ -425,6 +477,14 @@ export type ProjectUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.ProjectScalarWhereInput | Prisma.ProjectScalarWhereInput[]
 }
 
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type ProjectCreateNestedOneWithoutEtapasInput = {
   create?: Prisma.XOR<Prisma.ProjectCreateWithoutEtapasInput, Prisma.ProjectUncheckedCreateWithoutEtapasInput>
   connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutEtapasInput
@@ -453,10 +513,54 @@ export type ProjectUpdateOneRequiredWithoutMidiasNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutMidiasInput, Prisma.ProjectUpdateWithoutMidiasInput>, Prisma.ProjectUncheckedUpdateWithoutMidiasInput>
 }
 
+export type ProjectCreateNestedManyWithoutCommunityInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutCommunityInput, Prisma.ProjectUncheckedCreateWithoutCommunityInput> | Prisma.ProjectCreateWithoutCommunityInput[] | Prisma.ProjectUncheckedCreateWithoutCommunityInput[]
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutCommunityInput | Prisma.ProjectCreateOrConnectWithoutCommunityInput[]
+  createMany?: Prisma.ProjectCreateManyCommunityInputEnvelope
+  connect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+}
+
+export type ProjectUncheckedCreateNestedManyWithoutCommunityInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutCommunityInput, Prisma.ProjectUncheckedCreateWithoutCommunityInput> | Prisma.ProjectCreateWithoutCommunityInput[] | Prisma.ProjectUncheckedCreateWithoutCommunityInput[]
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutCommunityInput | Prisma.ProjectCreateOrConnectWithoutCommunityInput[]
+  createMany?: Prisma.ProjectCreateManyCommunityInputEnvelope
+  connect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+}
+
+export type ProjectUpdateManyWithoutCommunityNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutCommunityInput, Prisma.ProjectUncheckedCreateWithoutCommunityInput> | Prisma.ProjectCreateWithoutCommunityInput[] | Prisma.ProjectUncheckedCreateWithoutCommunityInput[]
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutCommunityInput | Prisma.ProjectCreateOrConnectWithoutCommunityInput[]
+  upsert?: Prisma.ProjectUpsertWithWhereUniqueWithoutCommunityInput | Prisma.ProjectUpsertWithWhereUniqueWithoutCommunityInput[]
+  createMany?: Prisma.ProjectCreateManyCommunityInputEnvelope
+  set?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  disconnect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  delete?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  connect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  update?: Prisma.ProjectUpdateWithWhereUniqueWithoutCommunityInput | Prisma.ProjectUpdateWithWhereUniqueWithoutCommunityInput[]
+  updateMany?: Prisma.ProjectUpdateManyWithWhereWithoutCommunityInput | Prisma.ProjectUpdateManyWithWhereWithoutCommunityInput[]
+  deleteMany?: Prisma.ProjectScalarWhereInput | Prisma.ProjectScalarWhereInput[]
+}
+
+export type ProjectUncheckedUpdateManyWithoutCommunityNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutCommunityInput, Prisma.ProjectUncheckedCreateWithoutCommunityInput> | Prisma.ProjectCreateWithoutCommunityInput[] | Prisma.ProjectUncheckedCreateWithoutCommunityInput[]
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutCommunityInput | Prisma.ProjectCreateOrConnectWithoutCommunityInput[]
+  upsert?: Prisma.ProjectUpsertWithWhereUniqueWithoutCommunityInput | Prisma.ProjectUpsertWithWhereUniqueWithoutCommunityInput[]
+  createMany?: Prisma.ProjectCreateManyCommunityInputEnvelope
+  set?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  disconnect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  delete?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  connect?: Prisma.ProjectWhereUniqueInput | Prisma.ProjectWhereUniqueInput[]
+  update?: Prisma.ProjectUpdateWithWhereUniqueWithoutCommunityInput | Prisma.ProjectUpdateWithWhereUniqueWithoutCommunityInput[]
+  updateMany?: Prisma.ProjectUpdateManyWithWhereWithoutCommunityInput | Prisma.ProjectUpdateManyWithWhereWithoutCommunityInput[]
+  deleteMany?: Prisma.ProjectScalarWhereInput | Prisma.ProjectScalarWhereInput[]
+}
+
 export type ProjectCreateWithoutUserInput = {
   titulo: string
   descricao: string
+  statusAprovacao?: string
   createdAt?: Date | string
+  community?: Prisma.CommunityCreateNestedOneWithoutProjetosInput
   etapas?: Prisma.ProjectStepCreateNestedManyWithoutProjectInput
   midias?: Prisma.ProjectMediaCreateNestedManyWithoutProjectInput
 }
@@ -465,7 +569,9 @@ export type ProjectUncheckedCreateWithoutUserInput = {
   id?: number
   titulo: string
   descricao: string
+  statusAprovacao?: string
   createdAt?: Date | string
+  communityId?: number | null
   etapas?: Prisma.ProjectStepUncheckedCreateNestedManyWithoutProjectInput
   midias?: Prisma.ProjectMediaUncheckedCreateNestedManyWithoutProjectInput
 }
@@ -503,15 +609,19 @@ export type ProjectScalarWhereInput = {
   id?: Prisma.IntFilter<"Project"> | number
   titulo?: Prisma.StringFilter<"Project"> | string
   descricao?: Prisma.StringFilter<"Project"> | string
+  statusAprovacao?: Prisma.StringFilter<"Project"> | string
   createdAt?: Prisma.DateTimeFilter<"Project"> | Date | string
   userId?: Prisma.IntFilter<"Project"> | number
+  communityId?: Prisma.IntNullableFilter<"Project"> | number | null
 }
 
 export type ProjectCreateWithoutEtapasInput = {
   titulo: string
   descricao: string
+  statusAprovacao?: string
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutProjetosInput
+  community?: Prisma.CommunityCreateNestedOneWithoutProjetosInput
   midias?: Prisma.ProjectMediaCreateNestedManyWithoutProjectInput
 }
 
@@ -519,8 +629,10 @@ export type ProjectUncheckedCreateWithoutEtapasInput = {
   id?: number
   titulo: string
   descricao: string
+  statusAprovacao?: string
   createdAt?: Date | string
   userId: number
+  communityId?: number | null
   midias?: Prisma.ProjectMediaUncheckedCreateNestedManyWithoutProjectInput
 }
 
@@ -543,8 +655,10 @@ export type ProjectUpdateToOneWithWhereWithoutEtapasInput = {
 export type ProjectUpdateWithoutEtapasInput = {
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  statusAprovacao?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutProjetosNestedInput
+  community?: Prisma.CommunityUpdateOneWithoutProjetosNestedInput
   midias?: Prisma.ProjectMediaUpdateManyWithoutProjectNestedInput
 }
 
@@ -552,16 +666,20 @@ export type ProjectUncheckedUpdateWithoutEtapasInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  statusAprovacao?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  communityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   midias?: Prisma.ProjectMediaUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutMidiasInput = {
   titulo: string
   descricao: string
+  statusAprovacao?: string
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutProjetosInput
+  community?: Prisma.CommunityCreateNestedOneWithoutProjetosInput
   etapas?: Prisma.ProjectStepCreateNestedManyWithoutProjectInput
 }
 
@@ -569,8 +687,10 @@ export type ProjectUncheckedCreateWithoutMidiasInput = {
   id?: number
   titulo: string
   descricao: string
+  statusAprovacao?: string
   createdAt?: Date | string
   userId: number
+  communityId?: number | null
   etapas?: Prisma.ProjectStepUncheckedCreateNestedManyWithoutProjectInput
 }
 
@@ -593,8 +713,10 @@ export type ProjectUpdateToOneWithWhereWithoutMidiasInput = {
 export type ProjectUpdateWithoutMidiasInput = {
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  statusAprovacao?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutProjetosNestedInput
+  community?: Prisma.CommunityUpdateOneWithoutProjetosNestedInput
   etapas?: Prisma.ProjectStepUpdateManyWithoutProjectNestedInput
 }
 
@@ -602,22 +724,75 @@ export type ProjectUncheckedUpdateWithoutMidiasInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  statusAprovacao?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  communityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   etapas?: Prisma.ProjectStepUncheckedUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectCreateWithoutCommunityInput = {
+  titulo: string
+  descricao: string
+  statusAprovacao?: string
+  createdAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutProjetosInput
+  etapas?: Prisma.ProjectStepCreateNestedManyWithoutProjectInput
+  midias?: Prisma.ProjectMediaCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectUncheckedCreateWithoutCommunityInput = {
+  id?: number
+  titulo: string
+  descricao: string
+  statusAprovacao?: string
+  createdAt?: Date | string
+  userId: number
+  etapas?: Prisma.ProjectStepUncheckedCreateNestedManyWithoutProjectInput
+  midias?: Prisma.ProjectMediaUncheckedCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectCreateOrConnectWithoutCommunityInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutCommunityInput, Prisma.ProjectUncheckedCreateWithoutCommunityInput>
+}
+
+export type ProjectCreateManyCommunityInputEnvelope = {
+  data: Prisma.ProjectCreateManyCommunityInput | Prisma.ProjectCreateManyCommunityInput[]
+  skipDuplicates?: boolean
+}
+
+export type ProjectUpsertWithWhereUniqueWithoutCommunityInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutCommunityInput, Prisma.ProjectUncheckedUpdateWithoutCommunityInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutCommunityInput, Prisma.ProjectUncheckedCreateWithoutCommunityInput>
+}
+
+export type ProjectUpdateWithWhereUniqueWithoutCommunityInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutCommunityInput, Prisma.ProjectUncheckedUpdateWithoutCommunityInput>
+}
+
+export type ProjectUpdateManyWithWhereWithoutCommunityInput = {
+  where: Prisma.ProjectScalarWhereInput
+  data: Prisma.XOR<Prisma.ProjectUpdateManyMutationInput, Prisma.ProjectUncheckedUpdateManyWithoutCommunityInput>
 }
 
 export type ProjectCreateManyUserInput = {
   id?: number
   titulo: string
   descricao: string
+  statusAprovacao?: string
   createdAt?: Date | string
+  communityId?: number | null
 }
 
 export type ProjectUpdateWithoutUserInput = {
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  statusAprovacao?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  community?: Prisma.CommunityUpdateOneWithoutProjetosNestedInput
   etapas?: Prisma.ProjectStepUpdateManyWithoutProjectNestedInput
   midias?: Prisma.ProjectMediaUpdateManyWithoutProjectNestedInput
 }
@@ -626,7 +801,9 @@ export type ProjectUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  statusAprovacao?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  communityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   etapas?: Prisma.ProjectStepUncheckedUpdateManyWithoutProjectNestedInput
   midias?: Prisma.ProjectMediaUncheckedUpdateManyWithoutProjectNestedInput
 }
@@ -635,7 +812,48 @@ export type ProjectUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  statusAprovacao?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  communityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type ProjectCreateManyCommunityInput = {
+  id?: number
+  titulo: string
+  descricao: string
+  statusAprovacao?: string
+  createdAt?: Date | string
+  userId: number
+}
+
+export type ProjectUpdateWithoutCommunityInput = {
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  statusAprovacao?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutProjetosNestedInput
+  etapas?: Prisma.ProjectStepUpdateManyWithoutProjectNestedInput
+  midias?: Prisma.ProjectMediaUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateWithoutCommunityInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  statusAprovacao?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  etapas?: Prisma.ProjectStepUncheckedUpdateManyWithoutProjectNestedInput
+  midias?: Prisma.ProjectMediaUncheckedUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateManyWithoutCommunityInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  statusAprovacao?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -682,9 +900,12 @@ export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   id?: boolean
   titulo?: boolean
   descricao?: boolean
+  statusAprovacao?: boolean
   createdAt?: boolean
   userId?: boolean
+  communityId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  community?: boolean | Prisma.Project$communityArgs<ExtArgs>
   etapas?: boolean | Prisma.Project$etapasArgs<ExtArgs>
   midias?: boolean | Prisma.Project$midiasArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
@@ -694,46 +915,58 @@ export type ProjectSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   id?: boolean
   titulo?: boolean
   descricao?: boolean
+  statusAprovacao?: boolean
   createdAt?: boolean
   userId?: boolean
+  communityId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  community?: boolean | Prisma.Project$communityArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
 export type ProjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   titulo?: boolean
   descricao?: boolean
+  statusAprovacao?: boolean
   createdAt?: boolean
   userId?: boolean
+  communityId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  community?: boolean | Prisma.Project$communityArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
 export type ProjectSelectScalar = {
   id?: boolean
   titulo?: boolean
   descricao?: boolean
+  statusAprovacao?: boolean
   createdAt?: boolean
   userId?: boolean
+  communityId?: boolean
 }
 
-export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "titulo" | "descricao" | "createdAt" | "userId", ExtArgs["result"]["project"]>
+export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "titulo" | "descricao" | "statusAprovacao" | "createdAt" | "userId" | "communityId", ExtArgs["result"]["project"]>
 export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  community?: boolean | Prisma.Project$communityArgs<ExtArgs>
   etapas?: boolean | Prisma.Project$etapasArgs<ExtArgs>
   midias?: boolean | Prisma.Project$midiasArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProjectIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  community?: boolean | Prisma.Project$communityArgs<ExtArgs>
 }
 export type ProjectIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  community?: boolean | Prisma.Project$communityArgs<ExtArgs>
 }
 
 export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Project"
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
+    community: Prisma.$CommunityPayload<ExtArgs> | null
     etapas: Prisma.$ProjectStepPayload<ExtArgs>[]
     midias: Prisma.$ProjectMediaPayload<ExtArgs>[]
   }
@@ -741,8 +974,10 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     id: number
     titulo: string
     descricao: string
+    statusAprovacao: string
     createdAt: Date
     userId: number
+    communityId: number | null
   }, ExtArgs["result"]["project"]>
   composites: {}
 }
@@ -1138,6 +1373,7 @@ readonly fields: ProjectFieldRefs;
 export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  community<T extends Prisma.Project$communityArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$communityArgs<ExtArgs>>): Prisma.Prisma__CommunityClient<runtime.Types.Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   etapas<T extends Prisma.Project$etapasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$etapasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectStepPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   midias<T extends Prisma.Project$midiasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$midiasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectMediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1172,8 +1408,10 @@ export interface ProjectFieldRefs {
   readonly id: Prisma.FieldRef<"Project", 'Int'>
   readonly titulo: Prisma.FieldRef<"Project", 'String'>
   readonly descricao: Prisma.FieldRef<"Project", 'String'>
+  readonly statusAprovacao: Prisma.FieldRef<"Project", 'String'>
   readonly createdAt: Prisma.FieldRef<"Project", 'DateTime'>
   readonly userId: Prisma.FieldRef<"Project", 'Int'>
+  readonly communityId: Prisma.FieldRef<"Project", 'Int'>
 }
     
 
@@ -1572,6 +1810,25 @@ export type ProjectDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Projects to delete.
    */
   limit?: number
+}
+
+/**
+ * Project.community
+ */
+export type Project$communityArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Community
+   */
+  select?: Prisma.CommunitySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Community
+   */
+  omit?: Prisma.CommunityOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CommunityInclude<ExtArgs> | null
+  where?: Prisma.CommunityWhereInput
 }
 
 /**

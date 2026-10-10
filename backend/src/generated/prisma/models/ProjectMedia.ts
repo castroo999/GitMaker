@@ -500,14 +500,6 @@ export type ProjectMediaUncheckedUpdateManyWithoutStepNestedInput = {
   deleteMany?: Prisma.ProjectMediaScalarWhereInput | Prisma.ProjectMediaScalarWhereInput[]
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type ProjectMediaCreateWithoutProjectInput = {
   nome: string
   tipo: string
