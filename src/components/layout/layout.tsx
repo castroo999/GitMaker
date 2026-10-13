@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "../sidebar/Sidebar";
 import Sobre from "../sobre/Sobre";
 import ConfigModal from '../config/ConfigModal'
-import "./Layout.css";
+import "./layout.css";
 
 export default function Layout() {
   const [minimizada, setMinimizada] = useState(false);
