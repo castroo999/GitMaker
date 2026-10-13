@@ -16,6 +16,7 @@ export default function HeroBackground() {
         glow={0.70}
         bloom={1.4}
         transparent={true}
+        suspendWhenOffscreen={true}
       />
     </div>
   );

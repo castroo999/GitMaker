@@ -59,7 +59,8 @@ export default function Prism({
     const BW = Math.max(0.001, baseWidth);
     const BASE_HALF = BW * 0.5;
     const GLOW = Math.max(0, glow);
-    const NOISE = Math.max(0, noise);
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const NOISE = prefersReducedMotion ? 0 : Math.max(0, noise);
 
     const offX = offset?.x ?? 0;
     const offY = offset?.y ?? 0;
@@ -74,11 +75,12 @@ export default function Prism({
     const RSY = 1;
     const RSZ = 1;
 
-    const TS = Math.max(0, timeScale || 1);
+    const TS = prefersReducedMotion ? 0 : Math.max(0, timeScale || 1);
     const HOVSTR = Math.max(0, hoverStrength || 1);
     const INERT = Math.max(0, Math.min(1, inertia || 0.12));
 
-    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    const mobile = window.matchMedia("(max-width: 760px)").matches;
+    const dpr = Math.min(mobile ? 1.25 : 2, window.devicePixelRatio || 1);
 
     const renderer = new Renderer({
       dpr,
@@ -490,10 +492,13 @@ export default function Prism({
     const NOISE_IS_ZERO = NOISE < 1e-6;
 
     let raf = 0;
+    let ultimaRenderizacao = 0;
+    const intervaloQuadro = mobile ? 1000 / 30 : 0;
 
     const t0 = performance.now();
 
     const startRAF = () => {
+      if (document.hidden) return;
       if (raf) {
         return;
       }
@@ -613,6 +618,11 @@ export default function Prism({
     }
 
     const render = (timeStamp: number) => {
+      if (intervaloQuadro > 0 && timeStamp - ultimaRenderizacao < intervaloQuadro) {
+        raf = requestAnimationFrame(render);
+        return;
+      }
+      ultimaRenderizacao = timeStamp;
       const time =
         (timeStamp - t0) * 0.001;
 
@@ -745,6 +755,12 @@ export default function Prism({
       | IntersectionObserver
       | null = null;
 
+    const onVisibilityChange = () => {
+      if (document.hidden) stopRAF();
+      else startRAF();
+    };
+    document.addEventListener("visibilitychange", onVisibilityChange);
+
     if (suspendWhenOffscreen) {
       intersectionObserver =
         new IntersectionObserver(
@@ -774,6 +790,7 @@ export default function Prism({
 
     return () => {
       stopRAF();
+      document.removeEventListener("visibilitychange", onVisibilityChange);
 
       ro.disconnect();
 

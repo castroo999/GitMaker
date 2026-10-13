@@ -2,6 +2,7 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
+  min-height: 100svh;
   overflow: hidden;
   background: #0b0b0f;
 }
@@ -26,6 +27,7 @@
   width: 100%;
   max-width: 1100px;
   min-height: 100vh;
+  min-height: 100svh;
   margin: 0 auto;
   padding: 40px 20px;
   display: flex;
@@ -128,4 +130,74 @@
   border-color: #7c3aed;
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(124, 58, 237, 0.15);
+}
+
+@media (max-width: 760px) {
+  .hero-conteudo {
+    justify-content: center;
+    padding: 56px 22px 40px;
+  }
+
+  .hero-logo h1 {
+    font-size: clamp(2.8rem, 13vw, 4.8rem);
+    letter-spacing: -0.055em;
+  }
+
+  .hero-titulo {
+    display: block;
+    width: 100%;
+    max-width: 620px;
+    min-height: 2.35em;
+    margin-top: 8px;
+    font-size: clamp(2rem, 8.4vw, 3.5rem);
+    line-height: 1.12;
+    letter-spacing: -0.045em;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-descricao {
+    max-width: 520px;
+    margin: 16px 0 25px;
+    font-size: clamp(15px, 4vw, 17px);
+    line-height: 1.55;
+  }
+
+  .hero-botoes {
+    width: 100%;
+    max-width: 440px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .hero-botoes button {
+    flex: 1 1 155px;
+    min-height: 48px;
+    padding: 12px 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-conteudo {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .hero-botoes {
+    flex-direction: column;
+  }
+
+  .hero-botoes button {
+    width: 100%;
+    flex-basis: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-cursor {
+    animation: none;
+  }
+
+  .hero-botoes button {
+    transition: none;
+  }
 }

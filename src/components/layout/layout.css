@@ -12,6 +12,11 @@
     transition: margin-left .3s ease, width .3s ease;
 }
 
+.layout-mobile-toggle,
+.layout-mobile-overlay {
+    display: none;
+}
+
 .layout.sidebar-minimizada .layout-conteudo {
     margin-left: 72px;
     width: calc(100% - 72px);
@@ -57,5 +62,97 @@
 @media(max-width:600px) {
     .sobre-overlay {
         padding: 16px;
+    }
+}
+
+@media (max-width: 760px) {
+    .layout-conteudo,
+    .layout.sidebar-minimizada .layout-conteudo {
+        width: 100%;
+        margin-left: 0;
+        padding-top: 62px;
+    }
+
+    .layout-mobile-toggle {
+        position: fixed;
+        z-index: 1002;
+        top: 10px;
+        left: 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        min-height: 42px;
+        padding: 0 13px;
+        color: #f5f5f7;
+        background: #15151c;
+        border: 1px solid #30303a;
+        border-radius: 11px;
+        font: inherit;
+        font-size: 14px;
+        font-weight: 650;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, .28);
+    }
+
+    .layout-mobile-toggle svg {
+        color: #c4b5fd;
+    }
+
+    .layout-mobile-overlay {
+        position: fixed;
+        z-index: 1000;
+        inset: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        background: rgba(3, 3, 7, .66);
+        backdrop-filter: blur(3px);
+    }
+
+    .sidebar-topo,
+    .sidebar-topo.minimizada {
+        position: fixed;
+        z-index: 1001;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: min(290px, 86vw);
+        height: 100dvh;
+        padding: 74px 16px 18px;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        transform: translateX(-105%);
+        transition: transform .24s cubic-bezier(.2, 0, 0, 1);
+        box-shadow: 14px 0 42px rgba(0, 0, 0, .3);
+    }
+
+    .sidebar-topo.mobile-aberta,
+    .sidebar-topo.minimizada.mobile-aberta {
+        transform: translateX(0);
+    }
+
+    .sidebar-topo .botao-toggle {
+        display: none;
+    }
+
+    .sidebar-topo .perfil h2,
+    .sidebar-topo .itens-sidebar span,
+    .sidebar-topo .sidebar-footer span {
+        display: initial;
+    }
+
+    .sidebar-topo.minimizada {
+        align-items: stretch;
+    }
+
+    .sidebar-topo.minimizada .perfil {
+        justify-content: flex-start;
+    }
+
+    .sidebar-topo.minimizada .itens-sidebar button,
+    .sidebar-topo.minimizada .sidebar-footer button {
+        justify-content: flex-start;
+        padding-right: 12px;
+        padding-left: 12px;
     }
 }

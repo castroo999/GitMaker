@@ -17,6 +17,8 @@ import { useNavigate } from "react-router-dom";
 type SidebarProps = {
   minimizada: boolean;
   setMinimizada: React.Dispatch<React.SetStateAction<boolean>>;
+  mobileAberta: boolean;
+  setMobileAberta: React.Dispatch<React.SetStateAction<boolean>>;
   onAbrirSobre: () => void
   onAbrirConfiguracoes: () => void;
 };
@@ -45,9 +47,15 @@ function obterNomeUsuario(): string {
   return "Usuário";
 }
 
-export default function Sidebar({ minimizada, setMinimizada, onAbrirSobre, onAbrirConfiguracoes, }: SidebarProps) {
+export default function Sidebar({ minimizada, setMinimizada, mobileAberta, setMobileAberta, onAbrirSobre, onAbrirConfiguracoes, }: SidebarProps) {
   const navigate = useNavigate();
   const nomeUsuario = obterNomeUsuario();
+  const mostrarRotulos = !minimizada || mobileAberta;
+
+  function navegar(caminho: string) {
+    setMobileAberta(false);
+    navigate(caminho);
+  }
 
 
   function sair() {
@@ -57,10 +65,10 @@ export default function Sidebar({ minimizada, setMinimizada, onAbrirSobre, onAbr
   }
 
   return (
-    <section className={`sidebar-topo ${minimizada ? "minimizada" : ""}`}>
+    <section className={`sidebar-topo ${minimizada ? "minimizada" : ""} ${mobileAberta ? "mobile-aberta" : ""}`}>
       <div className="perfil">
         <UserRound />
-        {!minimizada && <h2>{nomeUsuario}</h2>}
+        {mostrarRotulos && <h2>{nomeUsuario}</h2>}
 
         <button
           className="botao-toggle"
@@ -72,46 +80,46 @@ export default function Sidebar({ minimizada, setMinimizada, onAbrirSobre, onAbr
       </div>
 
       <div className="itens-sidebar">
-        <button onClick={() => navigate("/home")}>
+        <button onClick={() => navegar("/home")}>
           <Folder />
-          {!minimizada && <span>Projetos</span>}
+          {mostrarRotulos && <span>Projetos</span>}
         </button>
 
-        <button onClick={() => navigate("/meus-projetos")}>
+        <button onClick={() => navegar("/meus-projetos")}>
           <Folders />
-          {!minimizada && <span>Seus projetos</span>}
+          {mostrarRotulos && <span>Seus projetos</span>}
         </button>
 
-        <button onClick={() => navigate("/criar")}>
+        <button onClick={() => navegar("/criar")}>
           <Plus />
-          {!minimizada && <span>Criar Projetos</span>}
+          {mostrarRotulos && <span>Criar Projetos</span>}
         </button>
 
-        <button onClick={() => navigate('/comunidades')}>
+        <button onClick={() => navegar('/comunidades')}>
           <Globe />
-          {!minimizada && <span>Comunidades</span>}
+          {mostrarRotulos && <span>Comunidades</span>}
         </button>
 
         <button>
           <Users />
-          {!minimizada && <span>Amigos</span>}
+          {mostrarRotulos && <span>Amigos</span>}
         </button>
       </div>
 
       <div className="sidebar-footer">
-        <button onClick={onAbrirConfiguracoes}>
+        <button onClick={() => { setMobileAberta(false); onAbrirConfiguracoes(); }}>
           <Settings />
-          {!minimizada && <span>Configurações</span>}
+          {mostrarRotulos && <span>Configurações</span>}
         </button>
 
-        <button onClick={onAbrirSobre}>
+        <button onClick={() => { setMobileAberta(false); onAbrirSobre(); }}>
           <Info />
-          {!minimizada && <span>Sobre</span>}
+          {mostrarRotulos && <span>Sobre</span>}
         </button>
 
         <button onClick={sair}>
           <LogOut />
-          {!minimizada && <span>Sair</span>}
+          {mostrarRotulos && <span>Sair</span>}
         </button>
       </div>
     </section>
