@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Check, RefreshCw, UserRound, X } from "lucide-react";
 import "./GerenciarSolicitacoes.css";
+import { apiUrl } from "@/lib/api";
 
 interface SolicitacaoContribuicao {
   id: number;
@@ -37,7 +38,7 @@ export default function GerenciarContribuicoes({ comunidadeId, comunidadeFechada
     setErro("");
     try {
       const resposta = await fetch(
-        `http://localhost:3000/comunidades/${comunidadeId}/contribuicoes`,
+        apiUrl(`/comunidades/${comunidadeId}/contribuicoes`),
         { headers: { Authorization: `Bearer ${token}` } },
       );
       const dados = await resposta.json();
@@ -68,7 +69,7 @@ export default function GerenciarContribuicoes({ comunidadeId, comunidadeFechada
     setMensagem("");
     try {
       const resposta = await fetch(
-        `http://localhost:3000/comunidades/${comunidadeId}/contribuicoes/${membroId}`,
+        apiUrl(`/comunidades/${comunidadeId}/contribuicoes/${membroId}`),
         {
           method: "PATCH",
           headers: {

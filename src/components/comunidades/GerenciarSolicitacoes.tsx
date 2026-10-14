@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Check, X, RefreshCw, UserRound } from "lucide-react";
 import "./GerenciarSolicitacoes.css";
+import { apiUrl } from "@/lib/api";
 interface Solicitacao {
   id: number;
   status: string;
@@ -37,7 +38,7 @@ export default function GerenciarSolicitacoes({ comunidadeId }: Props) {
 
     try {
       const resposta = await fetch(
-        `http://localhost:3000/comunidades/${comunidadeId}/solicitacoes`,
+        apiUrl(`/comunidades/${comunidadeId}/solicitacoes`),
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -85,7 +86,7 @@ export default function GerenciarSolicitacoes({ comunidadeId }: Props) {
 
     try {
       const resposta = await fetch(
-        `http://localhost:3000/comunidades/${comunidadeId}/solicitacoes/${id}`,
+        apiUrl(`/comunidades/${comunidadeId}/solicitacoes/${id}`),
         {
           method: "PATCH",
           headers: {

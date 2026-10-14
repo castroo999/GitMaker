@@ -1,4 +1,5 @@
 import "./VerComunidade.css";
+import { apiUrl } from "@/lib/api";
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, FolderPlus, LoaderCircle, LogOut } from "lucide-react";
@@ -86,7 +87,7 @@ export default function VerComunidade() {
     async function verificarParticipacao() {
       try {
         const resposta = await fetch(
-          `http://localhost:3000/comunidades/${id}/minha-participacao`,
+          apiUrl(`/comunidades/${id}/minha-participacao`),
           { headers: { Authorization: `Bearer ${token}` } },
         );
         if (!resposta.ok) return;
@@ -147,7 +148,7 @@ export default function VerComunidade() {
       setCarregando(true);
       setErro("");
 
-      const resposta = await fetch("http://localhost:3000/comunidades");
+      const resposta = await fetch(apiUrl("/comunidades"));
 
       if (!resposta.ok) {
         throw new Error("Não foi possível carregar a comunidade.");
@@ -189,7 +190,7 @@ export default function VerComunidade() {
 
       if (abaAtiva === "membros") {
         const resposta = await fetch(
-          `http://localhost:3000/comunidades/${id}/membros`,
+          apiUrl(`/comunidades/${id}/membros`),
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -210,7 +211,7 @@ export default function VerComunidade() {
 
       if (abaAtiva === "publicacoes") {
         const resposta = await fetch(
-          `http://localhost:3000/comunidades/${id}/posts`,
+          apiUrl(`/comunidades/${id}/posts`),
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -231,7 +232,7 @@ export default function VerComunidade() {
 
       if (abaAtiva === "projetos") {
         const resposta = await fetch(
-          `http://localhost:3000/projetos/comunidade/${id}`,
+          apiUrl(`/projetos/comunidade/${id}`),
           {
             headers: { Authorization: `Bearer ${token}` },
           },
@@ -277,7 +278,7 @@ export default function VerComunidade() {
       setErro("");
 
       const resposta = await fetch(
-        `http://localhost:3000/comunidades/${id}/entrar`,
+        apiUrl(`/comunidades/${id}/entrar`),
         {
           method: "POST",
           headers: {
@@ -322,7 +323,7 @@ export default function VerComunidade() {
     try {
       setSolicitandoContribuicao(true);
       const resposta = await fetch(
-        `http://localhost:3000/comunidades/${id}/contribuicoes/solicitar`,
+        apiUrl(`/comunidades/${id}/contribuicoes/solicitar`),
         {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },
@@ -356,7 +357,7 @@ export default function VerComunidade() {
     try {
       setPublicando(true);
       const resposta = await fetch(
-        `http://localhost:3000/comunidades/${id}/posts`,
+        apiUrl(`/comunidades/${id}/posts`),
         {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },
@@ -390,7 +391,7 @@ export default function VerComunidade() {
     if (!window.confirm("Tem certeza de que deseja sair desta comunidade?")) return;
 
     try {
-      const resposta = await fetch(`http://localhost:3000/comunidades/${id}/sair`, {
+      const resposta = await fetch(apiUrl(`/comunidades/${id}/sair`), {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -413,7 +414,7 @@ export default function VerComunidade() {
 
     try {
       setMembroEmGestao(membroId);
-      const resposta = await fetch(`http://localhost:3000/comunidades/${id}/membros/${membroId}`, {
+      const resposta = await fetch(apiUrl(`/comunidades/${id}/membros/${membroId}`), {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

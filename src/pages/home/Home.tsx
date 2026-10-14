@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
 import ProjetoModal from "@/components/projeto/ProjetoModal";
+import { apiUrl } from "@/lib/api";
 
 type Projeto = {
   id: number;
@@ -45,7 +46,7 @@ export default function Home() {
 
       try {
         const resposta = await fetch(
-          "http://localhost:3000/projetos/listar-projetos",
+          apiUrl("/projetos/listar-projetos"),
           {
             method: "GET",
             headers: {

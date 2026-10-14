@@ -3,6 +3,7 @@ import LoginForm from "./LoginForm";
 import { useNavigate } from "react-router-dom";
 import { iniciarLoginBackground } from "./LoginBackground";
 import "./Login.css";
+import { apiUrl } from "@/lib/api";
 
 export default function Login() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -49,7 +50,7 @@ export default function Login() {
       setCarregando(true);
 
       if (isLogin) {
-        const response = await fetch("http://localhost:3000/auth/login", {
+        const response = await fetch(apiUrl("/auth/login"), {
           method: "POST",
 
           headers: {
@@ -75,7 +76,7 @@ export default function Login() {
 
         window.location.href = "/home";
       } else {
-        const response = await fetch("http://localhost:3000/auth/cadastro", {
+        const response = await fetch(apiUrl("/auth/cadastro"), {
           method: "POST",
 
           headers: {

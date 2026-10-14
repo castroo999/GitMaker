@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./DescProjeto.css";
+import { apiUrl } from "@/lib/api";
 
 type Projeto = {
   id: number;
@@ -64,7 +65,7 @@ export default function DescProjeto() {
 
       try {
         const resposta = await fetch(
-          `http://localhost:3000/projetos/buscar-projeto/${id}`,
+          apiUrl(`/projetos/buscar-projeto/${id}`),
           {
             method: "GET",
             headers: {
@@ -91,7 +92,7 @@ export default function DescProjeto() {
         setProjeto(dados);
 
         const respostaEtapas = await fetch(
-          `http://localhost:3000/api/projetos/${id}/etapas`,
+          apiUrl(`/api/projetos/${id}/etapas`),
           {
             method: "GET",
             headers: {
@@ -120,7 +121,7 @@ export default function DescProjeto() {
         setEtapas(dadosEtapas.etapas);
 
         const respostaMidias = await fetch(
-          `http://localhost:3000/api/projetos/${id}/midias`,
+          apiUrl(`/api/projetos/${id}/midias`),
           {
             method: "GET",
             headers: {

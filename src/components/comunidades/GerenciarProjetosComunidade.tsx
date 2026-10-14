@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Check, RefreshCw, X } from "lucide-react";
 import "./GerenciarSolicitacoes.css";
+import { apiUrl } from "@/lib/api";
 
 interface ProjetoPendente {
   id: number;
@@ -36,7 +37,7 @@ export default function GerenciarProjetosComunidade({ comunidadeId, onDecidiu }:
     setErro("");
     try {
       const resposta = await fetch(
-        `http://localhost:3000/projetos/comunidade/${comunidadeId}/pendentes`,
+        apiUrl(`/projetos/comunidade/${comunidadeId}/pendentes`),
         { headers: { Authorization: `Bearer ${token}` } },
       );
       const dados = await resposta.json();
@@ -65,7 +66,7 @@ export default function GerenciarProjetosComunidade({ comunidadeId, onDecidiu }:
     setMensagem("");
     try {
       const resposta = await fetch(
-        `http://localhost:3000/projetos/comunidade/${comunidadeId}/${projetoId}/aprovacao`,
+        apiUrl(`/projetos/comunidade/${comunidadeId}/${projetoId}/aprovacao`),
         {
           method: "PATCH",
           headers: {

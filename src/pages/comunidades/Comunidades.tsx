@@ -1,4 +1,5 @@
 import "./Comunidades.css";
+import { apiUrl } from "@/lib/api";
 import { useCallback, useEffect, useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -88,7 +89,7 @@ export default function Comunidades() {
       setCarregando(true);
       setErro("");
 
-      const resposta = await fetch("http://localhost:3000/comunidades");
+      const resposta = await fetch(apiUrl("/comunidades"));
 
       if (!resposta.ok) {
         throw new Error("Não foi possível carregar as comunidades.");
@@ -107,7 +108,7 @@ export default function Comunidades() {
         dados.comunidades.map(async (comunidade) => {
           try {
             const respostaParticipacao = await fetch(
-              `http://localhost:3000/comunidades/${comunidade.id}/minha-participacao`,
+              apiUrl(`/comunidades/${comunidade.id}/minha-participacao`),
               { headers: { Authorization: `Bearer ${token}` } },
             );
 
@@ -169,7 +170,7 @@ export default function Comunidades() {
     try {
       setCriando(true);
 
-      const resposta = await fetch("http://localhost:3000/comunidades", {
+      const resposta = await fetch(apiUrl("/comunidades"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -225,7 +226,7 @@ export default function Comunidades() {
       setSolicitando(communityId);
 
       const resposta = await fetch(
-        `http://localhost:3000/comunidades/${communityId}/entrar`,
+        apiUrl(`/comunidades/${communityId}/entrar`),
         {
           method: "POST",
           headers: {

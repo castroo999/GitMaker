@@ -1,6 +1,7 @@
 import { useState, type ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CriarEtapa.css";
+import { apiUrl } from "@/lib/api";
 
 type CriarEtapaProps = {
   projetoId: number;
@@ -43,7 +44,7 @@ export default function CriarEtapa({
 
     try {
       const resposta = await fetch(
-        `http://localhost:3000/api/projetos/${projetoId}/etapas`,
+        apiUrl(`/api/projetos/${projetoId}/etapas`),
         {
           method: "POST",
           headers: {
@@ -86,7 +87,7 @@ export default function CriarEtapa({
         formulario.append("arquivo", arquivo);
 
         const respostaMidia = await fetch(
-          `http://localhost:3000/api/projetos/${projetoId}/etapas/${etapaId}/midias`,
+          apiUrl(`/api/projetos/${projetoId}/etapas/${etapaId}/midias`),
           {
             method: "POST",
             headers: {

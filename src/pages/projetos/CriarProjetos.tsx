@@ -3,6 +3,7 @@ import { useState, type ChangeEvent } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import CriarEtapa from "@/components/etapas/CriarEtapa";
 import HeroBackground from "../../components/hero/HeroBackgound";
+import { apiUrl } from "@/lib/api";
 
 export default function CriarProjetos() {
   const navigate = useNavigate();
@@ -51,7 +52,7 @@ export default function CriarProjetos() {
 
     try {
       const resposta = await fetch(
-        "http://localhost:3000/projetos/criar-projeto",
+        apiUrl("/projetos/criar-projeto"),
         {
           method: "POST",
           headers: {
@@ -92,7 +93,7 @@ export default function CriarProjetos() {
         formulario.append("arquivo", imagem);
 
         const respostaMidia = await fetch(
-          `http://localhost:3000/api/projetos/${novoProjetoId}/midias`,
+          apiUrl(`/api/projetos/${novoProjetoId}/midias`),
           {
             method: "POST",
             headers: {

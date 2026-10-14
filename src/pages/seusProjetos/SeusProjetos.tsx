@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { apiUrl } from "@/lib/api";
 import "./SeusProjetos.css";
 import { useNavigate } from "react-router-dom";
 
@@ -37,7 +38,7 @@ export default function SeusProjetos() {
 
       try {
         const resposta = await fetch(
-          "http://localhost:3000/projetos/meus-projetos",
+          apiUrl("/projetos/meus-projetos"),
           {
             method: "GET",
             headers: {
