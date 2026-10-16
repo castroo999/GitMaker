@@ -1,6 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
 import prisma from "../lib/prisma";
 import { deletarArquivo, enviarMidiaPublicacao } from "../services/storageService";
+import { criarNotificacao } from "../services/notificationService";
 
 const TIPOS_ENTRADA = ["LIVRE", "APROVACAO"];
 
@@ -241,27 +242,38 @@ export async function solicitarEntrada(req: Request, res: Response) {
         }
 
         if (comunidade.tipoEntrada === "APROVACAO") {
-            const membro = membroExistente
-                ? await prisma.communityMember.update({
-                    where: {
-                        userId_communityId: {
+            const membro = await prisma.$transaction(async (transacao) => {
+                const membroAtualizado = membroExistente
+                    ? await transacao.communityMember.update({
+                        where: {
+                            userId_communityId: {
+                                userId: usuarioId,
+                                communityId,
+                            },
+                        },
+                        data: {
+                            status: "PENDENTE",
+                            statusContribuicao: "NAO_SOLICITADO",
+                            createdAt: new Date(),
+                        },
+                    })
+                    : await transacao.communityMember.create({
+                        data: {
                             userId: usuarioId,
                             communityId,
+                            status: "PENDENTE",
                         },
-                    },
-                    data: {
-                        status: "PENDENTE",
-                        statusContribuicao: "NAO_SOLICITADO",
-                        createdAt: new Date(),
-                    },
-                })
-                : await prisma.communityMember.create({
-                    data: {
-                        userId: usuarioId,
-                        communityId,
-                        status: "PENDENTE",
-                    },
+                    });
+
+                await criarNotificacao(transacao, "comunidades", {
+                        userId: comunidade.creatorId,
+                        tipo: "SOLICITACAO_ENTRADA",
+                        titulo: "Nova solicitação para entrar",
+                        mensagem: `Uma pessoa solicitou entrada em ${comunidade.nome}.`,
+                        link: `/comunidades/${communityId}`,
                 });
+                return membroAtualizado;
+            });
 
             return res.status(201).json({
                 mensagem: "Solicitação enviada. Aguarde a aprovação do moderador.",
@@ -340,6 +352,7 @@ export async function listarSolicitacoes(req: Request, res: Response) {
             select: {
                 id: true,
                 creatorId: true,
+                nome: true,
             },
         });
 
@@ -411,6 +424,7 @@ export async function decidirSolicitacao(req: Request, res: Response) {
             select: {
                 id: true,
                 creatorId: true,
+                nome: true,
             },
         });
 
@@ -432,6 +446,7 @@ export async function decidirSolicitacao(req: Request, res: Response) {
                 communityId,
                 status: "PENDENTE",
             },
+            select: { id: true, userId: true },
         });
 
         if (!membro) {
@@ -442,12 +457,25 @@ export async function decidirSolicitacao(req: Request, res: Response) {
 
         const status = decisao === "APROVAR" ? "APROVADO" : "RECUSADO";
 
-        const membroAtualizado = await prisma.communityMember.update({
-            where: { id: membroId },
-            data: {
-                status,
-                ...(decisao === "APROVAR" ? { statusContribuicao: "APROVADO" } : {}),
-            },
+        const membroAtualizado = await prisma.$transaction(async (transacao) => {
+            const atualizado = await transacao.communityMember.update({
+                where: { id: membroId },
+                data: {
+                    status,
+                    ...(decisao === "APROVAR" ? { statusContribuicao: "APROVADO" } : {}),
+                },
+            });
+
+            await criarNotificacao(transacao, "comunidades", {
+                    userId: membro.userId,
+                    tipo: decisao === "APROVAR" ? "ENTRADA_APROVADA" : "ENTRADA_RECUSADA",
+                    titulo: decisao === "APROVAR" ? "Solicitação aprovada" : "Solicitação recusada",
+                    mensagem: decisao === "APROVAR"
+                        ? `Sua solicitação para entrar em ${comunidade.nome} foi aprovada.`
+                        : `Sua solicitação para entrar em ${comunidade.nome} foi recusada.`,
+                    link: `/comunidades/${communityId}`,
+            });
+            return atualizado;
         });
 
         return res.status(200).json({
@@ -540,7 +568,7 @@ export async function sairDaComunidade(req: Request, res: Response) {
 
         const comunidade = await prisma.community.findUnique({
             where: { id: communityId },
-            select: { creatorId: true },
+            select: { creatorId: true, nome: true },
         });
         if (!comunidade) return res.status(404).json({ mensagem: "Comunidade não encontrada." });
         if (comunidade.creatorId === Number(userId)) {
@@ -585,7 +613,7 @@ export async function gerenciarMembro(req: Request, res: Response) {
 
         const comunidade = await prisma.community.findUnique({
             where: { id: communityId },
-            select: { creatorId: true },
+            select: { creatorId: true, nome: true },
         });
         if (!comunidade) return res.status(404).json({ mensagem: "Comunidade não encontrada." });
         if (comunidade.creatorId !== Number(userId)) {
@@ -734,7 +762,7 @@ export async function criarPublicacao(req: Request, res: Response) {
 
         const comunidade = await prisma.community.findUnique({
             where: { id: communityId },
-            select: { id: true, creatorId: true, tipoEntrada: true },
+            select: { id: true, creatorId: true, nome: true, tipoEntrada: true },
         });
 
         if (!comunidade) {
@@ -814,7 +842,7 @@ export async function solicitarPermissaoContribuicao(req: Request, res: Response
 
         const comunidade = await prisma.community.findUnique({
             where: { id: communityId },
-            select: { id: true, creatorId: true, tipoEntrada: true },
+            select: { id: true, creatorId: true, nome: true, tipoEntrada: true },
         });
 
         if (!comunidade) return res.status(404).json({ mensagem: "Comunidade não encontrada." });
@@ -838,9 +866,19 @@ export async function solicitarPermissaoContribuicao(req: Request, res: Response
             return res.status(409).json({ mensagem: "Você já tem permissão para publicar nesta comunidade." });
         }
 
-        await prisma.communityMember.update({
-            where: { id: membro.id },
-            data: { statusContribuicao: "PENDENTE" },
+        await prisma.$transaction(async (transacao) => {
+            await transacao.communityMember.update({
+                where: { id: membro.id },
+                data: { statusContribuicao: "PENDENTE" },
+            });
+
+            await criarNotificacao(transacao, "permissoes", {
+                    userId: comunidade.creatorId,
+                    tipo: "SOLICITACAO_CONTRIBUICAO",
+                    titulo: "Solicitação para publicar",
+                    mensagem: `Um membro solicitou permissão para publicar em ${comunidade.nome}.`,
+                    link: `/comunidades/${communityId}`,
+            });
         });
 
         return res.status(200).json({
@@ -863,7 +901,7 @@ export async function listarSolicitacoesContribuicao(req: Request, res: Response
 
         const comunidade = await prisma.community.findUnique({
             where: { id: communityId },
-            select: { creatorId: true },
+            select: { creatorId: true, nome: true },
         });
 
         if (!comunidade) return res.status(404).json({ mensagem: "Comunidade não encontrada." });
@@ -907,7 +945,7 @@ export async function decidirPermissaoContribuicao(req: Request, res: Response) 
 
         const comunidade = await prisma.community.findUnique({
             where: { id: communityId },
-            select: { creatorId: true },
+            select: { creatorId: true, nome: true },
         });
 
         if (!comunidade) return res.status(404).json({ mensagem: "Comunidade não encontrada." });
@@ -922,6 +960,7 @@ export async function decidirPermissaoContribuicao(req: Request, res: Response) 
                 status: "APROVADO",
                 userId: { not: Number(userId) },
             },
+            select: { id: true, userId: true },
         });
 
         if (!solicitacao) {
@@ -929,9 +968,31 @@ export async function decidirPermissaoContribuicao(req: Request, res: Response) 
         }
 
         const statusContribuicao = decisao === "APROVAR" ? "APROVADO" : "RECUSADO";
-        await prisma.communityMember.update({
-            where: { id: membroId },
-            data: { statusContribuicao },
+        await prisma.$transaction(async (transacao) => {
+            await transacao.communityMember.update({
+                where: { id: membroId },
+                data: { statusContribuicao },
+            });
+
+            await criarNotificacao(transacao, "permissoes", {
+                    userId: solicitacao.userId,
+                    tipo: decisao === "APROVAR"
+                        ? "CONTRIBUICAO_APROVADA"
+                        : decisao === "REVOGAR"
+                            ? "CONTRIBUICAO_REVOGADA"
+                            : "CONTRIBUICAO_RECUSADA",
+                    titulo: decisao === "APROVAR"
+                        ? "Permissão para publicar aprovada"
+                        : decisao === "REVOGAR"
+                            ? "Permissão para publicar revogada"
+                            : "Solicitação para publicar recusada",
+                    mensagem: decisao === "APROVAR"
+                        ? `Você já pode publicar em ${comunidade.nome}.`
+                        : decisao === "REVOGAR"
+                            ? `Sua permissão para publicar em ${comunidade.nome} foi revogada.`
+                            : `Sua solicitação para publicar em ${comunidade.nome} foi recusada.`,
+                    link: `/comunidades/${communityId}`,
+            });
         });
 
         return res.status(200).json({

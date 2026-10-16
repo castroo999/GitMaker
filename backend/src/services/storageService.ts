@@ -32,6 +32,34 @@ export async function enviarArquivo(
     };
 }
 
+export async function enviarFotoPerfil(
+    arquivo: Express.Multer.File,
+    userId: number
+) {
+    const extensao = path.extname(arquivo.originalname);
+    const nomeArquivo = `${Date.now()}-${Math.round(Math.random() * 1e9)}${extensao}`;
+    const caminho = `perfis/${userId}/${nomeArquivo}`;
+
+    const { data, error } = await supabase.storage
+        .from("projetos")
+        .upload(caminho, arquivo.buffer, {
+            contentType: arquivo.mimetype,
+            cacheControl: "3600",
+            upsert: false,
+        });
+
+    if (error) {
+        console.error("Erro ao enviar foto de perfil para o Supabase:", error);
+        throw new Error("Não foi possível enviar a foto de perfil.");
+    }
+
+    const { data: publicUrlData } = supabase.storage
+        .from("projetos")
+        .getPublicUrl(data.path);
+
+    return { path: data.path, url: publicUrlData.publicUrl };
+}
+
 export async function enviarMidiaPublicacao(
     arquivo: Express.Multer.File,
     comunidadeId: number

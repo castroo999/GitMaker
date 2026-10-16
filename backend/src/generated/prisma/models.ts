@@ -10,10 +10,13 @@
  */
 export type * from './models/User.js'
 export type * from './models/Project.js'
+export type * from './models/ProjectLike.js'
 export type * from './models/ProjectStep.js'
 export type * from './models/ProjectMedia.js'
 export type * from './models/Community.js'
 export type * from './models/CommunityMember.js'
 export type * from './models/CommunityPost.js'
 export type * from './models/CommunityPostMedia.js'
+export type * from './models/Notification.js'
+export type * from './models/NotificationPreference.js'
 export type * from './commonInputTypes.js'

@@ -13,16 +13,21 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  nome      String
-  email     String   @unique
-  senha     String
-  createdAt DateTime @default(now())
+  id          Int      @id @default(autoincrement())
+  nome        String
+  email       String   @unique
+  senha       String
+  descricao   String?
+  fotoPerfil  String?
+  createdAt   DateTime @default(now())
 
   projetos          Project[]
+  curtidas          ProjectLike[]
   comunidadesCriadas Community[]       @relation("CommunityCreator")
   participacoes     CommunityMember[]
   postsComunidade CommunityPost[] @relation("CommunityPostAuthor")
+  notificacoes    Notification[]
+  preferenciasNotificacao NotificationPreference?
 }
 
 model Project {
@@ -40,8 +45,22 @@ model Project {
 
   etapas ProjectStep[]
   midias ProjectMedia[]
+  curtidas ProjectLike[]
 
   @@index([communityId])
+}
+
+model ProjectLike {
+  projectId Int
+  userId    Int
+  createdAt DateTime @default(now())
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([projectId, userId])
+  @@index([projectId])
+  @@index([userId])
 }
 
 model ProjectStep {
@@ -128,4 +147,29 @@ model CommunityPostMedia {
   post   CommunityPost @relation(fields: [postId], references: [id], onDelete: Cascade)
 
   @@index([postId])
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  tipo      String
+  titulo    String
+  mensagem  String
+  link      String
+  lida      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, lida, createdAt])
+}
+
+model NotificationPreference {
+  id          Int     @id @default(autoincrement())
+  projetos    Boolean @default(true)
+  comunidades Boolean @default(true)
+  permissoes  Boolean @default(true)
+
+  userId Int  @unique
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

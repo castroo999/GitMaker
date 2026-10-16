@@ -29,7 +29,10 @@
 }
 
 .cards-projetos > div {
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
+  position: relative;
   background: #18181f;
   border: 1px solid #292932;
   border-radius: 12px;
@@ -67,7 +70,7 @@
   line-height: 1.6;
 }
 
-.cards-projetos span {
+.cards-projetos > div > span {
   display: block;
   margin: 0 20px 20px;
   color: #c7c7d1;
@@ -91,6 +94,13 @@
     transform 0.2s ease,
     border-color 0.2s ease,
     box-shadow 0.2s ease;
+}
+
+.projeto-card-acoes {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+  padding: 0 18px 16px;
 }
 
 .cards-projetos > div:hover {

@@ -12,6 +12,8 @@ import {
 } from "lucide-react";
 import "./Sidebar.css";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import NotificationsCenter from "../notifications/NotificationsCenter";
 
 
 type SidebarProps = {
@@ -23,10 +25,10 @@ type SidebarProps = {
   onAbrirConfiguracoes: () => void;
 };
 
-function obterNomeUsuario(): string {
+function obterDadosUsuario(): { nome: string; fotoPerfil: string | null } {
   const usuario = localStorage.getItem("usuario");
 
-  if (!usuario) return "Usuário";
+  if (!usuario) return { nome: "Usuário", fotoPerfil: null };
 
   try {
     const dados: unknown = JSON.parse(usuario);
@@ -38,19 +40,33 @@ function obterNomeUsuario(): string {
       typeof dados.nome === "string" &&
       dados.nome.trim()
     ) {
-      return dados.nome;
+      return {
+        nome: dados.nome,
+        fotoPerfil:
+          "fotoPerfil" in dados && typeof dados.fotoPerfil === "string"
+            ? dados.fotoPerfil
+            : null,
+      };
     }
   } catch (error: unknown) {
     if (!(error instanceof SyntaxError)) throw error;
   }
 
-  return "Usuário";
+  return { nome: "Usuário", fotoPerfil: null };
 }
 
 export default function Sidebar({ minimizada, setMinimizada, mobileAberta, setMobileAberta, onAbrirSobre, onAbrirConfiguracoes, }: SidebarProps) {
   const navigate = useNavigate();
-  const nomeUsuario = obterNomeUsuario();
+  const [dadosUsuario, setDadosUsuario] = useState(obterDadosUsuario);
   const mostrarRotulos = !minimizada || mobileAberta;
+
+  useEffect(() => {
+    function atualizarPerfil() {
+      setDadosUsuario(obterDadosUsuario());
+    }
+    window.addEventListener("gitmaker:profile-updated", atualizarPerfil);
+    return () => window.removeEventListener("gitmaker:profile-updated", atualizarPerfil);
+  }, []);
 
   function navegar(caminho: string) {
     setMobileAberta(false);
@@ -67,8 +83,18 @@ export default function Sidebar({ minimizada, setMinimizada, mobileAberta, setMo
   return (
     <section className={`sidebar-topo ${minimizada ? "minimizada" : ""} ${mobileAberta ? "mobile-aberta" : ""}`}>
       <div className="perfil">
-        <UserRound />
-        {mostrarRotulos && <h2>{nomeUsuario}</h2>}
+        <button
+          className="perfil-abrir"
+          onClick={() => navegar("/perfil")}
+          aria-label="Abrir meu perfil"
+        >
+          {dadosUsuario.fotoPerfil ? (
+            <img src={dadosUsuario.fotoPerfil} alt="" />
+          ) : (
+            <UserRound />
+          )}
+          {mostrarRotulos && <h2>{dadosUsuario.nome}</h2>}
+        </button>
 
         <button
           className="botao-toggle"
@@ -99,6 +125,11 @@ export default function Sidebar({ minimizada, setMinimizada, mobileAberta, setMo
           <Globe />
           {mostrarRotulos && <span>Comunidades</span>}
         </button>
+
+        <NotificationsCenter
+          mostrarRotulos={mostrarRotulos}
+          onAbrir={() => setMobileAberta(false)}
+        />
 
         <button>
           <Users />

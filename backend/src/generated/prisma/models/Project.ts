@@ -244,6 +244,7 @@ export type ProjectWhereInput = {
   community?: Prisma.XOR<Prisma.CommunityNullableScalarRelationFilter, Prisma.CommunityWhereInput> | null
   etapas?: Prisma.ProjectStepListRelationFilter
   midias?: Prisma.ProjectMediaListRelationFilter
+  curtidas?: Prisma.ProjectLikeListRelationFilter
 }
 
 export type ProjectOrderByWithRelationInput = {
@@ -258,6 +259,7 @@ export type ProjectOrderByWithRelationInput = {
   community?: Prisma.CommunityOrderByWithRelationInput
   etapas?: Prisma.ProjectStepOrderByRelationAggregateInput
   midias?: Prisma.ProjectMediaOrderByRelationAggregateInput
+  curtidas?: Prisma.ProjectLikeOrderByRelationAggregateInput
 }
 
 export type ProjectWhereUniqueInput = Prisma.AtLeast<{
@@ -275,6 +277,7 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   community?: Prisma.XOR<Prisma.CommunityNullableScalarRelationFilter, Prisma.CommunityWhereInput> | null
   etapas?: Prisma.ProjectStepListRelationFilter
   midias?: Prisma.ProjectMediaListRelationFilter
+  curtidas?: Prisma.ProjectLikeListRelationFilter
 }, "id">
 
 export type ProjectOrderByWithAggregationInput = {
@@ -314,6 +317,7 @@ export type ProjectCreateInput = {
   community?: Prisma.CommunityCreateNestedOneWithoutProjetosInput
   etapas?: Prisma.ProjectStepCreateNestedManyWithoutProjectInput
   midias?: Prisma.ProjectMediaCreateNestedManyWithoutProjectInput
+  curtidas?: Prisma.ProjectLikeCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateInput = {
@@ -326,6 +330,7 @@ export type ProjectUncheckedCreateInput = {
   communityId?: number | null
   etapas?: Prisma.ProjectStepUncheckedCreateNestedManyWithoutProjectInput
   midias?: Prisma.ProjectMediaUncheckedCreateNestedManyWithoutProjectInput
+  curtidas?: Prisma.ProjectLikeUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUpdateInput = {
@@ -337,6 +342,7 @@ export type ProjectUpdateInput = {
   community?: Prisma.CommunityUpdateOneWithoutProjetosNestedInput
   etapas?: Prisma.ProjectStepUpdateManyWithoutProjectNestedInput
   midias?: Prisma.ProjectMediaUpdateManyWithoutProjectNestedInput
+  curtidas?: Prisma.ProjectLikeUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateInput = {
@@ -349,6 +355,7 @@ export type ProjectUncheckedUpdateInput = {
   communityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   etapas?: Prisma.ProjectStepUncheckedUpdateManyWithoutProjectNestedInput
   midias?: Prisma.ProjectMediaUncheckedUpdateManyWithoutProjectNestedInput
+  curtidas?: Prisma.ProjectLikeUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateManyInput = {
@@ -485,6 +492,20 @@ export type NullableIntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type ProjectCreateNestedOneWithoutCurtidasInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutCurtidasInput, Prisma.ProjectUncheckedCreateWithoutCurtidasInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutCurtidasInput
+  connect?: Prisma.ProjectWhereUniqueInput
+}
+
+export type ProjectUpdateOneRequiredWithoutCurtidasNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutCurtidasInput, Prisma.ProjectUncheckedCreateWithoutCurtidasInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutCurtidasInput
+  upsert?: Prisma.ProjectUpsertWithoutCurtidasInput
+  connect?: Prisma.ProjectWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutCurtidasInput, Prisma.ProjectUpdateWithoutCurtidasInput>, Prisma.ProjectUncheckedUpdateWithoutCurtidasInput>
+}
+
 export type ProjectCreateNestedOneWithoutEtapasInput = {
   create?: Prisma.XOR<Prisma.ProjectCreateWithoutEtapasInput, Prisma.ProjectUncheckedCreateWithoutEtapasInput>
   connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutEtapasInput
@@ -563,6 +584,7 @@ export type ProjectCreateWithoutUserInput = {
   community?: Prisma.CommunityCreateNestedOneWithoutProjetosInput
   etapas?: Prisma.ProjectStepCreateNestedManyWithoutProjectInput
   midias?: Prisma.ProjectMediaCreateNestedManyWithoutProjectInput
+  curtidas?: Prisma.ProjectLikeCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutUserInput = {
@@ -574,6 +596,7 @@ export type ProjectUncheckedCreateWithoutUserInput = {
   communityId?: number | null
   etapas?: Prisma.ProjectStepUncheckedCreateNestedManyWithoutProjectInput
   midias?: Prisma.ProjectMediaUncheckedCreateNestedManyWithoutProjectInput
+  curtidas?: Prisma.ProjectLikeUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutUserInput = {
@@ -615,6 +638,68 @@ export type ProjectScalarWhereInput = {
   communityId?: Prisma.IntNullableFilter<"Project"> | number | null
 }
 
+export type ProjectCreateWithoutCurtidasInput = {
+  titulo: string
+  descricao: string
+  statusAprovacao?: string
+  createdAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutProjetosInput
+  community?: Prisma.CommunityCreateNestedOneWithoutProjetosInput
+  etapas?: Prisma.ProjectStepCreateNestedManyWithoutProjectInput
+  midias?: Prisma.ProjectMediaCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectUncheckedCreateWithoutCurtidasInput = {
+  id?: number
+  titulo: string
+  descricao: string
+  statusAprovacao?: string
+  createdAt?: Date | string
+  userId: number
+  communityId?: number | null
+  etapas?: Prisma.ProjectStepUncheckedCreateNestedManyWithoutProjectInput
+  midias?: Prisma.ProjectMediaUncheckedCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectCreateOrConnectWithoutCurtidasInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutCurtidasInput, Prisma.ProjectUncheckedCreateWithoutCurtidasInput>
+}
+
+export type ProjectUpsertWithoutCurtidasInput = {
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutCurtidasInput, Prisma.ProjectUncheckedUpdateWithoutCurtidasInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutCurtidasInput, Prisma.ProjectUncheckedCreateWithoutCurtidasInput>
+  where?: Prisma.ProjectWhereInput
+}
+
+export type ProjectUpdateToOneWithWhereWithoutCurtidasInput = {
+  where?: Prisma.ProjectWhereInput
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutCurtidasInput, Prisma.ProjectUncheckedUpdateWithoutCurtidasInput>
+}
+
+export type ProjectUpdateWithoutCurtidasInput = {
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  statusAprovacao?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutProjetosNestedInput
+  community?: Prisma.CommunityUpdateOneWithoutProjetosNestedInput
+  etapas?: Prisma.ProjectStepUpdateManyWithoutProjectNestedInput
+  midias?: Prisma.ProjectMediaUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateWithoutCurtidasInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  titulo?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.StringFieldUpdateOperationsInput | string
+  statusAprovacao?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  communityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  etapas?: Prisma.ProjectStepUncheckedUpdateManyWithoutProjectNestedInput
+  midias?: Prisma.ProjectMediaUncheckedUpdateManyWithoutProjectNestedInput
+}
+
 export type ProjectCreateWithoutEtapasInput = {
   titulo: string
   descricao: string
@@ -623,6 +708,7 @@ export type ProjectCreateWithoutEtapasInput = {
   user: Prisma.UserCreateNestedOneWithoutProjetosInput
   community?: Prisma.CommunityCreateNestedOneWithoutProjetosInput
   midias?: Prisma.ProjectMediaCreateNestedManyWithoutProjectInput
+  curtidas?: Prisma.ProjectLikeCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutEtapasInput = {
@@ -634,6 +720,7 @@ export type ProjectUncheckedCreateWithoutEtapasInput = {
   userId: number
   communityId?: number | null
   midias?: Prisma.ProjectMediaUncheckedCreateNestedManyWithoutProjectInput
+  curtidas?: Prisma.ProjectLikeUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutEtapasInput = {
@@ -660,6 +747,7 @@ export type ProjectUpdateWithoutEtapasInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutProjetosNestedInput
   community?: Prisma.CommunityUpdateOneWithoutProjetosNestedInput
   midias?: Prisma.ProjectMediaUpdateManyWithoutProjectNestedInput
+  curtidas?: Prisma.ProjectLikeUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutEtapasInput = {
@@ -671,6 +759,7 @@ export type ProjectUncheckedUpdateWithoutEtapasInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   communityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   midias?: Prisma.ProjectMediaUncheckedUpdateManyWithoutProjectNestedInput
+  curtidas?: Prisma.ProjectLikeUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutMidiasInput = {
@@ -681,6 +770,7 @@ export type ProjectCreateWithoutMidiasInput = {
   user: Prisma.UserCreateNestedOneWithoutProjetosInput
   community?: Prisma.CommunityCreateNestedOneWithoutProjetosInput
   etapas?: Prisma.ProjectStepCreateNestedManyWithoutProjectInput
+  curtidas?: Prisma.ProjectLikeCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutMidiasInput = {
@@ -692,6 +782,7 @@ export type ProjectUncheckedCreateWithoutMidiasInput = {
   userId: number
   communityId?: number | null
   etapas?: Prisma.ProjectStepUncheckedCreateNestedManyWithoutProjectInput
+  curtidas?: Prisma.ProjectLikeUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutMidiasInput = {
@@ -718,6 +809,7 @@ export type ProjectUpdateWithoutMidiasInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutProjetosNestedInput
   community?: Prisma.CommunityUpdateOneWithoutProjetosNestedInput
   etapas?: Prisma.ProjectStepUpdateManyWithoutProjectNestedInput
+  curtidas?: Prisma.ProjectLikeUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutMidiasInput = {
@@ -729,6 +821,7 @@ export type ProjectUncheckedUpdateWithoutMidiasInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   communityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   etapas?: Prisma.ProjectStepUncheckedUpdateManyWithoutProjectNestedInput
+  curtidas?: Prisma.ProjectLikeUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutCommunityInput = {
@@ -739,6 +832,7 @@ export type ProjectCreateWithoutCommunityInput = {
   user: Prisma.UserCreateNestedOneWithoutProjetosInput
   etapas?: Prisma.ProjectStepCreateNestedManyWithoutProjectInput
   midias?: Prisma.ProjectMediaCreateNestedManyWithoutProjectInput
+  curtidas?: Prisma.ProjectLikeCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutCommunityInput = {
@@ -750,6 +844,7 @@ export type ProjectUncheckedCreateWithoutCommunityInput = {
   userId: number
   etapas?: Prisma.ProjectStepUncheckedCreateNestedManyWithoutProjectInput
   midias?: Prisma.ProjectMediaUncheckedCreateNestedManyWithoutProjectInput
+  curtidas?: Prisma.ProjectLikeUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutCommunityInput = {
@@ -795,6 +890,7 @@ export type ProjectUpdateWithoutUserInput = {
   community?: Prisma.CommunityUpdateOneWithoutProjetosNestedInput
   etapas?: Prisma.ProjectStepUpdateManyWithoutProjectNestedInput
   midias?: Prisma.ProjectMediaUpdateManyWithoutProjectNestedInput
+  curtidas?: Prisma.ProjectLikeUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutUserInput = {
@@ -806,6 +902,7 @@ export type ProjectUncheckedUpdateWithoutUserInput = {
   communityId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   etapas?: Prisma.ProjectStepUncheckedUpdateManyWithoutProjectNestedInput
   midias?: Prisma.ProjectMediaUncheckedUpdateManyWithoutProjectNestedInput
+  curtidas?: Prisma.ProjectLikeUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateManyWithoutUserInput = {
@@ -834,6 +931,7 @@ export type ProjectUpdateWithoutCommunityInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutProjetosNestedInput
   etapas?: Prisma.ProjectStepUpdateManyWithoutProjectNestedInput
   midias?: Prisma.ProjectMediaUpdateManyWithoutProjectNestedInput
+  curtidas?: Prisma.ProjectLikeUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutCommunityInput = {
@@ -845,6 +943,7 @@ export type ProjectUncheckedUpdateWithoutCommunityInput = {
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   etapas?: Prisma.ProjectStepUncheckedUpdateManyWithoutProjectNestedInput
   midias?: Prisma.ProjectMediaUncheckedUpdateManyWithoutProjectNestedInput
+  curtidas?: Prisma.ProjectLikeUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateManyWithoutCommunityInput = {
@@ -864,11 +963,13 @@ export type ProjectUncheckedUpdateManyWithoutCommunityInput = {
 export type ProjectCountOutputType = {
   etapas: number
   midias: number
+  curtidas: number
 }
 
 export type ProjectCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   etapas?: boolean | ProjectCountOutputTypeCountEtapasArgs
   midias?: boolean | ProjectCountOutputTypeCountMidiasArgs
+  curtidas?: boolean | ProjectCountOutputTypeCountCurtidasArgs
 }
 
 /**
@@ -895,6 +996,13 @@ export type ProjectCountOutputTypeCountMidiasArgs<ExtArgs extends runtime.Types.
   where?: Prisma.ProjectMediaWhereInput
 }
 
+/**
+ * ProjectCountOutputType without action
+ */
+export type ProjectCountOutputTypeCountCurtidasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProjectLikeWhereInput
+}
+
 
 export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -908,6 +1016,7 @@ export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   community?: boolean | Prisma.Project$communityArgs<ExtArgs>
   etapas?: boolean | Prisma.Project$etapasArgs<ExtArgs>
   midias?: boolean | Prisma.Project$midiasArgs<ExtArgs>
+  curtidas?: boolean | Prisma.Project$curtidasArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
@@ -951,6 +1060,7 @@ export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   community?: boolean | Prisma.Project$communityArgs<ExtArgs>
   etapas?: boolean | Prisma.Project$etapasArgs<ExtArgs>
   midias?: boolean | Prisma.Project$midiasArgs<ExtArgs>
+  curtidas?: boolean | Prisma.Project$curtidasArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProjectIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -969,6 +1079,7 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     community: Prisma.$CommunityPayload<ExtArgs> | null
     etapas: Prisma.$ProjectStepPayload<ExtArgs>[]
     midias: Prisma.$ProjectMediaPayload<ExtArgs>[]
+    curtidas: Prisma.$ProjectLikePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1376,6 +1487,7 @@ export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends runtime.
   community<T extends Prisma.Project$communityArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$communityArgs<ExtArgs>>): Prisma.Prisma__CommunityClient<runtime.Types.Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   etapas<T extends Prisma.Project$etapasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$etapasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectStepPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   midias<T extends Prisma.Project$midiasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$midiasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectMediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  curtidas<T extends Prisma.Project$curtidasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$curtidasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1877,6 +1989,30 @@ export type Project$midiasArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.ProjectMediaScalarFieldEnum | Prisma.ProjectMediaScalarFieldEnum[]
+}
+
+/**
+ * Project.curtidas
+ */
+export type Project$curtidasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProjectLike
+   */
+  select?: Prisma.ProjectLikeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProjectLike
+   */
+  omit?: Prisma.ProjectLikeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectLikeInclude<ExtArgs> | null
+  where?: Prisma.ProjectLikeWhereInput
+  orderBy?: Prisma.ProjectLikeOrderByWithRelationInput | Prisma.ProjectLikeOrderByWithRelationInput[]
+  cursor?: Prisma.ProjectLikeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProjectLikeScalarFieldEnum | Prisma.ProjectLikeScalarFieldEnum[]
 }
 
 /**

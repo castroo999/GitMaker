@@ -28,6 +28,11 @@ export type User = Prisma.UserModel
  */
 export type Project = Prisma.ProjectModel
 /**
+ * Model ProjectLike
+ * 
+ */
+export type ProjectLike = Prisma.ProjectLikeModel
+/**
  * Model ProjectStep
  * 
  */
@@ -57,3 +62,13 @@ export type CommunityPost = Prisma.CommunityPostModel
  * 
  */
 export type CommunityPostMedia = Prisma.CommunityPostMediaModel
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
+/**
+ * Model NotificationPreference
+ * 
+ */
+export type NotificationPreference = Prisma.NotificationPreferenceModel

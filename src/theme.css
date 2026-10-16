@@ -1,0 +1,247 @@
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-background: #f5f6fa;
+  --color-surface: #ffffff;
+  --color-surface-secondary: #eef0f5;
+  --color-border: #dfe2ea;
+  --color-title: #191923;
+  --color-text: #393946;
+  --color-text-secondary: #686878;
+}
+
+:root[data-theme="light"] body {
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+:root[data-theme="light"] .layout,
+:root[data-theme="light"] .conteudo,
+:root[data-theme="light"] .pagina-criar-projeto,
+:root[data-theme="light"] .criar-projeto,
+:root[data-theme="light"] .seus-projetos,
+:root[data-theme="light"] .ver-comunidade,
+:root[data-theme="light"] .comuni,
+:root[data-theme="light"] .pagina-projeto {
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+:root[data-theme="light"] .layout-conteudo {
+  color: var(--color-text);
+}
+
+:root[data-theme="light"] .sidebar-topo {
+  background: #ffffff;
+  border-color: var(--color-border);
+}
+
+:root[data-theme="light"] .perfil,
+:root[data-theme="light"] .perfil h2,
+:root[data-theme="light"] .itens-sidebar button:hover,
+:root[data-theme="light"] .sidebar-footer button:hover {
+  color: var(--color-title);
+}
+
+:root[data-theme="light"] .itens-sidebar button:hover,
+:root[data-theme="light"] .sidebar-footer button:hover,
+:root[data-theme="light"] .botao-toggle:hover,
+:root[data-theme="light"] .layout-mobile-toggle {
+  background: #f0edf8;
+  border-color: var(--color-border);
+}
+
+:root[data-theme="light"] .layout-mobile-toggle {
+  color: var(--color-title);
+}
+
+:root[data-theme="light"] .sidebar-footer {
+  border-color: var(--color-border);
+}
+
+:root[data-theme="light"] .config-modal {
+  background: linear-gradient(145deg, #ffffff 0%, #f7f7fb 100%);
+  border-color: var(--color-border);
+  color: var(--color-title);
+}
+
+:root[data-theme="light"] .config-header,
+:root[data-theme="light"] .config-footer {
+  border-color: var(--color-border);
+}
+
+:root[data-theme="light"] .config-header h2,
+:root[data-theme="light"] .config-item-info strong {
+  color: var(--color-title);
+}
+
+:root[data-theme="light"] .config-header p,
+:root[data-theme="light"] .config-item,
+:root[data-theme="light"] .config-fechar {
+  color: var(--color-text-secondary);
+}
+
+:root[data-theme="light"] .config-item:hover,
+:root[data-theme="light"] .config-fechar:hover {
+  background: #f0edf8;
+  border-color: var(--color-border);
+}
+
+:root[data-theme="light"] .config-item-icone {
+  border-color: #e2d8f7;
+}
+
+:root[data-theme="light"] .config-footer {
+  background: rgba(28, 24, 42, 0.025);
+}
+
+:root[data-theme="light"] .config-voltar:hover {
+  background: #f0edf8;
+}
+
+:root[data-theme="light"] .config-preferencia-item {
+  border-color: var(--color-border);
+  background: #ffffff;
+}
+
+:root[data-theme="light"] .config-preferencias-intro h3,
+:root[data-theme="light"] .config-preferencia-texto strong {
+  color: var(--color-title);
+}
+
+:root[data-theme="light"] .config-preferencias-intro p,
+:root[data-theme="light"] .config-preferencia-texto span,
+:root[data-theme="light"] .config-preferencias-estado {
+  color: var(--color-text-secondary);
+}
+
+:root[data-theme="light"] .cards-projetos > div,
+:root[data-theme="light"] .seu-projeto-card,
+:root[data-theme="light"] .vc-resumo-item,
+:root[data-theme="light"] .vc-projeto-comunidade,
+:root[data-theme="light"] .vc-publicacao,
+:root[data-theme="light"] .vc-membro,
+:root[data-theme="light"] .comuni-modal,
+:root[data-theme="light"] .projeto-modal,
+:root[data-theme="light"] .etapa,
+:root[data-theme="light"] .preview-imagem {
+  background: #ffffff;
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+:root[data-theme="light"] .seu-projeto-card:hover {
+  background: #ffffff;
+}
+
+:root[data-theme="light"] .seu-projetos-vazio,
+:root[data-theme="light"] .cards-projetos > div,
+:root[data-theme="light"] .criar-projeto input,
+:root[data-theme="light"] .criar-projeto textarea,
+:root[data-theme="light"] .botao-arquivos,
+:root[data-theme="light"] .comuni-busca input,
+:root[data-theme="light"] .comuni-header-busca input,
+:root[data-theme="light"] .comuni-formulario input,
+:root[data-theme="light"] .comuni-formulario textarea,
+:root[data-theme="light"] .comuni-formulario select,
+:root[data-theme="light"] .vc-form-publicacao textarea,
+:root[data-theme="light"] .login-input-wrapper input,
+:root[data-theme="light"] .config-item-icone {
+  background: #ffffff;
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+:root[data-theme="light"] .conteudo h1,
+:root[data-theme="light"] .cards-projetos h2,
+:root[data-theme="light"] .seus-projetos-topo h1,
+:root[data-theme="light"] .seu-projeto-info h2,
+:root[data-theme="light"] .seus-projetos-vazio h2,
+:root[data-theme="light"] .criar-projeto h1,
+:root[data-theme="light"] .vc-titulo-linha h1,
+:root[data-theme="light"] .vc-estado h2,
+:root[data-theme="light"] .comuni-header-texto h1,
+:root[data-theme="light"] .comuni-introducao h2,
+:root[data-theme="light"] .comuni-lista-header h2,
+:root[data-theme="light"] .em-destaque > h2,
+:root[data-theme="light"] .projeto-header h1,
+:root[data-theme="light"] .projeto-descricao h2,
+:root[data-theme="light"] .projeto-etapas h2,
+:root[data-theme="light"] .etapa-conteudo h3,
+:root[data-theme="light"] .projeto-modal-titulo,
+:root[data-theme="light"] .projeto-modal-descricao h3 {
+  color: var(--color-title);
+}
+
+:root[data-theme="light"] .cards-projetos p,
+:root[data-theme="light"] .cards-projetos span,
+:root[data-theme="light"] .conteudo > p,
+:root[data-theme="light"] .seus-projetos-topo p,
+:root[data-theme="light"] .seu-projeto-info p,
+:root[data-theme="light"] .seu-projeto-info span,
+:root[data-theme="light"] .seus-projetos-vazio p,
+:root[data-theme="light"] .comuni-introducao p,
+:root[data-theme="light"] .comuni-lista-header p,
+:root[data-theme="light"] .vc-projeto-comunidade p,
+:root[data-theme="light"] .vc-publicacao > p,
+:root[data-theme="light"] .projeto-descricao p,
+:root[data-theme="light"] .etapa-conteudo p {
+  color: var(--color-text-secondary);
+}
+
+:root[data-theme="light"] .perfil-pagina {
+  color: var(--color-text);
+}
+
+:root[data-theme="light"] .perfil-pagina-cabecalho h1,
+:root[data-theme="light"] .perfil-projetos-cabecalho h2,
+:root[data-theme="light"] .perfil-editor-nome h2,
+:root[data-theme="light"] .perfil-projeto-conteudo h3 {
+  color: var(--color-title);
+}
+
+:root[data-theme="light"] .perfil-editor,
+:root[data-theme="light"] .perfil-projeto-card {
+  border-color: var(--color-border);
+  background: #ffffff;
+}
+
+:root[data-theme="light"] .perfil-editor textarea {
+  border-color: var(--color-border);
+  background: #ffffff;
+  color: var(--color-text);
+}
+
+:root[data-theme="light"] .perfil-descricao-label {
+  color: var(--color-title);
+}
+
+:root[data-theme="light"] .perfil-pagina-cabecalho p,
+:root[data-theme="light"] .perfil-projetos-cabecalho p,
+:root[data-theme="light"] .perfil-editor-nome > span,
+:root[data-theme="light"] .perfil-projeto-conteudo > p {
+  color: var(--color-text-secondary);
+}
+
+:root[data-theme="light"] .perfil-projeto-card > img,
+:root[data-theme="light"] .perfil-projeto-sem-imagem {
+  background: #f2f1f7;
+}
+
+:root[data-theme="light"] .login-page {
+  background: #f5f6fa;
+}
+
+:root[data-theme="light"] .login-card {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: var(--color-border);
+}
+
+:root[data-theme="light"] .login-title,
+:root[data-theme="light"] .login-field label {
+  color: var(--color-title);
+}
+
+:root[data-theme="light"] .login-description,
+:root[data-theme="light"] .login-terms {
+  color: var(--color-text-secondary);
+}

@@ -1,0 +1,219 @@
+.notificacao-botao {
+  position: relative;
+}
+
+.notificacao-contador {
+  position: absolute;
+  top: 1px;
+  right: 2px;
+  min-width: 17px;
+  height: 17px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #7c3aed;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.notificacoes-overlay {
+  position: fixed;
+  z-index: 1000000;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(4, 4, 7, .68);
+  backdrop-filter: blur(8px);
+}
+
+.notificacoes-modal {
+  width: min(100%, 520px);
+  max-height: min(680px, calc(100vh - 40px));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #292932;
+  border-radius: 16px;
+  background: #15151b;
+  color: #f5f5f7;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, .45);
+}
+
+.notificacoes-cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 22px;
+  border-bottom: 1px solid #292932;
+}
+
+.notificacoes-cabecalho h2 {
+  margin: 0;
+  color: #f5f5f7;
+  font-size: 19px;
+}
+
+.notificacoes-cabecalho p {
+  margin: 5px 0 0;
+  color: #92929f;
+  font-size: 12px;
+}
+
+.notificacoes-acoes {
+  display: flex;
+  gap: 6px;
+}
+
+.notificacoes-acoes button {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: #a5a5b1;
+  cursor: pointer;
+}
+
+.notificacoes-acoes button:hover:not(:disabled) {
+  border-color: #393342;
+  background: #211d29;
+  color: #c4b5fd;
+}
+
+.notificacoes-acoes button:disabled {
+  cursor: not-allowed;
+  opacity: .45;
+}
+
+.notificacoes-lista {
+  overflow-y: auto;
+}
+
+.notificacao-item {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  padding: 16px 22px;
+  border: 0;
+  border-bottom: 1px solid #24242c;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.notificacao-item:hover {
+  background: #1c1b23;
+}
+
+.notificacao-item:disabled {
+  cursor: progress;
+}
+
+.notificacao-indicador {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 8px;
+  margin-top: 6px;
+  border-radius: 50%;
+  background: #8b5cf6;
+}
+
+.notificacao-item.lida .notificacao-indicador {
+  background: transparent;
+}
+
+.notificacao-texto {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.notificacao-texto strong {
+  color: #e5e5eb;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.notificacao-item.lida .notificacao-texto strong {
+  color: #b7b7c2;
+  font-weight: 500;
+}
+
+.notificacao-texto > span {
+  color: #a1a1ad;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.notificacao-texto time {
+  color: #73737f;
+  font-size: 10px;
+}
+
+.notificacoes-vazio,
+.notificacoes-erro {
+  margin: 0;
+  padding: 28px 22px;
+  color: #a1a1ad;
+  font-size: 13px;
+  text-align: center;
+}
+
+.notificacoes-erro {
+  color: #fca5a5;
+}
+
+:root[data-theme="light"] .notificacoes-modal {
+  border-color: #dfe2ea;
+  background: #ffffff;
+  color: #393946;
+}
+
+:root[data-theme="light"] .notificacoes-cabecalho {
+  border-color: #dfe2ea;
+}
+
+:root[data-theme="light"] .notificacoes-cabecalho h2,
+:root[data-theme="light"] .notificacao-texto strong {
+  color: #191923;
+}
+
+:root[data-theme="light"] .notificacoes-cabecalho p,
+:root[data-theme="light"] .notificacao-texto > span,
+:root[data-theme="light"] .notificacao-texto time,
+:root[data-theme="light"] .notificacoes-vazio {
+  color: #686878;
+}
+
+:root[data-theme="light"] .notificacao-item {
+  border-color: #ececf1;
+}
+
+:root[data-theme="light"] .notificacao-item:hover,
+:root[data-theme="light"] .notificacoes-acoes button:hover:not(:disabled) {
+  background: #f5f3fa;
+}
+
+@media (max-width: 600px) {
+  .notificacoes-overlay {
+    padding: 12px;
+  }
+
+  .notificacoes-modal {
+    max-height: calc(100vh - 24px);
+    border-radius: 13px;
+  }
+}

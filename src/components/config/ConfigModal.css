@@ -208,6 +208,143 @@
     text-align: right;
 }
 
+.config-preferencias {
+    padding: 16px 24px 24px;
+}
+
+.config-voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 7px 8px;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: #A78BFA;
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.config-voltar:hover {
+    background: #19191F;
+}
+
+.config-preferencias-intro {
+    margin: 18px 0 14px;
+}
+
+.config-preferencias-intro h3 {
+    margin: 0;
+    color: #E5E5EB;
+    font-size: 15px;
+}
+
+.config-preferencias-intro p {
+    margin: 5px 0 0;
+    color: #92929F;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.config-preferencias-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.config-preferencia-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px;
+    border: 1px solid #292932;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .015);
+}
+
+.config-preferencia-texto {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.config-preferencia-texto strong {
+    color: #E5E5EB;
+    font-size: 13px;
+    font-weight: 550;
+}
+
+.config-preferencia-texto span {
+    color: #92929F;
+    font-size: 11px;
+    line-height: 1.45;
+}
+
+.config-interruptor {
+    width: 42px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    padding: 3px;
+    border: 1px solid #42424E;
+    border-radius: 999px;
+    background: #292932;
+    cursor: pointer;
+    transition: background-color .2s ease, border-color .2s ease;
+}
+
+.config-interruptor span {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #B7B7C2;
+    transition: transform .2s ease, background-color .2s ease;
+}
+
+.config-interruptor.ativo {
+    border-color: #7C3AED;
+    background: #7C3AED;
+}
+
+.config-interruptor.ativo span {
+    background: #FFFFFF;
+    transform: translateX(18px);
+}
+
+.config-interruptor:focus-visible,
+.config-voltar:focus-visible {
+    outline: 2px solid #A78BFA;
+    outline-offset: 2px;
+}
+
+.config-interruptor:disabled {
+    cursor: wait;
+    opacity: .65;
+}
+
+.config-preferencias-erro,
+.config-preferencias-sucesso,
+.config-preferencias-estado {
+    margin: 10px 0;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.config-preferencias-erro {
+    color: #FCA5A5;
+}
+
+.config-preferencias-sucesso {
+    color: #86EFAC;
+}
+
+.config-preferencias-estado {
+    color: #92929F;
+}
+
 @keyframes config-overlay-in {
     from {
         opacity: 0;
@@ -254,6 +391,14 @@
 
     .config-footer {
         padding: 14px 18px;
+    }
+
+    .config-preferencias {
+        padding: 12px 16px 18px;
+    }
+
+    .config-preferencia-item {
+        padding: 12px;
     }
 
     .config-footer span:last-child {

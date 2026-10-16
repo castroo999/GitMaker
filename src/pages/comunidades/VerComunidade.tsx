@@ -78,6 +78,30 @@ export default function VerComunidade() {
         : statusContribuicao === "APROVADO"));
   const podeEnviarProjeto = ehCriador || statusParticipacao === "APROVADO";
 
+  function atualizarCurtidasProjeto(
+    projetoId: number,
+    curtidas: number,
+    curtido: boolean,
+  ) {
+    setProjetos((atuais) =>
+      atuais
+        .map((projeto) =>
+          projeto.id === projetoId
+            ? {
+                ...projeto,
+                _count: { curtidas },
+                curtidoPeloUsuario: curtido,
+              }
+            : projeto,
+        )
+        .sort(
+          (a, b) =>
+            (b._count?.curtidas ?? 0) - (a._count?.curtidas ?? 0) ||
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+        ),
+    );
+  }
+
   useEffect(() => {
     if (!id || !token || !comunidade || ehCriador) return;
 
@@ -585,6 +609,7 @@ export default function VerComunidade() {
         onMudarAba={setAbaAtiva}
         onTentarNovamente={() => void carregarConteudo()}
         onAbrirProjeto={(projetoId) => navigate(`/projetos/${projetoId}`)}
+        onAtualizarCurtidas={atualizarCurtidasProjeto}
         onPublicar={publicar}
         membroEmGestao={membroEmGestao}
         onGerenciarMembro={(membroId, acao) => void gerenciarMembro(membroId, acao)}

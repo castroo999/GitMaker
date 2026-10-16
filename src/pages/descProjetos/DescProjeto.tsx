@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./DescProjeto.css";
 import { apiUrl } from "@/lib/api";
+import ProjectLikeButton from "@/components/projeto/ProjectLikeButton";
 
 type Projeto = {
   id: number;
@@ -18,6 +19,9 @@ type Projeto = {
     id: number;
     nome: string;
   } | null;
+  _count?: { curtidas: number };
+  curtidas?: { userId: number }[];
+  curtidoPeloUsuario?: boolean;
 };
 
 type Etapa = {
@@ -47,6 +51,22 @@ export default function DescProjeto() {
   const [midias, setMidias] = useState<Midia[]>([]);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState("");
+
+  function atualizarCurtidas(
+    _projetoId: number,
+    curtidas: number,
+    curtido: boolean,
+  ) {
+    setProjeto((atual) =>
+      atual
+        ? {
+            ...atual,
+            _count: { curtidas },
+            curtidoPeloUsuario: curtido,
+          }
+        : atual,
+    );
+  }
 
   useEffect(() => {
     async function carregarProjeto() {
@@ -201,6 +221,15 @@ export default function DescProjeto() {
           <h1>{projeto.titulo}</h1>
 
           <p className="projeto-autor">Criado por {projeto.user.nome}</p>
+          <ProjectLikeButton
+            projetoId={projeto.id}
+            curtidasIniciais={projeto._count?.curtidas ?? 0}
+            curtidoInicialmente={
+              projeto.curtidoPeloUsuario ??
+              (projeto.curtidas?.length ?? 0) > 0
+            }
+            onAtualizar={atualizarCurtidas}
+          />
         </section>
 
         {projeto.community && projeto.statusAprovacao === "PENDENTE" && (

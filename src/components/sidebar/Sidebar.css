@@ -30,12 +30,44 @@
   min-width: 0;
 }
 
-.perfil h2 {
+.perfil-abrir {
+  min-width: 0;
   flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.perfil-abrir > svg,
+.perfil-abrir > img {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  border-radius: 50%;
+}
+
+.perfil-abrir > img {
+  object-fit: cover;
+}
+
+.perfil-abrir:hover h2 {
+  color: #a78bfa;
+}
+
+.perfil h2 {
+  min-width: 0;
   margin: 0;
+  overflow: hidden;
   font-size: 15px;
   font-weight: 600;
   text-transform: capitalize;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
@@ -70,7 +102,8 @@
 }
 
 .itens-sidebar button,
-.sidebar-footer button {
+.sidebar-footer button,
+.itens-sidebar .notificacao-botao {
   width: 100%;
   display: flex;
   align-items: center;
@@ -89,21 +122,24 @@
 }
 
 .itens-sidebar button svg,
-.sidebar-footer button svg {
+.sidebar-footer button svg,
+.itens-sidebar .notificacao-botao svg {
   width: 19px;
   height: 19px;
   flex-shrink: 0;
 }
 
 .itens-sidebar button:hover,
-.sidebar-footer button:hover {
+.sidebar-footer button:hover,
+.itens-sidebar .notificacao-botao:hover {
   background: #18181f;
   color: #f5f5f7;
   border-color: #292932;
 }
 
 .itens-sidebar button:hover svg,
-.sidebar-footer button:hover svg {
+.sidebar-footer button:hover svg,
+.itens-sidebar .notificacao-botao:hover svg {
   color: #8b5cf6;
 }
 

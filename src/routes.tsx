@@ -8,6 +8,7 @@ import SeusProjetos from './pages/seusProjetos/SeusProjetos'
 import Comunidades from "./pages/comunidades/Comunidades";
 import Layout from "./components/layout/layout";
 import VerComunidade from "./pages/comunidades/VerComunidade";
+import Perfil from "./pages/perfil/Perfil";
 
 export default function AppRoutes() {
   return (
@@ -20,6 +21,7 @@ export default function AppRoutes() {
           <Route path="/home" element={<Home />} />
           <Route path="/criar" element={<CriarProjetos />} />
           <Route path="/meus-projetos" element={<SeusProjetos />} />
+          <Route path="/perfil" element={<Perfil />} />
           <Route path="/projetos/:id" element={<DescProjeto />} />
           <Route path='comunidades' element={<Comunidades />} />
           <Route path='comunidades/:id' element={<VerComunidade />} />

@@ -5,6 +5,7 @@ import midiaRoutes from "./routes/midiaRoutes";
 import projetosRoutes from "./routes/projetoRouters";
 import userRouter from "./routes/userRoutes";
 import comunidadesRoutes from './routes/comunidadesRoutes'
+import notificacoesRoutes from "./routes/notificacoesRoutes";
 
 import cors from "cors";
 
@@ -26,6 +27,7 @@ app.use("/projetos", projetosRoutes);
 app.use("/api", etapasRoutes);
 app.use("/api", midiaRoutes);
 app.use("/comunidades", comunidadesRoutes);
+app.use("/notificacoes", notificacoesRoutes);
 
 app.use((error: Error, _req: Request,res: Response,_next: NextFunction,) => {
     console.error(error);

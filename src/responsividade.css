@@ -499,7 +499,7 @@ select {
     padding: 15px;
   }
 
-  .vc-projeto-comunidade button,
+  .vc-projeto-comunidade button:not(.project-like-button),
   .vc-acoes-comunidade > button {
     width: 100%;
     min-height: 44px;

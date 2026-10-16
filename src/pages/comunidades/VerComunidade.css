@@ -236,6 +236,12 @@
     border: 1px solid #30303b;
     border-radius: 12px;
 }
+.vc-projeto-acoes {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 10px;
+}
 .vc-projeto-comunidade h3 {
     margin: 0 0 8px;
     font-size: 16px;
@@ -494,7 +500,10 @@
         align-items: stretch;
         flex-direction: column;
     }
-    .vc-projeto-comunidade button {
+    .vc-projeto-acoes {
+        justify-content: space-between;
+    }
+    .vc-projeto-acoes .vc-botao-secundario {
         width: 100%;
     }
     .vc-permissao-contribuicao {

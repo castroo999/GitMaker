@@ -3,6 +3,7 @@ import "./Home.css";
 import { useNavigate } from "react-router-dom";
 import ProjetoModal from "@/components/projeto/ProjetoModal";
 import { apiUrl } from "@/lib/api";
+import ProjectLikeButton from "@/components/projeto/ProjectLikeButton";
 
 type Projeto = {
   id: number;
@@ -20,6 +21,9 @@ type Projeto = {
     tipo: string;
     url: string;
   }[];
+  _count?: { curtidas: number };
+  curtidas?: { userId: number }[];
+  curtidoPeloUsuario?: boolean;
 };
 
 export default function Home() {
@@ -92,6 +96,30 @@ export default function Home() {
     setProjetoSelecionado(null);
   }
 
+  function atualizarCurtidas(
+    projetoId: number,
+    curtidas: number,
+    curtido: boolean,
+  ) {
+    setProjetos((atuais) =>
+      atuais
+        .map((projeto) =>
+          projeto.id === projetoId
+            ? {
+                ...projeto,
+                _count: { curtidas },
+                curtidoPeloUsuario: curtido,
+              }
+            : projeto,
+        )
+        .sort(
+          (a, b) =>
+            (b._count?.curtidas ?? 0) - (a._count?.curtidas ?? 0) ||
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+        ),
+    );
+  }
+
   return (
     <div className="layout">
       <main className="conteudo">
@@ -117,6 +145,17 @@ export default function Home() {
                   <p>{projeto.descricao}</p>
 
                   <span>Criado por {projeto.user.nome}</span>
+                  <div className="projeto-card-acoes">
+                    <ProjectLikeButton
+                      projetoId={projeto.id}
+                      curtidasIniciais={projeto._count?.curtidas ?? 0}
+                      curtidoInicialmente={
+                        projeto.curtidoPeloUsuario ??
+                        (projeto.curtidas?.length ?? 0) > 0
+                      }
+                      onAtualizar={atualizarCurtidas}
+                    />
+                  </div>
                 </div>
               );
             })}

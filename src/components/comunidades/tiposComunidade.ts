@@ -55,6 +55,9 @@ export interface ProjetoComunidade {
     id: number;
     nome: string;
   };
+  _count?: { curtidas: number };
+  curtidas?: { userId: number }[];
+  curtidoPeloUsuario?: boolean;
 }
 
 export type AbaComunidade = "publicacoes" | "membros" | "projetos";

@@ -53,12 +53,15 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   Project: 'Project',
+  ProjectLike: 'ProjectLike',
   ProjectStep: 'ProjectStep',
   ProjectMedia: 'ProjectMedia',
   Community: 'Community',
   CommunityMember: 'CommunityMember',
   CommunityPost: 'CommunityPost',
-  CommunityPostMedia: 'CommunityPostMedia'
+  CommunityPostMedia: 'CommunityPostMedia',
+  Notification: 'Notification',
+  NotificationPreference: 'NotificationPreference'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -82,6 +85,8 @@ export const UserScalarFieldEnum = {
   nome: 'nome',
   email: 'email',
   senha: 'senha',
+  descricao: 'descricao',
+  fotoPerfil: 'fotoPerfil',
   createdAt: 'createdAt'
 } as const
 
@@ -99,6 +104,15 @@ export const ProjectScalarFieldEnum = {
 } as const
 
 export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
+
+
+export const ProjectLikeScalarFieldEnum = {
+  projectId: 'projectId',
+  userId: 'userId',
+  createdAt: 'createdAt'
+} as const
+
+export type ProjectLikeScalarFieldEnum = (typeof ProjectLikeScalarFieldEnum)[keyof typeof ProjectLikeScalarFieldEnum]
 
 
 export const ProjectStepScalarFieldEnum = {
@@ -173,6 +187,31 @@ export const CommunityPostMediaScalarFieldEnum = {
 } as const
 
 export type CommunityPostMediaScalarFieldEnum = (typeof CommunityPostMediaScalarFieldEnum)[keyof typeof CommunityPostMediaScalarFieldEnum]
+
+
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  tipo: 'tipo',
+  titulo: 'titulo',
+  mensagem: 'mensagem',
+  link: 'link',
+  lida: 'lida',
+  createdAt: 'createdAt',
+  userId: 'userId'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const NotificationPreferenceScalarFieldEnum = {
+  id: 'id',
+  projetos: 'projetos',
+  comunidades: 'comunidades',
+  permissoes: 'permissoes',
+  userId: 'userId'
+} as const
+
+export type NotificationPreferenceScalarFieldEnum = (typeof NotificationPreferenceScalarFieldEnum)[keyof typeof NotificationPreferenceScalarFieldEnum]
 
 
 export const SortOrder = {

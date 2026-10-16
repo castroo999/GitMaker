@@ -12,6 +12,7 @@ import {
   Ban,
 } from "lucide-react";
 import formatarDataComunidade from "./formatarDataComunidade";
+import ProjectLikeButton from "@/components/projeto/ProjectLikeButton";
 import type {
   AbaComunidade,
   Membro,
@@ -35,6 +36,7 @@ interface Props {
   onMudarAba: (aba: AbaComunidade) => void;
   onTentarNovamente: () => void;
   onAbrirProjeto: (projetoId: number) => void;
+  onAtualizarCurtidas: (projetoId: number, curtidas: number, curtido: boolean) => void;
   onPublicar: (conteudo: string, arquivos: File[]) => Promise<boolean>;
   membroEmGestao: number | null;
   onGerenciarMembro: (membroId: number, acao: "REMOVER" | "BANIR") => void;
@@ -56,6 +58,7 @@ export default function ConteudoComunidade({
   onMudarAba,
   onTentarNovamente,
   onAbrirProjeto,
+  onAtualizarCurtidas,
   onPublicar,
   membroEmGestao,
   onGerenciarMembro,
@@ -296,13 +299,24 @@ export default function ConteudoComunidade({
                   </span>
                 )}
               </div>
-              <button
-                type="button"
-                className="vc-botao-secundario"
-                onClick={() => onAbrirProjeto(projeto.id)}
-              >
-                Abrir projeto
-              </button>
+              <div className="vc-projeto-acoes">
+                <ProjectLikeButton
+                  projetoId={projeto.id}
+                  curtidasIniciais={projeto._count?.curtidas ?? 0}
+                  curtidoInicialmente={
+                    projeto.curtidoPeloUsuario ??
+                    (projeto.curtidas?.length ?? 0) > 0
+                  }
+                  onAtualizar={onAtualizarCurtidas}
+                />
+                <button
+                  type="button"
+                  className="vc-botao-secundario"
+                  onClick={() => onAbrirProjeto(projeto.id)}
+                >
+                  Abrir projeto
+                </button>
+              </div>
             </article>
           ))}
         </div>

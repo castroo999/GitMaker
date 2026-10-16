@@ -39,6 +39,8 @@ export type UserMinAggregateOutputType = {
   nome: string | null
   email: string | null
   senha: string | null
+  descricao: string | null
+  fotoPerfil: string | null
   createdAt: Date | null
 }
 
@@ -47,6 +49,8 @@ export type UserMaxAggregateOutputType = {
   nome: string | null
   email: string | null
   senha: string | null
+  descricao: string | null
+  fotoPerfil: string | null
   createdAt: Date | null
 }
 
@@ -55,6 +59,8 @@ export type UserCountAggregateOutputType = {
   nome: number
   email: number
   senha: number
+  descricao: number
+  fotoPerfil: number
   createdAt: number
   _all: number
 }
@@ -73,6 +79,8 @@ export type UserMinAggregateInputType = {
   nome?: true
   email?: true
   senha?: true
+  descricao?: true
+  fotoPerfil?: true
   createdAt?: true
 }
 
@@ -81,6 +89,8 @@ export type UserMaxAggregateInputType = {
   nome?: true
   email?: true
   senha?: true
+  descricao?: true
+  fotoPerfil?: true
   createdAt?: true
 }
 
@@ -89,6 +99,8 @@ export type UserCountAggregateInputType = {
   nome?: true
   email?: true
   senha?: true
+  descricao?: true
+  fotoPerfil?: true
   createdAt?: true
   _all?: true
 }
@@ -184,6 +196,8 @@ export type UserGroupByOutputType = {
   nome: string
   email: string
   senha: string
+  descricao: string | null
+  fotoPerfil: string | null
   createdAt: Date
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
@@ -215,11 +229,16 @@ export type UserWhereInput = {
   nome?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
   senha?: Prisma.StringFilter<"User"> | string
+  descricao?: Prisma.StringNullableFilter<"User"> | string | null
+  fotoPerfil?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   projetos?: Prisma.ProjectListRelationFilter
+  curtidas?: Prisma.ProjectLikeListRelationFilter
   comunidadesCriadas?: Prisma.CommunityListRelationFilter
   participacoes?: Prisma.CommunityMemberListRelationFilter
   postsComunidade?: Prisma.CommunityPostListRelationFilter
+  notificacoes?: Prisma.NotificationListRelationFilter
+  preferenciasNotificacao?: Prisma.XOR<Prisma.NotificationPreferenceNullableScalarRelationFilter, Prisma.NotificationPreferenceWhereInput> | null
 }
 
 export type UserOrderByWithRelationInput = {
@@ -227,11 +246,16 @@ export type UserOrderByWithRelationInput = {
   nome?: Prisma.SortOrder
   email?: Prisma.SortOrder
   senha?: Prisma.SortOrder
+  descricao?: Prisma.SortOrderInput | Prisma.SortOrder
+  fotoPerfil?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   projetos?: Prisma.ProjectOrderByRelationAggregateInput
+  curtidas?: Prisma.ProjectLikeOrderByRelationAggregateInput
   comunidadesCriadas?: Prisma.CommunityOrderByRelationAggregateInput
   participacoes?: Prisma.CommunityMemberOrderByRelationAggregateInput
   postsComunidade?: Prisma.CommunityPostOrderByRelationAggregateInput
+  notificacoes?: Prisma.NotificationOrderByRelationAggregateInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceOrderByWithRelationInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -242,11 +266,16 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   nome?: Prisma.StringFilter<"User"> | string
   senha?: Prisma.StringFilter<"User"> | string
+  descricao?: Prisma.StringNullableFilter<"User"> | string | null
+  fotoPerfil?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   projetos?: Prisma.ProjectListRelationFilter
+  curtidas?: Prisma.ProjectLikeListRelationFilter
   comunidadesCriadas?: Prisma.CommunityListRelationFilter
   participacoes?: Prisma.CommunityMemberListRelationFilter
   postsComunidade?: Prisma.CommunityPostListRelationFilter
+  notificacoes?: Prisma.NotificationListRelationFilter
+  preferenciasNotificacao?: Prisma.XOR<Prisma.NotificationPreferenceNullableScalarRelationFilter, Prisma.NotificationPreferenceWhereInput> | null
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -254,6 +283,8 @@ export type UserOrderByWithAggregationInput = {
   nome?: Prisma.SortOrder
   email?: Prisma.SortOrder
   senha?: Prisma.SortOrder
+  descricao?: Prisma.SortOrderInput | Prisma.SortOrder
+  fotoPerfil?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
@@ -270,6 +301,8 @@ export type UserScalarWhereWithAggregatesInput = {
   nome?: Prisma.StringWithAggregatesFilter<"User"> | string
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   senha?: Prisma.StringWithAggregatesFilter<"User"> | string
+  descricao?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  fotoPerfil?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
 
@@ -277,11 +310,16 @@ export type UserCreateInput = {
   nome: string
   email: string
   senha: string
+  descricao?: string | null
+  fotoPerfil?: string | null
   createdAt?: Date | string
   projetos?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  curtidas?: Prisma.ProjectLikeCreateNestedManyWithoutUserInput
   comunidadesCriadas?: Prisma.CommunityCreateNestedManyWithoutCreatorInput
   participacoes?: Prisma.CommunityMemberCreateNestedManyWithoutUserInput
   postsComunidade?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  notificacoes?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -289,22 +327,32 @@ export type UserUncheckedCreateInput = {
   nome: string
   email: string
   senha: string
+  descricao?: string | null
+  fotoPerfil?: string | null
   createdAt?: Date | string
   projetos?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  curtidas?: Prisma.ProjectLikeUncheckedCreateNestedManyWithoutUserInput
   comunidadesCriadas?: Prisma.CommunityUncheckedCreateNestedManyWithoutCreatorInput
   participacoes?: Prisma.CommunityMemberUncheckedCreateNestedManyWithoutUserInput
   postsComunidade?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  notificacoes?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserUpdateInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senha?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fotoPerfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projetos?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  curtidas?: Prisma.ProjectLikeUpdateManyWithoutUserNestedInput
   comunidadesCriadas?: Prisma.CommunityUpdateManyWithoutCreatorNestedInput
   participacoes?: Prisma.CommunityMemberUpdateManyWithoutUserNestedInput
   postsComunidade?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  notificacoes?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -312,11 +360,16 @@ export type UserUncheckedUpdateInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senha?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fotoPerfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projetos?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  curtidas?: Prisma.ProjectLikeUncheckedUpdateManyWithoutUserNestedInput
   comunidadesCriadas?: Prisma.CommunityUncheckedUpdateManyWithoutCreatorNestedInput
   participacoes?: Prisma.CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
   postsComunidade?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  notificacoes?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -324,6 +377,8 @@ export type UserCreateManyInput = {
   nome: string
   email: string
   senha: string
+  descricao?: string | null
+  fotoPerfil?: string | null
   createdAt?: Date | string
 }
 
@@ -331,6 +386,8 @@ export type UserUpdateManyMutationInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senha?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fotoPerfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -339,6 +396,8 @@ export type UserUncheckedUpdateManyInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senha?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fotoPerfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -347,6 +406,8 @@ export type UserCountOrderByAggregateInput = {
   nome?: Prisma.SortOrder
   email?: Prisma.SortOrder
   senha?: Prisma.SortOrder
+  descricao?: Prisma.SortOrder
+  fotoPerfil?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -359,6 +420,8 @@ export type UserMaxOrderByAggregateInput = {
   nome?: Prisma.SortOrder
   email?: Prisma.SortOrder
   senha?: Prisma.SortOrder
+  descricao?: Prisma.SortOrder
+  fotoPerfil?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -367,6 +430,8 @@ export type UserMinOrderByAggregateInput = {
   nome?: Prisma.SortOrder
   email?: Prisma.SortOrder
   senha?: Prisma.SortOrder
+  descricao?: Prisma.SortOrder
+  fotoPerfil?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -381,6 +446,10 @@ export type UserScalarRelationFilter = {
 
 export type StringFieldUpdateOperationsInput = {
   set?: string
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -407,6 +476,20 @@ export type UserUpdateOneRequiredWithoutProjetosNestedInput = {
   upsert?: Prisma.UserUpsertWithoutProjetosInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProjetosInput, Prisma.UserUpdateWithoutProjetosInput>, Prisma.UserUncheckedUpdateWithoutProjetosInput>
+}
+
+export type UserCreateNestedOneWithoutCurtidasInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCurtidasInput, Prisma.UserUncheckedCreateWithoutCurtidasInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCurtidasInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutCurtidasNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCurtidasInput, Prisma.UserUncheckedCreateWithoutCurtidasInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCurtidasInput
+  upsert?: Prisma.UserUpsertWithoutCurtidasInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCurtidasInput, Prisma.UserUpdateWithoutCurtidasInput>, Prisma.UserUncheckedUpdateWithoutCurtidasInput>
 }
 
 export type UserCreateNestedOneWithoutComunidadesCriadasInput = {
@@ -451,14 +534,47 @@ export type UserUpdateOneRequiredWithoutPostsComunidadeNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPostsComunidadeInput, Prisma.UserUpdateWithoutPostsComunidadeInput>, Prisma.UserUncheckedUpdateWithoutPostsComunidadeInput>
 }
 
+export type UserCreateNestedOneWithoutNotificacoesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificacoesInput, Prisma.UserUncheckedCreateWithoutNotificacoesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificacoesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutNotificacoesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificacoesInput, Prisma.UserUncheckedCreateWithoutNotificacoesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificacoesInput
+  upsert?: Prisma.UserUpsertWithoutNotificacoesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificacoesInput, Prisma.UserUpdateWithoutNotificacoesInput>, Prisma.UserUncheckedUpdateWithoutNotificacoesInput>
+}
+
+export type UserCreateNestedOneWithoutPreferenciasNotificacaoInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPreferenciasNotificacaoInput, Prisma.UserUncheckedCreateWithoutPreferenciasNotificacaoInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPreferenciasNotificacaoInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPreferenciasNotificacaoNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPreferenciasNotificacaoInput, Prisma.UserUncheckedCreateWithoutPreferenciasNotificacaoInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPreferenciasNotificacaoInput
+  upsert?: Prisma.UserUpsertWithoutPreferenciasNotificacaoInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPreferenciasNotificacaoInput, Prisma.UserUpdateWithoutPreferenciasNotificacaoInput>, Prisma.UserUncheckedUpdateWithoutPreferenciasNotificacaoInput>
+}
+
 export type UserCreateWithoutProjetosInput = {
   nome: string
   email: string
   senha: string
+  descricao?: string | null
+  fotoPerfil?: string | null
   createdAt?: Date | string
+  curtidas?: Prisma.ProjectLikeCreateNestedManyWithoutUserInput
   comunidadesCriadas?: Prisma.CommunityCreateNestedManyWithoutCreatorInput
   participacoes?: Prisma.CommunityMemberCreateNestedManyWithoutUserInput
   postsComunidade?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  notificacoes?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProjetosInput = {
@@ -466,10 +582,15 @@ export type UserUncheckedCreateWithoutProjetosInput = {
   nome: string
   email: string
   senha: string
+  descricao?: string | null
+  fotoPerfil?: string | null
   createdAt?: Date | string
+  curtidas?: Prisma.ProjectLikeUncheckedCreateNestedManyWithoutUserInput
   comunidadesCriadas?: Prisma.CommunityUncheckedCreateNestedManyWithoutCreatorInput
   participacoes?: Prisma.CommunityMemberUncheckedCreateNestedManyWithoutUserInput
   postsComunidade?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  notificacoes?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProjetosInput = {
@@ -492,10 +613,15 @@ export type UserUpdateWithoutProjetosInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senha?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fotoPerfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  curtidas?: Prisma.ProjectLikeUpdateManyWithoutUserNestedInput
   comunidadesCriadas?: Prisma.CommunityUpdateManyWithoutCreatorNestedInput
   participacoes?: Prisma.CommunityMemberUpdateManyWithoutUserNestedInput
   postsComunidade?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  notificacoes?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProjetosInput = {
@@ -503,20 +629,108 @@ export type UserUncheckedUpdateWithoutProjetosInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senha?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fotoPerfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  curtidas?: Prisma.ProjectLikeUncheckedUpdateManyWithoutUserNestedInput
   comunidadesCriadas?: Prisma.CommunityUncheckedUpdateManyWithoutCreatorNestedInput
   participacoes?: Prisma.CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
   postsComunidade?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  notificacoes?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutCurtidasInput = {
+  nome: string
+  email: string
+  senha: string
+  descricao?: string | null
+  fotoPerfil?: string | null
+  createdAt?: Date | string
+  projetos?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  comunidadesCriadas?: Prisma.CommunityCreateNestedManyWithoutCreatorInput
+  participacoes?: Prisma.CommunityMemberCreateNestedManyWithoutUserInput
+  postsComunidade?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  notificacoes?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutCurtidasInput = {
+  id?: number
+  nome: string
+  email: string
+  senha: string
+  descricao?: string | null
+  fotoPerfil?: string | null
+  createdAt?: Date | string
+  projetos?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  comunidadesCriadas?: Prisma.CommunityUncheckedCreateNestedManyWithoutCreatorInput
+  participacoes?: Prisma.CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+  postsComunidade?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  notificacoes?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutCurtidasInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCurtidasInput, Prisma.UserUncheckedCreateWithoutCurtidasInput>
+}
+
+export type UserUpsertWithoutCurtidasInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCurtidasInput, Prisma.UserUncheckedUpdateWithoutCurtidasInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCurtidasInput, Prisma.UserUncheckedCreateWithoutCurtidasInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCurtidasInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCurtidasInput, Prisma.UserUncheckedUpdateWithoutCurtidasInput>
+}
+
+export type UserUpdateWithoutCurtidasInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fotoPerfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  projetos?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  comunidadesCriadas?: Prisma.CommunityUpdateManyWithoutCreatorNestedInput
+  participacoes?: Prisma.CommunityMemberUpdateManyWithoutUserNestedInput
+  postsComunidade?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  notificacoes?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCurtidasInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fotoPerfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  projetos?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  comunidadesCriadas?: Prisma.CommunityUncheckedUpdateManyWithoutCreatorNestedInput
+  participacoes?: Prisma.CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+  postsComunidade?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  notificacoes?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutComunidadesCriadasInput = {
   nome: string
   email: string
   senha: string
+  descricao?: string | null
+  fotoPerfil?: string | null
   createdAt?: Date | string
   projetos?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  curtidas?: Prisma.ProjectLikeCreateNestedManyWithoutUserInput
   participacoes?: Prisma.CommunityMemberCreateNestedManyWithoutUserInput
   postsComunidade?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  notificacoes?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutComunidadesCriadasInput = {
@@ -524,10 +738,15 @@ export type UserUncheckedCreateWithoutComunidadesCriadasInput = {
   nome: string
   email: string
   senha: string
+  descricao?: string | null
+  fotoPerfil?: string | null
   createdAt?: Date | string
   projetos?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  curtidas?: Prisma.ProjectLikeUncheckedCreateNestedManyWithoutUserInput
   participacoes?: Prisma.CommunityMemberUncheckedCreateNestedManyWithoutUserInput
   postsComunidade?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  notificacoes?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutComunidadesCriadasInput = {
@@ -550,10 +769,15 @@ export type UserUpdateWithoutComunidadesCriadasInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senha?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fotoPerfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projetos?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  curtidas?: Prisma.ProjectLikeUpdateManyWithoutUserNestedInput
   participacoes?: Prisma.CommunityMemberUpdateManyWithoutUserNestedInput
   postsComunidade?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  notificacoes?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutComunidadesCriadasInput = {
@@ -561,20 +785,30 @@ export type UserUncheckedUpdateWithoutComunidadesCriadasInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senha?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fotoPerfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projetos?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  curtidas?: Prisma.ProjectLikeUncheckedUpdateManyWithoutUserNestedInput
   participacoes?: Prisma.CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
   postsComunidade?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  notificacoes?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutParticipacoesInput = {
   nome: string
   email: string
   senha: string
+  descricao?: string | null
+  fotoPerfil?: string | null
   createdAt?: Date | string
   projetos?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  curtidas?: Prisma.ProjectLikeCreateNestedManyWithoutUserInput
   comunidadesCriadas?: Prisma.CommunityCreateNestedManyWithoutCreatorInput
   postsComunidade?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  notificacoes?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutParticipacoesInput = {
@@ -582,10 +816,15 @@ export type UserUncheckedCreateWithoutParticipacoesInput = {
   nome: string
   email: string
   senha: string
+  descricao?: string | null
+  fotoPerfil?: string | null
   createdAt?: Date | string
   projetos?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  curtidas?: Prisma.ProjectLikeUncheckedCreateNestedManyWithoutUserInput
   comunidadesCriadas?: Prisma.CommunityUncheckedCreateNestedManyWithoutCreatorInput
   postsComunidade?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  notificacoes?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutParticipacoesInput = {
@@ -608,10 +847,15 @@ export type UserUpdateWithoutParticipacoesInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senha?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fotoPerfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projetos?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  curtidas?: Prisma.ProjectLikeUpdateManyWithoutUserNestedInput
   comunidadesCriadas?: Prisma.CommunityUpdateManyWithoutCreatorNestedInput
   postsComunidade?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  notificacoes?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutParticipacoesInput = {
@@ -619,20 +863,30 @@ export type UserUncheckedUpdateWithoutParticipacoesInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senha?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fotoPerfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projetos?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  curtidas?: Prisma.ProjectLikeUncheckedUpdateManyWithoutUserNestedInput
   comunidadesCriadas?: Prisma.CommunityUncheckedUpdateManyWithoutCreatorNestedInput
   postsComunidade?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  notificacoes?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPostsComunidadeInput = {
   nome: string
   email: string
   senha: string
+  descricao?: string | null
+  fotoPerfil?: string | null
   createdAt?: Date | string
   projetos?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  curtidas?: Prisma.ProjectLikeCreateNestedManyWithoutUserInput
   comunidadesCriadas?: Prisma.CommunityCreateNestedManyWithoutCreatorInput
   participacoes?: Prisma.CommunityMemberCreateNestedManyWithoutUserInput
+  notificacoes?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPostsComunidadeInput = {
@@ -640,10 +894,15 @@ export type UserUncheckedCreateWithoutPostsComunidadeInput = {
   nome: string
   email: string
   senha: string
+  descricao?: string | null
+  fotoPerfil?: string | null
   createdAt?: Date | string
   projetos?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  curtidas?: Prisma.ProjectLikeUncheckedCreateNestedManyWithoutUserInput
   comunidadesCriadas?: Prisma.CommunityUncheckedCreateNestedManyWithoutCreatorInput
   participacoes?: Prisma.CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+  notificacoes?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPostsComunidadeInput = {
@@ -666,10 +925,15 @@ export type UserUpdateWithoutPostsComunidadeInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senha?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fotoPerfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projetos?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  curtidas?: Prisma.ProjectLikeUpdateManyWithoutUserNestedInput
   comunidadesCriadas?: Prisma.CommunityUpdateManyWithoutCreatorNestedInput
   participacoes?: Prisma.CommunityMemberUpdateManyWithoutUserNestedInput
+  notificacoes?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPostsComunidadeInput = {
@@ -677,10 +941,171 @@ export type UserUncheckedUpdateWithoutPostsComunidadeInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senha?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fotoPerfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projetos?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  curtidas?: Prisma.ProjectLikeUncheckedUpdateManyWithoutUserNestedInput
   comunidadesCriadas?: Prisma.CommunityUncheckedUpdateManyWithoutCreatorNestedInput
   participacoes?: Prisma.CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+  notificacoes?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutNotificacoesInput = {
+  nome: string
+  email: string
+  senha: string
+  descricao?: string | null
+  fotoPerfil?: string | null
+  createdAt?: Date | string
+  projetos?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  curtidas?: Prisma.ProjectLikeCreateNestedManyWithoutUserInput
+  comunidadesCriadas?: Prisma.CommunityCreateNestedManyWithoutCreatorInput
+  participacoes?: Prisma.CommunityMemberCreateNestedManyWithoutUserInput
+  postsComunidade?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutNotificacoesInput = {
+  id?: number
+  nome: string
+  email: string
+  senha: string
+  descricao?: string | null
+  fotoPerfil?: string | null
+  createdAt?: Date | string
+  projetos?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  curtidas?: Prisma.ProjectLikeUncheckedCreateNestedManyWithoutUserInput
+  comunidadesCriadas?: Prisma.CommunityUncheckedCreateNestedManyWithoutCreatorInput
+  participacoes?: Prisma.CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+  postsComunidade?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutNotificacoesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificacoesInput, Prisma.UserUncheckedCreateWithoutNotificacoesInput>
+}
+
+export type UserUpsertWithoutNotificacoesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutNotificacoesInput, Prisma.UserUncheckedUpdateWithoutNotificacoesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificacoesInput, Prisma.UserUncheckedCreateWithoutNotificacoesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutNotificacoesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutNotificacoesInput, Prisma.UserUncheckedUpdateWithoutNotificacoesInput>
+}
+
+export type UserUpdateWithoutNotificacoesInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fotoPerfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  projetos?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  curtidas?: Prisma.ProjectLikeUpdateManyWithoutUserNestedInput
+  comunidadesCriadas?: Prisma.CommunityUpdateManyWithoutCreatorNestedInput
+  participacoes?: Prisma.CommunityMemberUpdateManyWithoutUserNestedInput
+  postsComunidade?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutNotificacoesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fotoPerfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  projetos?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  curtidas?: Prisma.ProjectLikeUncheckedUpdateManyWithoutUserNestedInput
+  comunidadesCriadas?: Prisma.CommunityUncheckedUpdateManyWithoutCreatorNestedInput
+  participacoes?: Prisma.CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+  postsComunidade?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  preferenciasNotificacao?: Prisma.NotificationPreferenceUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutPreferenciasNotificacaoInput = {
+  nome: string
+  email: string
+  senha: string
+  descricao?: string | null
+  fotoPerfil?: string | null
+  createdAt?: Date | string
+  projetos?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  curtidas?: Prisma.ProjectLikeCreateNestedManyWithoutUserInput
+  comunidadesCriadas?: Prisma.CommunityCreateNestedManyWithoutCreatorInput
+  participacoes?: Prisma.CommunityMemberCreateNestedManyWithoutUserInput
+  postsComunidade?: Prisma.CommunityPostCreateNestedManyWithoutAuthorInput
+  notificacoes?: Prisma.NotificationCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutPreferenciasNotificacaoInput = {
+  id?: number
+  nome: string
+  email: string
+  senha: string
+  descricao?: string | null
+  fotoPerfil?: string | null
+  createdAt?: Date | string
+  projetos?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  curtidas?: Prisma.ProjectLikeUncheckedCreateNestedManyWithoutUserInput
+  comunidadesCriadas?: Prisma.CommunityUncheckedCreateNestedManyWithoutCreatorInput
+  participacoes?: Prisma.CommunityMemberUncheckedCreateNestedManyWithoutUserInput
+  postsComunidade?: Prisma.CommunityPostUncheckedCreateNestedManyWithoutAuthorInput
+  notificacoes?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutPreferenciasNotificacaoInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPreferenciasNotificacaoInput, Prisma.UserUncheckedCreateWithoutPreferenciasNotificacaoInput>
+}
+
+export type UserUpsertWithoutPreferenciasNotificacaoInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPreferenciasNotificacaoInput, Prisma.UserUncheckedUpdateWithoutPreferenciasNotificacaoInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPreferenciasNotificacaoInput, Prisma.UserUncheckedCreateWithoutPreferenciasNotificacaoInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPreferenciasNotificacaoInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPreferenciasNotificacaoInput, Prisma.UserUncheckedUpdateWithoutPreferenciasNotificacaoInput>
+}
+
+export type UserUpdateWithoutPreferenciasNotificacaoInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fotoPerfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  projetos?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  curtidas?: Prisma.ProjectLikeUpdateManyWithoutUserNestedInput
+  comunidadesCriadas?: Prisma.CommunityUpdateManyWithoutCreatorNestedInput
+  participacoes?: Prisma.CommunityMemberUpdateManyWithoutUserNestedInput
+  postsComunidade?: Prisma.CommunityPostUpdateManyWithoutAuthorNestedInput
+  notificacoes?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPreferenciasNotificacaoInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fotoPerfil?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  projetos?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  curtidas?: Prisma.ProjectLikeUncheckedUpdateManyWithoutUserNestedInput
+  comunidadesCriadas?: Prisma.CommunityUncheckedUpdateManyWithoutCreatorNestedInput
+  participacoes?: Prisma.CommunityMemberUncheckedUpdateManyWithoutUserNestedInput
+  postsComunidade?: Prisma.CommunityPostUncheckedUpdateManyWithoutAuthorNestedInput
+  notificacoes?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -690,16 +1115,20 @@ export type UserUncheckedUpdateWithoutPostsComunidadeInput = {
 
 export type UserCountOutputType = {
   projetos: number
+  curtidas: number
   comunidadesCriadas: number
   participacoes: number
   postsComunidade: number
+  notificacoes: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   projetos?: boolean | UserCountOutputTypeCountProjetosArgs
+  curtidas?: boolean | UserCountOutputTypeCountCurtidasArgs
   comunidadesCriadas?: boolean | UserCountOutputTypeCountComunidadesCriadasArgs
   participacoes?: boolean | UserCountOutputTypeCountParticipacoesArgs
   postsComunidade?: boolean | UserCountOutputTypeCountPostsComunidadeArgs
+  notificacoes?: boolean | UserCountOutputTypeCountNotificacoesArgs
 }
 
 /**
@@ -717,6 +1146,13 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
  */
 export type UserCountOutputTypeCountProjetosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ProjectWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCurtidasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProjectLikeWhereInput
 }
 
 /**
@@ -740,17 +1176,29 @@ export type UserCountOutputTypeCountPostsComunidadeArgs<ExtArgs extends runtime.
   where?: Prisma.CommunityPostWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountNotificacoesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   nome?: boolean
   email?: boolean
   senha?: boolean
+  descricao?: boolean
+  fotoPerfil?: boolean
   createdAt?: boolean
   projetos?: boolean | Prisma.User$projetosArgs<ExtArgs>
+  curtidas?: boolean | Prisma.User$curtidasArgs<ExtArgs>
   comunidadesCriadas?: boolean | Prisma.User$comunidadesCriadasArgs<ExtArgs>
   participacoes?: boolean | Prisma.User$participacoesArgs<ExtArgs>
   postsComunidade?: boolean | Prisma.User$postsComunidadeArgs<ExtArgs>
+  notificacoes?: boolean | Prisma.User$notificacoesArgs<ExtArgs>
+  preferenciasNotificacao?: boolean | Prisma.User$preferenciasNotificacaoArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -759,6 +1207,8 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   nome?: boolean
   email?: boolean
   senha?: boolean
+  descricao?: boolean
+  fotoPerfil?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["user"]>
 
@@ -767,6 +1217,8 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   nome?: boolean
   email?: boolean
   senha?: boolean
+  descricao?: boolean
+  fotoPerfil?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["user"]>
 
@@ -775,15 +1227,20 @@ export type UserSelectScalar = {
   nome?: boolean
   email?: boolean
   senha?: boolean
+  descricao?: boolean
+  fotoPerfil?: boolean
   createdAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "email" | "senha" | "createdAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "email" | "senha" | "descricao" | "fotoPerfil" | "createdAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   projetos?: boolean | Prisma.User$projetosArgs<ExtArgs>
+  curtidas?: boolean | Prisma.User$curtidasArgs<ExtArgs>
   comunidadesCriadas?: boolean | Prisma.User$comunidadesCriadasArgs<ExtArgs>
   participacoes?: boolean | Prisma.User$participacoesArgs<ExtArgs>
   postsComunidade?: boolean | Prisma.User$postsComunidadeArgs<ExtArgs>
+  notificacoes?: boolean | Prisma.User$notificacoesArgs<ExtArgs>
+  preferenciasNotificacao?: boolean | Prisma.User$preferenciasNotificacaoArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -793,15 +1250,20 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "User"
   objects: {
     projetos: Prisma.$ProjectPayload<ExtArgs>[]
+    curtidas: Prisma.$ProjectLikePayload<ExtArgs>[]
     comunidadesCriadas: Prisma.$CommunityPayload<ExtArgs>[]
     participacoes: Prisma.$CommunityMemberPayload<ExtArgs>[]
     postsComunidade: Prisma.$CommunityPostPayload<ExtArgs>[]
+    notificacoes: Prisma.$NotificationPayload<ExtArgs>[]
+    preferenciasNotificacao: Prisma.$NotificationPreferencePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     nome: string
     email: string
     senha: string
+    descricao: string | null
+    fotoPerfil: string | null
     createdAt: Date
   }, ExtArgs["result"]["user"]>
   composites: {}
@@ -1198,9 +1660,12 @@ readonly fields: UserFieldRefs;
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   projetos<T extends Prisma.User$projetosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$projetosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  curtidas<T extends Prisma.User$curtidasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$curtidasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   comunidadesCriadas<T extends Prisma.User$comunidadesCriadasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$comunidadesCriadasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommunityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   participacoes<T extends Prisma.User$participacoesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$participacoesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommunityMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   postsComunidade<T extends Prisma.User$postsComunidadeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$postsComunidadeArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommunityPostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notificacoes<T extends Prisma.User$notificacoesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificacoesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  preferenciasNotificacao<T extends Prisma.User$preferenciasNotificacaoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$preferenciasNotificacaoArgs<ExtArgs>>): Prisma.Prisma__NotificationPreferenceClient<runtime.Types.Result.GetResult<Prisma.$NotificationPreferencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1234,6 +1699,8 @@ export interface UserFieldRefs {
   readonly nome: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly senha: Prisma.FieldRef<"User", 'String'>
+  readonly descricao: Prisma.FieldRef<"User", 'String'>
+  readonly fotoPerfil: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
 }
     
@@ -1652,6 +2119,30 @@ export type User$projetosArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 /**
+ * User.curtidas
+ */
+export type User$curtidasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProjectLike
+   */
+  select?: Prisma.ProjectLikeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProjectLike
+   */
+  omit?: Prisma.ProjectLikeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectLikeInclude<ExtArgs> | null
+  where?: Prisma.ProjectLikeWhereInput
+  orderBy?: Prisma.ProjectLikeOrderByWithRelationInput | Prisma.ProjectLikeOrderByWithRelationInput[]
+  cursor?: Prisma.ProjectLikeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProjectLikeScalarFieldEnum | Prisma.ProjectLikeScalarFieldEnum[]
+}
+
+/**
  * User.comunidadesCriadas
  */
 export type User$comunidadesCriadasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1721,6 +2212,49 @@ export type User$postsComunidadeArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.CommunityPostScalarFieldEnum | Prisma.CommunityPostScalarFieldEnum[]
+}
+
+/**
+ * User.notificacoes
+ */
+export type User$notificacoesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Notification
+   */
+  select?: Prisma.NotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Notification
+   */
+  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationInclude<ExtArgs> | null
+  where?: Prisma.NotificationWhereInput
+  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
+}
+
+/**
+ * User.preferenciasNotificacao
+ */
+export type User$preferenciasNotificacaoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the NotificationPreference
+   */
+  select?: Prisma.NotificationPreferenceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the NotificationPreference
+   */
+  omit?: Prisma.NotificationPreferenceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationPreferenceInclude<ExtArgs> | null
+  where?: Prisma.NotificationPreferenceWhereInput
 }
 
 /**

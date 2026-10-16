@@ -1,0 +1,68 @@
+.project-like-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  gap: 6px;
+  min-width: 64px;
+  min-height: 34px;
+  box-sizing: border-box;
+  padding: 6px 10px;
+  border: 1px solid #38303f;
+  border-radius: 999px;
+  background: #19171f;
+  color: #c5bdcf;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color .18s ease, border-color .18s ease, color .18s ease, transform .18s ease;
+}
+
+.project-like-button > svg {
+  flex: 0 0 auto;
+}
+
+.project-like-button > span {
+  display: inline;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  line-height: 1;
+}
+
+.project-like-button:hover:not(:disabled) {
+  border-color: #a33e73;
+  background: #291a25;
+  color: #ff6b9a;
+  transform: translateY(-1px);
+}
+
+.project-like-button.curtido {
+  border-color: #853a62;
+  background: #321a29;
+  color: #ff6b9a;
+}
+
+.project-like-button:focus-visible {
+  outline: 2px solid #a78bfa;
+  outline-offset: 2px;
+}
+
+.project-like-button:disabled {
+  cursor: wait;
+  opacity: .7;
+}
+
+:root[data-theme="light"] .project-like-button {
+  border-color: #e1d7e0;
+  background: #ffffff;
+  color: #746673;
+}
+
+:root[data-theme="light"] .project-like-button:hover:not(:disabled),
+:root[data-theme="light"] .project-like-button.curtido {
+  border-color: #ed9fbd;
+  background: #fff0f5;
+  color: #cf3472;
+}
